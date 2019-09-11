@@ -3,11 +3,3 @@
 .font {
   font-family: "Muli", sans-serif;
 }
-
-.font:hover {
-  color: yellow;
-}
-
-#buttonHover:hover {
-  color: yellow;
-}
