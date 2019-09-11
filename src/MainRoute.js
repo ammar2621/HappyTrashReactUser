@@ -1,15 +1,16 @@
 import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import App from "./App";
 import { connect } from "unistore/react";
 import { actions } from "./store";
+import App from "./App";
+import Home from "./pages/homepage/home";
 
 class MainRoute extends React.Component {
   render() {
     return (
       <Router>
         <Switch>
-          <Route path="/" component={App} />
+          <Route path="/" component={Home} />
         </Switch>
       </Router>
     );

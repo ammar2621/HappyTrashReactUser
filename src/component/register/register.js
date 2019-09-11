@@ -74,6 +74,7 @@ class SignUp extends Component {
     return (
       <MDBContainer style={{ padding: "0" }}>
         <MDBBtn
+          id="buttonHover"
           className="font rounded-pill"
           style={{ width: "145px" }}
           color="dark-green"
