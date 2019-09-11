@@ -4,6 +4,7 @@ import { connect } from "unistore/react";
 import { actions } from "./store";
 import App from "./App";
 import Home from "./pages/homepage/home";
+import Location from "./pages/locationpage/location";
 
 class MainRoute extends React.Component {
   render() {
