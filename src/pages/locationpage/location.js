@@ -18,8 +18,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Time from "../../component/time/time";
 import Upload from "../../component/time/foto";
+import swal from "sweetalert";
 
 class Location extends React.Component {
+  constructor(props) {
+    super(props);
+    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+  }
+
+  sweetAlertFunction() {
+    console.log("button clicks");
+    swal(
+      "Terima Kasih, Ammar!",
+      "Harap tunggu tim kami akan menghubungi kamu!",
+      "success"
+    );
+  }
+
   state = {
     startDate: new Date(),
     startTime: new Time()
@@ -151,8 +166,8 @@ class Location extends React.Component {
                         </div>
                       </div>
                       <MDBBtn
+                        onClick={this.sweetAlertFunction}
                         style={{ width: "100%" }}
-                        href="https://www.mdbootstrap.com"
                         target="_blank"
                         color="dark-green"
                       >
