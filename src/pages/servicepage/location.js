@@ -92,9 +92,6 @@ class Location extends React.Component {
                     backgroundColor: "white",
                     textAlign: "center",
                     padding: "0",
-                    // borderTop: "0.5px solid grey",
-                    // borderLeft: "0.5px solid grey",
-                    // borderRight: "0.5px solid grey",
                     borderTopLeftRadius: "20px",
                     borderTopRightRadius: "20px"
                   }}

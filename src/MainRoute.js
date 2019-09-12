@@ -5,13 +5,14 @@ import { actions } from "./store";
 import App from "./App";
 import Home from "./pages/homepage/home";
 import Location from "./pages/servicepage/location";
-import OngoingOrder from "./pages/orderpage/order";
+import Order from "./pages/orderpage/order";
 import OrderDetails from "./pages/orderdetails/orderdetails";
 import Time from "./component/time/time";
 import Upload from "./component/time/foto";
 import NotFound from "./pages/notfound/NotFound";
 import Footer from "./component/footer";
 import TablePage from "./component/table/tableorder";
+import RewardPage from "./pages/rewardpage/reward";
 
 class MainRoute extends React.Component {
   render() {
@@ -21,8 +22,9 @@ class MainRoute extends React.Component {
           <Route exact path="/" component={App} />
           <Route exact path="/home" component={Home} />
           <Route path="/service" component={Location} />
-          <Route path="/order" component={OngoingOrder} />
+          <Route path="/order" component={Order} />
           <Route path="/orderdetails" component={OrderDetails} />
+          <Route path="/reward" component={RewardPage} />
           <Route component={NotFound} />
         </Switch>
       </Router>

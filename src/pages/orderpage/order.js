@@ -16,10 +16,10 @@ import {
   MDBMedia
 } from "mdbreact";
 import swal from "sweetalert";
-import Pills from "./taborder";
+import TabOrder from "./taborder";
 import "./order.css";
 
-class OngoingOrder extends React.Component {
+class Order extends React.Component {
   constructor(props) {
     super(props);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
@@ -45,7 +45,7 @@ class OngoingOrder extends React.Component {
                   height: "100vh",
                   backgroundColor: "#FFFFFF",
                   textAlign: "center",
-                  padding: "0",
+                  padding: "0"
                 }}
               >
                 <div
@@ -109,7 +109,7 @@ class OngoingOrder extends React.Component {
                     </div>
                   </div>
                 </div>
-                <Pills />
+                <TabOrder />
                 <br />
                 <br />
               </div>
@@ -121,4 +121,4 @@ class OngoingOrder extends React.Component {
   }
 }
 
-export default OngoingOrder;
+export default Order;
