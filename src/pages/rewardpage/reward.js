@@ -16,10 +16,11 @@ import {
   MDBMedia
 } from "mdbreact";
 import swal from "sweetalert";
-import TabOrder from "./taborder";
-import "./order.css";
+import TablePage from "../../component/table/tableorder";
+import TableTrash from "../../component/table/trashdetails";
+import TabReward from "./tabreward";
 
-class Order extends React.Component {
+class RewardPage extends React.Component {
   constructor(props) {
     super(props);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
@@ -43,7 +44,7 @@ class Order extends React.Component {
               <div
                 style={{
                   height: "100vh",
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "white",
                   textAlign: "center",
                   padding: "0"
                 }}
@@ -52,7 +53,7 @@ class Order extends React.Component {
                   style={{
                     padding: "0",
                     backgroundColor: "#377C4E",
-                    marginBottom: "10px"
+                    marginBottom: "20px"
                   }}
                 >
                   <h1
@@ -77,8 +78,12 @@ class Order extends React.Component {
                   <div
                     className="col-11 text-left"
                     style={{
-                      borderBottom: "1px solid grey",
-                      padding: "0"
+                      borderTop: "0.5px solid green",
+                      borderLeft: "0.5px solid green",
+                      borderRight: "0.5px solid green",
+                      borderTopLeftRadius: "15px",
+                      borderTopRightRadius: "15px",
+                      padding: "5px 0 8px 0"
                     }}
                   >
                     <div
@@ -89,27 +94,50 @@ class Order extends React.Component {
                       }}
                     >
                       <div
-                        className="col-12"
+                        className="col-11 text-center"
                         style={{
                           padding: "0",
                           margin: "0"
                         }}
                       >
-                        <h5
+                        <h3
                           className="font"
                           style={{
                             marginTop: "5px",
                             marginBottom: "10px",
-                            fontWeight: "700"
+                            fontWeight: "600",
+                            margin: "0"
                           }}
                         >
-                          Pesanan
-                        </h5>
+                          Jumlah Pointmu
+                        </h3>
                       </div>
                     </div>
                   </div>
+                  <div
+                    className="col-11 text-left"
+                    style={{
+                      borderBottom: "0.5px solid green",
+                      borderLeft: "0.5px solid green",
+                      borderRight: "0.5px solid green",
+                      paddingTop: "5px"
+                    }}
+                  >
+                    <h6 className="text-center">
+                      Total kamu sudah mengumpulkan Point sebanyak
+                    </h6>
+                    <h3
+                      className="text-center font"
+                      style={{ fontWeight: "600" }}
+                    >
+                      11 Points
+                    </h3>
+                  </div>
                 </div>
-                <TabOrder />
+                <div className="text-center">
+                  <TabReward />
+                </div>
+                <br />
                 <br />
                 <br />
               </div>
@@ -121,4 +149,4 @@ class Order extends React.Component {
   }
 }
 
-export default Order;
+export default RewardPage;

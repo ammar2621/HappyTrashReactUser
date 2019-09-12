@@ -5,11 +5,10 @@ import {
   MDBTabContent,
   MDBNav,
   MDBNavItem,
-  MDBNavLink,
-  MDBMedia
+  MDBNavLink
 } from "mdbreact";
 
-class TabOrder extends Component {
+class TabsDefault extends Component {
   state = {
     activeItem: "1"
   };
@@ -78,7 +77,7 @@ class TabOrder extends Component {
               <MDBMedia body className="text-left font">
                 <p style={{ margin: "0" }}>Tukar Sampahmu</p>
                 <p style={{ margin: "0", color: "red" }}>Status: Canceled</p>
-                <p style={{ margin: "0" }}>21 September 2019</p>
+                <p style={{ margin: "0" }}>26 September 2019</p>
               </MDBMedia>
             </MDBMedia>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
@@ -93,7 +92,7 @@ class TabOrder extends Component {
               <MDBMedia body className="text-left font">
                 <p style={{ margin: "0" }}>Tukar Sampahmu</p>
                 <p style={{ margin: "0", color: "green" }}>Status: Completed</p>
-                <p style={{ margin: "0" }}>22 September 2019</p>
+                <p style={{ margin: "0" }}>29 September 2019</p>
               </MDBMedia>
             </MDBMedia>
           </MDBTabPane>
@@ -102,4 +101,4 @@ class TabOrder extends Component {
     );
   }
 }
-export default TabOrder;
+export default TabsDefault;

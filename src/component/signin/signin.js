@@ -17,7 +17,7 @@ import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import swal from "sweetalert";
 
-class SignIn extends Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
