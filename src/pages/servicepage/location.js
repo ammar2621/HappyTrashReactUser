@@ -60,13 +60,25 @@ class Location extends React.Component {
                   padding: "0"
                 }}
               >
-                <br />
-                <h1
-                  className="font"
-                  style={{ color: "#377C4E", fontWeight: "900", padding: "0" }}
+                <div
+                  style={{
+                    padding: "0",
+                    backgroundColor: "#377C4E",
+                    marginBottom: "10px"
+                  }}
                 >
-                  Sampah Online
-                </h1>
+                  <h1
+                    className="font"
+                    style={{
+                      color: "white",
+                      fontWeight: "900",
+                      padding: "10px 0 15px 0",
+                      backgroundColor: "#377C4E"
+                    }}
+                  >
+                    Happy Trash
+                  </h1>
+                </div>
                 <br />
                 <br />
                 <div className="row" style={{ padding: "0", margin: "0" }}>
@@ -103,7 +115,8 @@ class Location extends React.Component {
                   <div class="mapouter">
                     <div class="gmap_canvas">
                       <iframe
-                        width="400"
+                        width="100%"
+                        padding="10px"
                         height="300"
                         id="gmap_canvas"
                         src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
@@ -130,7 +143,12 @@ class Location extends React.Component {
                       <h6 className="text-left">
                         Dimana tempat penjemputan sampahmu?
                       </h6>
-                      <MDBInput label="Lokasi" />
+                      <input
+                        type="email"
+                        id="defaultFormLoginEmailEx"
+                        className="form-control"
+                      />
+                      <br />
                       <div className="text-left">
                         <p style={{ fontSize: "15px", margin: "0" }}>
                           Tentukan tanggal
@@ -157,7 +175,18 @@ class Location extends React.Component {
                           timeCaption="Time"
                           dateFormat="h:mm aa"
                         />
-                        <MDBInput label="Masukkan Note" size="lg" />
+                        <br />
+                        <br />
+                        <p style={{ fontSize: "15px", margin: "0" }}>
+                          Masukkan Note
+                        </p>
+                        <input
+                          type="text-area"
+                          id="defaultFormLoginEmailEx"
+                          className="form-control"
+                        />
+                        <br />
+                        <br />
                         <p style={{ fontSize: "15px", margin: "0" }}>
                           Pilih Foto
                         </p>
@@ -167,7 +196,7 @@ class Location extends React.Component {
                       </div>
                       <MDBBtn
                         onClick={this.sweetAlertFunction}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", borderRadius: "15px" }}
                         target="_blank"
                         color="dark-green"
                       >

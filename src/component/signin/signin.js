@@ -15,6 +15,7 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
+import swal from "sweetalert";
 
 class SignIn extends Component {
   constructor(props) {
@@ -25,6 +26,16 @@ class SignIn extends Component {
       password: ""
     };
     this.doLogin = this.doLogin.bind(this);
+    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+  }
+
+  sweetAlertFunction() {
+    console.log("button clicks");
+    swal(
+      "Terima Kasih, Sudah Login!",
+      "Sampah Online siap membantumu!",
+      "success"
+    );
   }
 
   setUsername = e => {
@@ -109,14 +120,17 @@ class SignIn extends Component {
             </MDBContainer>
           </MDBModalBody>
           <MDBModalFooter>
-            <MDBBtn
-              className="font rounded-pill"
-              onClick={this.doLogin}
-              isOpen={this.state.modal14}
-              color="dark-green"
-            >
-              Login
-            </MDBBtn>
+            <Link to="/home">
+              <MDBBtn
+                className="font rounded-pill"
+                onClick={this.doLogin}
+                onClick={this.sweetAlertFunction}
+                isOpen={this.state.modal14}
+                color="dark-green"
+              >
+                Masuk
+              </MDBBtn>
+            </Link>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>
