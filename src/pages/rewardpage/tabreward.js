@@ -10,12 +10,32 @@ import {
   MDBBadge
 } from "mdbreact";
 import swal from "sweetalert";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import SwipeableViews from "react-swipeable-views";
 
 class TabReward extends Component {
   constructor(props) {
     super(props);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
+  state = {
+    index: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({
+      index: value
+    });
+  };
+
+  handleChangeIndex = index => {
+    this.setState({
+      index
+    });
+  };
 
   sweetAlertFunction() {
     console.log("button clicks");
@@ -52,33 +72,22 @@ class TabReward extends Component {
   };
 
   render() {
+    const { index } = this.state;
+
     return (
-      <MDBContainer>
-        <MDBNav className="nav-tabs mt-5">
-          <MDBNavItem>
-            <MDBNavLink
-              to="#"
-              active={this.state.activeItem === "1"}
-              onClick={this.toggle("1")}
-              role="tab"
-            >
-              Hadiah
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink
-              to="#"
-              active={this.state.activeItem === "2"}
-              onClick={this.toggle("2")}
-              role="tab"
-            >
-              Riwayat Hadiah
-            </MDBNavLink>
-          </MDBNavItem>
-        </MDBNav>
-        <MDBTabContent activeItem={this.state.activeItem}>
+      <div className="text-center">
+        <Tabs
+          value={index}
+          fullWidth
+          onChange={this.handleChange}
+          style={styles.tabs}
+        >
+          <Tab label="Hadiah" />
+          <Tab label="Riwayat Hadiah" />
+        </Tabs>
+        <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
           {/* Tab 1 */}
-          <MDBTabPane tabId="1" role="tabpanel">
+          <div style={Object.assign({}, styles.slide)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
               <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
                 <img
@@ -121,10 +130,10 @@ class TabReward extends Component {
                 </MDBBadge>
               </MDBMedia>
             </MDBMedia>
-          </MDBTabPane>
+          </div>
 
           {/* Tab 2 */}
-          <MDBTabPane tabId="2" role="tabpanel">
+          <div style={Object.assign({}, styles.slide)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
               <MDBMedia left className="mr-3 ml-3" href="#">
                 <img
@@ -140,10 +149,21 @@ class TabReward extends Component {
                 <p style={{ margin: "0" }}>26 September 2019</p>
               </MDBMedia>
             </MDBMedia>
-          </MDBTabPane>
-        </MDBTabContent>
-      </MDBContainer>
+          </div>
+        </SwipeableViews>
+      </div>
     );
   }
 }
+
+const styles = {
+  tabs: {
+    background: "#fff"
+  },
+  slide: {
+    padding: 15,
+    minHeight: 100
+  }
+};
+
 export default TabReward;

@@ -26,15 +26,6 @@ class SignIn extends React.Component {
       password: null
     };
     this.doLogin = this.doLogin.bind(this);
-    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
-  }
-
-  sweetAlertFunction() {
-    swal(
-      "Terima Kasih, Sudah Login!",
-      "Sampah Online siap membantumu!",
-      "success"
-    );
   }
 
   setEmail = e => {
@@ -64,12 +55,10 @@ class SignIn extends React.Component {
     const self = this;
     axios
       .post(self.props.base_url + "/auth", {
-
         email: self.state.email,
         password: self.state.password
-
       })
-      .then(function (response) {
+      .then(function(response) {
         self.props.setLogin(true);
         self.props.setToken(response.data.token);
         console.log(response.data.status);
@@ -81,13 +70,9 @@ class SignIn extends React.Component {
         );
         self.props.history.push("/home");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("errrrrrr", error);
-        swal(
-          "Terima Kasih, Sudah Login!",
-          "Sampah Online siap membantumu!",
-          "error"
-        );
+        swal("Email atau passwordmu salah!", "Coba lagi!", "error");
       });
   };
 
@@ -107,15 +92,16 @@ class SignIn extends React.Component {
             <MDBContainer>
               <MDBRow className="text-left">
                 <MDBCol md="10">
-                  <MDBIcon className="text-left" icon="mobile-alt" size="3x" />
-
+                  {/* <MDBIcon className="text-left" icon="mobile-alt" size="3x" /> */}
                   <form>
-                    <div className="grey-text">
+                    <div
+                      className="grey-text"
+                      style={{ width: "100%", margin: "0" }}
+                    >
                       <MDBInput
                         label="Masukkan emailmu"
                         group
                         type="text"
-
                         validate="number"
                         onChange={this.setEmail}
                       />

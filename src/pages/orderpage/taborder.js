@@ -48,7 +48,7 @@ class TabOrder extends React.Component {
         <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
           <div style={Object.assign({}, styles.slide)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
-              <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
+              <MDBMedia left className="mr-3" href="/orderdetails">
                 <img
                   style={{
                     width: "75px"
@@ -65,7 +65,7 @@ class TabOrder extends React.Component {
           </div>
           <div style={Object.assign({}, styles.slide)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
-              <MDBMedia left className="mr-3 ml-3" href="#">
+              <MDBMedia left className="mr-3" href="#">
                 <img
                   style={{
                     width: "75px"
@@ -80,7 +80,7 @@ class TabOrder extends React.Component {
               </MDBMedia>
             </MDBMedia>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
-              <MDBMedia left className="mr-3 ml-3" href="#">
+              <MDBMedia left className="mr-3" href="#">
                 <img
                   style={{
                     width: "75px"

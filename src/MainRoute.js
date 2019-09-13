@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "unistore/react";
 import { actions } from "./store";
-import App from "./App";
+import App from "./pages/welcomepage/welcome";
 import Home from "./pages/homepage/home";
 import Location from "./pages/servicepage/location";
 import Order from "./pages/orderpage/order";
@@ -15,6 +15,8 @@ import Header from "./component/header";
 import TablePage from "./component/table/tableorder";
 import RewardPage from "./pages/rewardpage/reward";
 import Profile from "./pages/profile/profile";
+import Register from "./validcoba";
+import Help from "./pages/helppage/helppage";
 
 class MainRoute extends React.Component {
   render() {
@@ -30,6 +32,8 @@ class MainRoute extends React.Component {
           <Route path="/profile" component={Profile} />
           <Route path="/footer" component={Footer} />
           <Route path="/header" component={Header} />
+          <Route path="/register" component={Register} />
+          <Route path="/help" component={Help} />
           <Route component={NotFound} />
         </Switch>
       </Router>

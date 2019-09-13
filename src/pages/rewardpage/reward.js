@@ -16,9 +16,9 @@ import {
   MDBMedia
 } from "mdbreact";
 import swal from "sweetalert";
-import TablePage from "../../component/table/tableorder";
-import TableTrash from "../../component/table/trashdetails";
 import TabReward from "./tabreward";
+import Header from "../../component/header";
+import Footer from "../../component/footer";
 
 class RewardPage extends React.Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class RewardPage extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <MDBContainer>
           <MDBRow className="justify-content-center" style={{ padding: "0" }}>
             <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -49,25 +50,7 @@ class RewardPage extends React.Component {
                   padding: "0"
                 }}
               >
-                <div
-                  style={{
-                    padding: "0",
-                    backgroundColor: "#377C4E",
-                    marginBottom: "20px"
-                  }}
-                >
-                  <h1
-                    className="font"
-                    style={{
-                      color: "white",
-                      fontWeight: "900",
-                      padding: "10px 0 15px 0",
-                      backgroundColor: "#377C4E"
-                    }}
-                  >
-                    Happy Trash
-                  </h1>
-                </div>
+                <br />
                 <div
                   className="row justify-content-center"
                   style={{
@@ -134,8 +117,10 @@ class RewardPage extends React.Component {
                     </h3>
                   </div>
                 </div>
-                <div className="text-center">
-                  <TabReward />
+                <div className="row justify-content-center">
+                  <div className=" col-11 text-center">
+                    <TabReward />
+                  </div>
                 </div>
                 <br />
                 <br />
@@ -144,6 +129,7 @@ class RewardPage extends React.Component {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        <Footer />
       </div>
     );
   }
