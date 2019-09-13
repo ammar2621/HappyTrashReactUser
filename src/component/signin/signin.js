@@ -22,8 +22,8 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      username: "",
-      password: ""
+      email: null,
+      password: null
     };
     this.doLogin = this.doLogin.bind(this);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
@@ -37,9 +37,9 @@ class SignIn extends React.Component {
     );
   }
 
-  setUsername = e => {
+  setEmail = e => {
     e.preventDefault();
-    this.setState({ username: e.target.value });
+    this.setState({ email: e.target.value });
   };
 
   setPassword = e => {
@@ -59,17 +59,21 @@ class SignIn extends React.Component {
     });
   };
 
-  doLogin = async e => {
+  doLogin = e => {
+    e.preventDefault();
     const self = this;
     axios
-      .post("http://api.alfaruqi.xyz/auth", {
-        username: self.state.username,
+      .post(self.props.base_url + "/auth", {
+
+        email: self.state.email,
         password: self.state.password
+
       })
-      .then(function(response) {
+      .then(function (response) {
         self.props.setLogin(true);
         self.props.setToken(response.data.token);
         console.log(response.data.status);
+        self.props.history.replace("/profile");
         swal(
           "Terima Kasih, Sudah Login!",
           "Sampah Online siap membantumu!",
@@ -77,7 +81,7 @@ class SignIn extends React.Component {
         );
         self.props.history.push("/home");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("errrrrrr", error);
         swal(
           "Terima Kasih, Sudah Login!",
@@ -111,8 +115,9 @@ class SignIn extends React.Component {
                         label="Masukkan emailmu"
                         group
                         type="text"
-                        validate="email"
-                        onChange={this.setUsername}
+
+                        validate="number"
+                        onChange={this.setEmail}
                       />
                       <MDBInput
                         label="Masukkan passwordmu"
@@ -144,6 +149,6 @@ class SignIn extends React.Component {
 }
 
 export default connect(
-  "is_login",
+  "is_login, base_url",
   actions
 )(withRouter(SignIn));
