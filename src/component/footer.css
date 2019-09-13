@@ -1,0 +1,29 @@
+.footer {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.footer a {
+  /* float: left; */
+  /* display: block; */
+  color: black;
+  text-align: center;
+  /* padding: 14px 5px; */
+  text-decoration: none;
+  /* font-size: 17px; */
+}
+
+/* Change the color of links on hover */
+/* .footer a:hover {
+  background-color: #ddd;
+  color: black;
+} */
+
+/* Add a color to the active/current link */
+/* .footer a.active {
+  background-color: #4caf50;
+  color: green;
+} */
