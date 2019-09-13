@@ -22,8 +22,8 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      username: "",
-      password: ""
+      email: null,
+      password: null
     };
     this.doLogin = this.doLogin.bind(this);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
@@ -38,9 +38,9 @@ class SignIn extends React.Component {
     );
   }
 
-  setUsername = e => {
+  setEmail = e => {
     e.preventDefault();
-    this.setState({ username: e.target.value });
+    this.setState({ email: e.target.value });
   };
 
   setPassword = e => {
@@ -60,23 +60,30 @@ class SignIn extends React.Component {
     });
   };
 
-  doLogin = async e => {
+  doLogin = e => {
+    e.preventDefault();
+    console.log('I login')
+    console.log(this.props)
+    console.log(this.state)
     const self = this;
     axios
-      .post("http://api.alfaruqi.xyz/auth", {
-        username: self.state.username,
+      .post("http://localhost:5000/v1/auth", {
+
+        email: self.state.email,
         password: self.state.password
+
       })
-      .then(function(response) {
+      .then(function (response) {
         self.props.setLogin(true);
         self.props.setToken(response.data.token);
         console.log(response.data.status);
         self.props.history.replace("/profile");
+        alert("Selamat Datang Orang Baik!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("errrrrrr", error);
       });
-    alert("Selamat Datang Orang Baik!");
+
   };
 
   render() {
@@ -104,7 +111,7 @@ class SignIn extends React.Component {
                         group
                         type="text"
                         validate="number"
-                        onChange={this.setUsername}
+                        onChange={this.setEmail}
                       />
                       <MDBInput
                         label="Masukkan passwordmu"
@@ -124,7 +131,6 @@ class SignIn extends React.Component {
               <MDBBtn
                 className="font rounded-pill"
                 onClick={this.doLogin}
-                onClick={this.sweetAlertFunction}
                 isOpen={this.state.modal14}
                 color="dark-green"
               >
