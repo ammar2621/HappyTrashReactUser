@@ -18,6 +18,7 @@ import {
 import swal from "sweetalert";
 import TabOrder from "./taborder";
 import "./order.css";
+import DemoTabs from "./coba";
 
 class Order extends React.Component {
   constructor(props) {
@@ -109,6 +110,7 @@ class Order extends React.Component {
                     </div>
                   </div>
                 </div>
+                <DemoTabs />
                 <TabOrder />
                 <br />
                 <br />

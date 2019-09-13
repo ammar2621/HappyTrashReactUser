@@ -30,7 +30,6 @@ class SignIn extends React.Component {
   }
 
   sweetAlertFunction() {
-    console.log("button clicks");
     swal(
       "Terima Kasih, Sudah Login!",
       "Sampah Online siap membantumu!",
@@ -71,12 +70,17 @@ class SignIn extends React.Component {
         self.props.setLogin(true);
         self.props.setToken(response.data.token);
         console.log(response.data.status);
-        self.props.history.replace("/profile");
+        self.props.history.replace("/home");
       })
       .catch(function(error) {
         console.log("errrrrrr", error);
+        swal("Email atau password mu salah!", "Coba lagi", "error");
       });
-    alert("Selamat Datang Orang Baik!");
+    swal(
+      "Terima Kasih, Sudah Login!",
+      "Sampah Online siap membantumu!",
+      "success"
+    );
   };
 
   render() {
@@ -120,17 +124,14 @@ class SignIn extends React.Component {
             </MDBContainer>
           </MDBModalBody>
           <MDBModalFooter>
-            <Link to="/home">
-              <MDBBtn
-                className="font rounded-pill"
-                onClick={this.doLogin}
-                onClick={this.sweetAlertFunction}
-                isOpen={this.state.modal14}
-                color="dark-green"
-              >
-                Masuk
-              </MDBBtn>
-            </Link>
+            <MDBBtn
+              className="font rounded-pill"
+              onClick={this.doLogin}
+              isOpen={this.state.modal14}
+              color="dark-green"
+            >
+              Masuk
+            </MDBBtn>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>

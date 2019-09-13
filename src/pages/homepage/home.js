@@ -171,64 +171,8 @@ const Home = () => {
             </div>
           </MDBCol>
         </MDBRow>
-        {/* <Footer className="position-fixed" style={{ position: "fixed" }} /> */}
-
-        <div
-          className="container pt-5"
-          style={{
-            position: "fixed",
-            bottom: "0",
-            paddingTop: "10px"
-          }}
-        >
-          <div className="row justify-content-around">
-            <div
-              className="col"
-              style={{ maxWidth: "480px", backgroundColor: "white" }}
-            >
-              <div className="row justify-content-center text-center">
-                <div className="col-3" style={{ padding: "0" }}>
-                  <img
-                    style={{ width: "25px" }}
-                    src="https://image.flaticon.com/icons/svg/263/263115.svg"
-                  ></img>
-                  <br />
-
-                  <p>Home</p>
-                </div>
-                <Link to="/order">
-                  <div className="col-3" style={{ padding: "0" }}>
-                    <img
-                      style={{ width: "25px" }}
-                      src="https://image.flaticon.com/icons/svg/151/151917.svg"
-                    ></img>
-                    <br />
-
-                    <p style={{ textDecoration: "none" }}>Pesanan</p>
-                  </div>
-                </Link>
-                <div className="col-3" style={{ padding: "0" }}>
-                  <img
-                    style={{ width: "25px" }}
-                    src="https://image.flaticon.com/icons/svg/906/906794.svg"
-                  ></img>
-                  <br />
-
-                  <p>Help</p>
-                </div>
-                <div className="col-3" style={{ padding: "0" }}>
-                  <img
-                    style={{ width: "25px" }}
-                    src="https://image.flaticon.com/icons/svg/1738/1738760.svg"
-                  ></img>
-                  <br />
-                  <p>Me</p>
-                </div>
-              </div>
-            </div>{" "}
-          </div>
-        </div>
       </MDBContainer>
+      <Footer />
     </div>
   );
 };

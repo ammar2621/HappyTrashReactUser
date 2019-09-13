@@ -11,9 +11,8 @@ import {
   MDBInput
 } from "mdbreact";
 import axios from "axios";
-import swal from "sweetalert";
 
-class SignUp extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,11 +67,7 @@ class SignUp extends Component {
       .catch(function(error) {
         console.log("errrrrrr", error);
       });
-    swal(
-      "Terima Kasih, Sudah Login!",
-      "Sampah Online siap membantumu!",
-      "success"
-    );
+    alert("Anda sudah terdaftar, yuk SignIn!");
   };
 
   render() {
@@ -80,12 +75,12 @@ class SignUp extends Component {
       <MDBContainer style={{ padding: "0" }}>
         <MDBBtn
           id="buttonHover"
-          className="font rounded-pill"
-          style={{ width: "145px" }}
+          className="font"
+          style={{ width: "125px", borderRadius: "15px" }}
           color="dark-green"
           onClick={this.toggle(14)}
         >
-          DAFTAR
+          Edit
         </MDBBtn>
         <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
           <MDBModalBody>
@@ -152,4 +147,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default EditProfile;

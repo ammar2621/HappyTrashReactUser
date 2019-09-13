@@ -11,8 +11,10 @@ import Time from "./component/time/time";
 import Upload from "./component/time/foto";
 import NotFound from "./pages/notfound/NotFound";
 import Footer from "./component/footer";
+import Header from "./component/header";
 import TablePage from "./component/table/tableorder";
 import RewardPage from "./pages/rewardpage/reward";
+import Profile from "./pages/profile/profile";
 
 class MainRoute extends React.Component {
   render() {
@@ -25,6 +27,9 @@ class MainRoute extends React.Component {
           <Route path="/order" component={Order} />
           <Route path="/orderdetails" component={OrderDetails} />
           <Route path="/reward" component={RewardPage} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/footer" component={Footer} />
+          <Route path="/header" component={Header} />
           <Route component={NotFound} />
         </Switch>
       </Router>
