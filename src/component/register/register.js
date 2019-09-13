@@ -11,6 +11,9 @@ import {
   MDBInput
 } from "mdbreact";
 import axios from "axios";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
 class SignUp extends Component {
   constructor(props) {
@@ -62,7 +65,7 @@ class SignUp extends Component {
     e.preventDefault();
     const self = this;
     axios
-      .post("http://localhost:5000/v1/users", {
+      .post(self.props.base_url + "/users", {
         name: self.state.username,
         email: self.state.email,
         password: self.state.password,
@@ -75,7 +78,6 @@ class SignUp extends Component {
       .catch(function (error) {
         console.log("errrrrrr", error);
       });
-    alert("Anda sudah terdaftar, yuk SignIn!");
   };
 
   render() {
@@ -155,4 +157,7 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default connect(
+  "is_login, base_url",
+  actions
+)(withRouter(SignUp));

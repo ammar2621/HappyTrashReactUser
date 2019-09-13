@@ -62,12 +62,9 @@ class SignIn extends React.Component {
 
   doLogin = e => {
     e.preventDefault();
-    console.log('I login')
-    console.log(this.props)
-    console.log(this.state)
     const self = this;
     axios
-      .post("http://localhost:5000/v1/auth", {
+      .post(self.props.base_url + "/auth", {
 
         email: self.state.email,
         password: self.state.password
@@ -145,6 +142,6 @@ class SignIn extends React.Component {
 }
 
 export default connect(
-  "is_login",
+  "is_login, base_url",
   actions
 )(withRouter(SignIn));
