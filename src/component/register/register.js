@@ -17,11 +17,13 @@ class SignUp extends Component {
     super(props);
     this.state = {
       modal: false,
-      username: "",
-      email: "",
-      password: "",
+      username: null,
+      email: null,
+      password: null,
+      mobile_number: null,
       status: false
     };
+    this.doRegister = this.doRegister.bind(this)
   }
 
   toggle = nr => () => {
@@ -46,6 +48,11 @@ class SignUp extends Component {
     this.setState({ password: e.target.value });
   };
 
+  setNumber = e => {
+    e.preventDefault();
+    this.setState({ mobile_number: e.target.value })
+  }
+
   setStatus = e => {
     e.preventDefault();
     this.setState({ status: e.target.value });
@@ -55,16 +62,17 @@ class SignUp extends Component {
     e.preventDefault();
     const self = this;
     axios
-      .post("http://api.alfaruqi.xyz/user", {
-        username: self.state.username,
+      .post("http://localhost:5000/v1/users", {
+        name: self.state.username,
         email: self.state.email,
         password: self.state.password,
+        mobile_number: self.state.mobile_number,
         status: false
       })
-      .then(function(response) {
-        this.props.history.push("/");
+      .then(function (response) {
+        self.props.history.push("/home");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("errrrrrr", error);
       });
     alert("Anda sudah terdaftar, yuk SignIn!");
@@ -110,9 +118,9 @@ class SignUp extends Component {
                       <MDBInput
                         label="Masukkan Nomor Handphonemu"
                         group
-                        type="password"
+                        type="text"
                         validate
-                        onChange={this.setPassword}
+                        onChange={this.setNumber}
                       />
                       <MDBInput
                         label="Masukkan Passwordmu"
