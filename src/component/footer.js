@@ -68,12 +68,14 @@ const Footer = () => {
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
-                        <img
-                          style={{ width: "25px" }}
-                          src="https://image.flaticon.com/icons/svg/906/906794.svg"
-                        ></img>
-                        <br />
-                        <p className="my-0">Help</p>
+                        <Link to="/help">
+                          <img
+                            style={{ width: "25px" }}
+                            src="https://image.flaticon.com/icons/svg/906/906794.svg"
+                          ></img>
+                          <br />
+                          <p className="my-0">Help</p>
+                        </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
                         <Link to="/profile">

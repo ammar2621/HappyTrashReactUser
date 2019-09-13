@@ -8,9 +8,9 @@ import {
   MDBBadge,
   MDBContainer
 } from "mdbreact";
-import Signin from "./component/signin/signin";
-import SignUp from "./component/register/register";
-import "./App.css";
+import Signin from "../../component/signin/signin";
+import SignUp from "../../component/register/register";
+import "./welcome.css";
 
 const EcommercePage = () => {
   return (

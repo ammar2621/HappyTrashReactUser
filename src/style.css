@@ -1,0 +1,9 @@
+.error {
+  color: #db2269;
+  font-size: 0.7em;
+  display: relative;
+}
+
+.form-group {
+  margin: 0;
+}

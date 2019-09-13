@@ -69,24 +69,26 @@ const Home = () => {
                   </Link>
                 </div>
                 <div className="col-6">
-                  <MDBCard
-                    border="success"
-                    className="m-3"
-                    style={{ maxWidth: "18rem" }}
-                  >
-                    <MDBCardHeader
-                      className="font"
-                      style={{ fontSize: "13px" }}
+                  <Link to="/reward">
+                    <MDBCard
+                      border="success"
+                      className="m-3"
+                      style={{ maxWidth: "18rem" }}
                     >
-                      Tukar Pointmu
-                    </MDBCardHeader>
-                    <MDBCardBody className="text-success">
-                      <img
-                        style={{ width: "80px" }}
-                        src="https://image.flaticon.com/icons/svg/744/744922.svg"
-                      ></img>
-                    </MDBCardBody>
-                  </MDBCard>
+                      <MDBCardHeader
+                        className="font"
+                        style={{ fontSize: "13px" }}
+                      >
+                        Tukar Pointmu
+                      </MDBCardHeader>
+                      <MDBCardBody className="text-success">
+                        <img
+                          style={{ width: "80px" }}
+                          src="https://image.flaticon.com/icons/svg/744/744922.svg"
+                        ></img>
+                      </MDBCardBody>
+                    </MDBCard>
+                  </Link>
                 </div>
               </div>
               <br />

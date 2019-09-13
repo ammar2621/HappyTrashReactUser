@@ -52,6 +52,7 @@ class Order extends React.Component {
                   padding: "0"
                 }}
               >
+                <br />
                 <div
                   className="row justify-content-center"
                   style={{
@@ -94,9 +95,11 @@ class Order extends React.Component {
                     </div>
                   </div>
                 </div>
-                <TabOrder />
-                <br />
-                <br />
+                <div className="row justify-content-center">
+                  <div className=" col-11 text-center">
+                    <TabOrder />
+                  </div>
+                </div>
               </div>
             </MDBCol>
           </MDBRow>
