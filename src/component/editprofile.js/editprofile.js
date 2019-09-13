@@ -11,24 +11,17 @@ import {
   MDBInput
 } from "mdbreact";
 import axios from "axios";
-import { connect } from "unistore/react";
-import { actions } from "../../store";
-import { withRouter, Link, Redirect } from "react-router-dom";
-import swal from "sweetalert";
 
-
-class SignUp extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      username: null,
-      email: null,
-      password: null,
-      mobile_number: null,
+      username: "",
+      email: "",
+      password: "",
       status: false
     };
-    this.doRegister = this.doRegister.bind(this)
   }
 
   toggle = nr => () => {
@@ -53,11 +46,6 @@ class SignUp extends Component {
     this.setState({ password: e.target.value });
   };
 
-  setNumber = e => {
-    e.preventDefault();
-    this.setState({ mobile_number: e.target.value })
-  }
-
   setStatus = e => {
     e.preventDefault();
     this.setState({ status: e.target.value });
@@ -67,25 +55,19 @@ class SignUp extends Component {
     e.preventDefault();
     const self = this;
     axios
-      .post(self.props.base_url + "/users", {
-        name: self.state.username,
+      .post("http://api.alfaruqi.xyz/user", {
+        username: self.state.username,
         email: self.state.email,
         password: self.state.password,
-        mobile_number: self.state.mobile_number,
         status: false
       })
-      .then(function (response) {
-        self.props.history.push("/home");
+      .then(function(response) {
+        this.props.history.push("/");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("errrrrrr", error);
       });
-    swal(
-      "Terima Kasih, Sudah Login!",
-      "Sampah Online siap membantumu!",
-      "success"
-    );
-
+    alert("Anda sudah terdaftar, yuk SignIn!");
   };
 
   render() {
@@ -93,12 +75,12 @@ class SignUp extends Component {
       <MDBContainer style={{ padding: "0" }}>
         <MDBBtn
           id="buttonHover"
-          className="font rounded-pill"
-          style={{ width: "145px" }}
+          className="font"
+          style={{ width: "125px", borderRadius: "15px" }}
           color="dark-green"
           onClick={this.toggle(14)}
         >
-          DAFTAR
+          Edit
         </MDBBtn>
         <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
           <MDBModalBody>
@@ -128,9 +110,9 @@ class SignUp extends Component {
                       <MDBInput
                         label="Masukkan Nomor Handphonemu"
                         group
-                        type="text"
+                        type="password"
                         validate
-                        onChange={this.setNumber}
+                        onChange={this.setPassword}
                       />
                       <MDBInput
                         label="Masukkan Passwordmu"
@@ -165,7 +147,4 @@ class SignUp extends Component {
   }
 }
 
-export default connect(
-  "is_login, base_url",
-  actions
-)(withRouter(SignUp));
+export default EditProfile;

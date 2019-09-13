@@ -30,7 +30,6 @@ class SignIn extends React.Component {
   }
 
   sweetAlertFunction() {
-    console.log("button clicks");
     swal(
       "Terima Kasih, Sudah Login!",
       "Sampah Online siap membantumu!",
@@ -75,12 +74,21 @@ class SignIn extends React.Component {
         self.props.setToken(response.data.token);
         console.log(response.data.status);
         self.props.history.replace("/profile");
-        alert("Selamat Datang Orang Baik!");
+        swal(
+          "Terima Kasih, Sudah Login!",
+          "Sampah Online siap membantumu!",
+          "success"
+        );
+        self.props.history.push("/home");
       })
       .catch(function (error) {
         console.log("errrrrrr", error);
+        swal(
+          "Terima Kasih, Sudah Login!",
+          "Sampah Online siap membantumu!",
+          "error"
+        );
       });
-
   };
 
   render() {
@@ -104,9 +112,10 @@ class SignIn extends React.Component {
                   <form>
                     <div className="grey-text">
                       <MDBInput
-                        label="Masukkan nomor handphone mu"
+                        label="Masukkan emailmu"
                         group
                         type="text"
+
                         validate="number"
                         onChange={this.setEmail}
                       />
@@ -124,16 +133,14 @@ class SignIn extends React.Component {
             </MDBContainer>
           </MDBModalBody>
           <MDBModalFooter>
-            <Link to="/home">
-              <MDBBtn
-                className="font rounded-pill"
-                onClick={this.doLogin}
-                isOpen={this.state.modal14}
-                color="dark-green"
-              >
-                Masuk
-              </MDBBtn>
-            </Link>
+            <MDBBtn
+              className="font rounded-pill"
+              onClick={this.doLogin}
+              isOpen={this.state.modal14}
+              color="dark-green"
+            >
+              Masuk
+            </MDBBtn>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>

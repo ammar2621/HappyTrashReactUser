@@ -14,7 +14,17 @@ import {
   MDBMedia
 } from "mdbreact";
 
-class TabOrder extends React.Component {
+const styles = {
+  tabs: {
+    background: "#fff"
+  },
+  slide: {
+    padding: 15,
+    minHeight: 100
+  }
+};
+
+class DemoTabs extends React.Component {
   state = {
     index: 0
   };
@@ -46,7 +56,7 @@ class TabOrder extends React.Component {
           <Tab label="Riwayat Pesanan" />
         </Tabs>
         <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
-          <div style={Object.assign({}, styles.slide)}>
+          <div style={Object.assign({}, styles.slide, styles.slide1)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
               <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
                 <img
@@ -63,7 +73,7 @@ class TabOrder extends React.Component {
               </MDBMedia>
             </MDBMedia>
           </div>
-          <div style={Object.assign({}, styles.slide)}>
+          <div style={Object.assign({}, styles.slide, styles.slide2)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
               <MDBMedia left className="mr-3 ml-3" href="#">
                 <img
@@ -101,13 +111,4 @@ class TabOrder extends React.Component {
   }
 }
 
-const styles = {
-  tabs: {
-    background: "#fff"
-  },
-  slide: {
-    padding: 15,
-    minHeight: 100
-  }
-};
-export default TabOrder;
+export default DemoTabs;

@@ -19,6 +19,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Time from "../../component/time/time";
 import Upload from "../../component/time/foto";
 import swal from "sweetalert";
+import Header from "../../component/header";
 
 class Location extends React.Component {
   constructor(props) {
@@ -27,12 +28,14 @@ class Location extends React.Component {
   }
 
   sweetAlertFunction() {
+    const self = this;
     console.log("button clicks");
     swal(
       "Terima Kasih, Ammar!",
       "Harap tunggu tim kami akan menghubungi kamu!",
       "success"
     );
+    self.props.history.push("/home");
   }
 
   state = {
@@ -49,6 +52,7 @@ class Location extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <MDBContainer>
           <MDBRow className="justify-content-center" style={{ padding: "0" }}>
             <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -60,32 +64,6 @@ class Location extends React.Component {
                   padding: "0"
                 }}
               >
-                <div
-                  style={{
-                    padding: "0",
-                    backgroundColor: "#377C4E",
-                    marginBottom: "10px"
-                  }}
-                >
-                  <h1
-                    className="font"
-                    style={{
-                      color: "white",
-                      fontWeight: "900",
-                      padding: "10px 0 15px 0",
-                      backgroundColor: "#377C4E"
-                    }}
-                  >
-                    Happy Trash
-                  </h1>
-                </div>
-                <br />
-                <br />
-                <div className="row" style={{ padding: "0", margin: "0" }}>
-                  <div className="col-10 text-left">
-                    <h2 className="font">Tukar Sampahmu</h2>
-                  </div>
-                </div>
                 <div
                   style={{
                     height: "100vh",
@@ -104,30 +82,14 @@ class Location extends React.Component {
                     }}
                   ></div>
                   <br />
-
+                  <div className="col-10 text-left">
+                    <h2 className="font">Tukar Sampahmu</h2>
+                  </div>
                   <div
                     className="row justify-content-center"
                     style={{ padding: "0", margin: "0" }}
                   ></div>
-                  <div class="mapouter">
-                    <div class="gmap_canvas">
-                      <iframe
-                        width="100%"
-                        padding="10px"
-                        height="300"
-                        id="gmap_canvas"
-                        src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                        frameborder="0"
-                        scrolling="no"
-                        marginheight="0"
-                        marginwidth="0"
-                      ></iframe>
-                      Google Maps Generator by{" "}
-                      <a href="https://www.embedgooglemap.net">
-                        embedgooglemap.net
-                      </a>
-                    </div>
-                  </div>
+
                   <br />
                   <div
                     className="row text-center justify-content-center"
@@ -137,6 +99,26 @@ class Location extends React.Component {
                     }}
                   >
                     <div className="col-11">
+                      <div class="mapouter">
+                        <div class="gmap_canvas">
+                          <iframe
+                            width="100%"
+                            padding="10px"
+                            height="300"
+                            id="gmap_canvas"
+                            src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0"
+                            scrolling="no"
+                            marginheight="0"
+                            marginwidth="0"
+                          ></iframe>
+                          Google Maps Generator by{" "}
+                          <a href="https://www.embedgooglemap.net">
+                            embedgooglemap.net
+                          </a>
+                        </div>
+                      </div>
+                      <br />
                       <h6 className="text-left">
                         Dimana tempat penjemputan sampahmu?
                       </h6>
@@ -151,6 +133,7 @@ class Location extends React.Component {
                           Tentukan tanggal
                         </p>
                         <DatePicker
+                          dateFormat="dd-MM-yyyy"
                           label="Tentukan tanggal"
                           style={{ width: "100%" }}
                           selected={this.state.startDate}
@@ -162,15 +145,16 @@ class Location extends React.Component {
                           Tentukan Waktu
                         </p>
                         <DatePicker
-                          label="Tentukan tanggal"
+                          timeFormat="HH:mm"
+                          label="Tentukan waktu"
                           style={{ width: "100%" }}
                           selected={this.state.startDate}
                           onChange={this.handleChange}
                           showTimeSelect
                           showTimeSelectOnly
-                          timeIntervals={15}
+                          timeIntervals={30}
                           timeCaption="Time"
-                          dateFormat="h:mm aa"
+                          dateFormat="HH:mm"
                         />
                         <br />
                         <br />
