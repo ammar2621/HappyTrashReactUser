@@ -70,17 +70,21 @@ class SignIn extends React.Component {
         self.props.setLogin(true);
         self.props.setToken(response.data.token);
         console.log(response.data.status);
-        self.props.history.replace("/home");
+        swal(
+          "Terima Kasih, Sudah Login!",
+          "Sampah Online siap membantumu!",
+          "success"
+        );
+        self.props.history.push("/home");
       })
       .catch(function(error) {
         console.log("errrrrrr", error);
-        swal("Email atau password mu salah!", "Coba lagi", "error");
+        swal(
+          "Terima Kasih, Sudah Login!",
+          "Sampah Online siap membantumu!",
+          "error"
+        );
       });
-    swal(
-      "Terima Kasih, Sudah Login!",
-      "Sampah Online siap membantumu!",
-      "success"
-    );
   };
 
   render() {
@@ -104,10 +108,10 @@ class SignIn extends React.Component {
                   <form>
                     <div className="grey-text">
                       <MDBInput
-                        label="Masukkan nomor handphone mu"
+                        label="Masukkan emailmu"
                         group
                         type="text"
-                        validate="number"
+                        validate="email"
                         onChange={this.setUsername}
                       />
                       <MDBInput

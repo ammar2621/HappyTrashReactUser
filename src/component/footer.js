@@ -40,7 +40,7 @@ const Footer = () => {
                       borderTopRightRadius: "10px"
                     }}
                   >
-                    <div className="row justify-content-center text-center">
+                    <div className="row justify-content-center text-center py-0">
                       <div
                         className="col-2 "
                         style={{
@@ -54,7 +54,7 @@ const Footer = () => {
                             src="https://image.flaticon.com/icons/svg/263/263115.svg"
                           ></img>
                           <br />
-                          <p>Home</p>
+                          <p className="my-0">Home</p>
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
@@ -64,7 +64,7 @@ const Footer = () => {
                             src="https://image.flaticon.com/icons/svg/151/151917.svg"
                           ></img>
                           <br />
-                          <p style={{ textDecoration: "none" }}>Pesanan</p>
+                          <p className="my-0">Pesanan</p>
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
@@ -73,7 +73,7 @@ const Footer = () => {
                           src="https://image.flaticon.com/icons/svg/906/906794.svg"
                         ></img>
                         <br />
-                        <p>Help</p>
+                        <p className="my-0">Help</p>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
                         <Link to="/profile">
@@ -82,7 +82,7 @@ const Footer = () => {
                             src="https://image.flaticon.com/icons/svg/1738/1738760.svg"
                           ></img>
                           <br />
-                          <p>Me</p>
+                          <p className="my-0">Me</p>
                         </Link>
                       </div>
                     </div>

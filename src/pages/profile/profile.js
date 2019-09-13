@@ -23,7 +23,6 @@ const Profile = () => {
   return (
     <div>
       <Header />
-
       <MDBContainer>
         <MDBRow className="justify-content-center" style={{ padding: "0" }}>
           <MDBCol style={{ maxWidth: "480px", padding: "0" }}>

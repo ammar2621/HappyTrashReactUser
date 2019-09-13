@@ -1,4 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import SwipeableViews from "react-swipeable-views";
 import {
   MDBContainer,
   MDBTabPane,
@@ -9,46 +14,39 @@ import {
   MDBMedia
 } from "mdbreact";
 
-class TabOrder extends Component {
+class TabOrder extends React.Component {
   state = {
-    activeItem: "1"
+    index: 0
   };
 
-  toggle = tab => e => {
-    if (this.state.activeItem !== tab) {
-      this.setState({
-        activeItem: tab
-      });
-    }
+  handleChange = (event, value) => {
+    this.setState({
+      index: value
+    });
+  };
+
+  handleChangeIndex = index => {
+    this.setState({
+      index
+    });
   };
 
   render() {
+    const { index } = this.state;
+
     return (
-      <MDBContainer>
-        <MDBNav className="nav-tabs mt-5">
-          <MDBNavItem>
-            <MDBNavLink
-              to="#"
-              active={this.state.activeItem === "1"}
-              onClick={this.toggle("1")}
-              role="tab"
-            >
-              Dalam Pesanan
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink
-              to="#"
-              active={this.state.activeItem === "2"}
-              onClick={this.toggle("2")}
-              role="tab"
-            >
-              Riwayat Pesanan
-            </MDBNavLink>
-          </MDBNavItem>
-        </MDBNav>
-        <MDBTabContent activeItem={this.state.activeItem}>
-          <MDBTabPane tabId="1" role="tabpanel">
+      <div>
+        <Tabs
+          value={index}
+          fullWidth
+          onChange={this.handleChange}
+          style={styles.tabs}
+        >
+          <Tab label="Dalam Pesanan" />
+          <Tab label="Riwayat Pesanan" />
+        </Tabs>
+        <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+          <div style={Object.assign({}, styles.slide)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
               <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
                 <img
@@ -64,8 +62,8 @@ class TabOrder extends Component {
                 <p style={{ margin: "0" }}>26 September 2019</p>
               </MDBMedia>
             </MDBMedia>
-          </MDBTabPane>
-          <MDBTabPane tabId="2" role="tabpanel">
+          </div>
+          <div style={Object.assign({}, styles.slide)}>
             <MDBMedia className="mt-3" style={{ width: "100%" }}>
               <MDBMedia left className="mr-3 ml-3" href="#">
                 <img
@@ -96,10 +94,20 @@ class TabOrder extends Component {
                 <p style={{ margin: "0" }}>22 September 2019</p>
               </MDBMedia>
             </MDBMedia>
-          </MDBTabPane>
-        </MDBTabContent>
-      </MDBContainer>
+          </div>
+        </SwipeableViews>
+      </div>
     );
   }
 }
+
+const styles = {
+  tabs: {
+    background: "#fff"
+  },
+  slide: {
+    padding: 15,
+    minHeight: 100
+  }
+};
 export default TabOrder;

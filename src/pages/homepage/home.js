@@ -15,10 +15,12 @@ import {
 } from "mdbreact";
 import Footer from "../../component/footer";
 import { Link } from "react-router-dom";
+import Header from "../../component/header";
 
 const Home = () => {
   return (
     <div>
+      <Header />
       <MDBContainer>
         <MDBRow className="justify-content-center" style={{ padding: "0" }}>
           <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -30,25 +32,6 @@ const Home = () => {
                 padding: "0"
               }}
             >
-              <div
-                style={{
-                  padding: "0",
-                  backgroundColor: "#377C4E",
-                  marginBottom: "10px"
-                }}
-              >
-                <h1
-                  className="font"
-                  style={{
-                    color: "white",
-                    fontWeight: "900",
-                    padding: "10px 0 15px 0",
-                    backgroundColor: "#377C4E"
-                  }}
-                >
-                  Happy Trash
-                </h1>
-              </div>
               <br />
               <br />
               <div className="row" style={{ padding: "0", margin: "0" }}>

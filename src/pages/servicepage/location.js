@@ -19,6 +19,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Time from "../../component/time/time";
 import Upload from "../../component/time/foto";
 import swal from "sweetalert";
+import Header from "../../component/header";
 
 class Location extends React.Component {
   constructor(props) {
@@ -27,12 +28,14 @@ class Location extends React.Component {
   }
 
   sweetAlertFunction() {
+    const self = this;
     console.log("button clicks");
     swal(
       "Terima Kasih, Ammar!",
       "Harap tunggu tim kami akan menghubungi kamu!",
       "success"
     );
+    self.props.history.push("/home");
   }
 
   state = {
@@ -49,6 +52,7 @@ class Location extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <MDBContainer>
           <MDBRow className="justify-content-center" style={{ padding: "0" }}>
             <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -60,27 +64,6 @@ class Location extends React.Component {
                   padding: "0"
                 }}
               >
-                <div
-                  style={{
-                    padding: "0",
-                    backgroundColor: "#377C4E",
-                    marginBottom: "10px"
-                  }}
-                >
-                  <h1
-                    className="font"
-                    style={{
-                      color: "white",
-                      fontWeight: "900",
-                      padding: "10px 0 15px 0",
-                      backgroundColor: "#377C4E"
-                    }}
-                  >
-                    Happy Trash
-                  </h1>
-                </div>
-                <br />
-                <br />
                 <div
                   style={{
                     height: "100vh",

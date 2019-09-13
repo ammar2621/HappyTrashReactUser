@@ -19,6 +19,8 @@ import swal from "sweetalert";
 import TabOrder from "./taborder";
 import "./order.css";
 import DemoTabs from "./coba";
+import Header from "../../component/header";
+import Footer from "../../component/footer";
 
 class Order extends React.Component {
   constructor(props) {
@@ -38,6 +40,7 @@ class Order extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <MDBContainer>
           <MDBRow className="justify-content-center" style={{ padding: "0" }}>
             <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -49,25 +52,6 @@ class Order extends React.Component {
                   padding: "0"
                 }}
               >
-                <div
-                  style={{
-                    padding: "0",
-                    backgroundColor: "#377C4E",
-                    marginBottom: "10px"
-                  }}
-                >
-                  <h1
-                    className="font"
-                    style={{
-                      color: "white",
-                      fontWeight: "900",
-                      padding: "10px 0 15px 0",
-                      backgroundColor: "#377C4E"
-                    }}
-                  >
-                    Happy Trash
-                  </h1>
-                </div>
                 <div
                   className="row justify-content-center"
                   style={{
@@ -110,7 +94,6 @@ class Order extends React.Component {
                     </div>
                   </div>
                 </div>
-                <DemoTabs />
                 <TabOrder />
                 <br />
                 <br />
@@ -118,6 +101,7 @@ class Order extends React.Component {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        <Footer />
       </div>
     );
   }

@@ -18,6 +18,8 @@ import {
 import swal from "sweetalert";
 import TablePage from "../../component/table/tableorder";
 import TableTrash from "../../component/table/trashdetails";
+import Header from "../../component/header";
+import Footer from "../../component/footer";
 
 class OrderDetails extends React.Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class OrderDetails extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <MDBContainer>
           <MDBRow className="justify-content-center" style={{ padding: "0" }}>
             <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -48,25 +51,7 @@ class OrderDetails extends React.Component {
                   padding: "0"
                 }}
               >
-                <div
-                  style={{
-                    padding: "0",
-                    backgroundColor: "#377C4E",
-                    marginBottom: "20px"
-                  }}
-                >
-                  <h1
-                    className="font"
-                    style={{
-                      color: "white",
-                      fontWeight: "900",
-                      padding: "10px 0 15px 0",
-                      backgroundColor: "#377C4E"
-                    }}
-                  >
-                    Happy Trash
-                  </h1>
-                </div>
+                <br />
                 <div
                   className="row justify-content-center"
                   style={{
@@ -182,7 +167,7 @@ class OrderDetails extends React.Component {
                 </div>
                 <br />
                 <div
-                  className="row justify-content-center"
+                  className="row justify-content-center pb-5"
                   style={{
                     padding: "0",
                     margin: "0"
@@ -215,6 +200,7 @@ class OrderDetails extends React.Component {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        <Footer />
       </div>
     );
   }
