@@ -20,11 +20,19 @@ import Time from "../../component/time/time";
 import Upload from "./foto";
 import swal from "sweetalert";
 import Header from "../../component/header";
+import { storage } from "../../firebase/index";
 
 class Location extends React.Component {
   constructor(props) {
     super(props);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+    this.state = {
+      startDate: new Date(),
+      startTime: new Time(),
+      photo: null,
+      urlPhoto: "",
+      progress: 0,
+    }
   }
 
   sweetAlertFunction() {
@@ -38,15 +46,53 @@ class Location extends React.Component {
     self.props.history.push("/home");
   }
 
-  state = {
-    startDate: new Date(),
-    startTime: new Time()
-  };
-
   handleChange = date => {
     this.setState({
       startDate: date
     });
+  };
+
+  // funtion to store photo uploaded by user
+  handleChangePhoto = e => {
+    if (e.target.files[0]) {
+      this.state.photo = e.target.files[0];
+      console.log(e.target.files[0])
+    }
+  };
+
+  // function to upload photo to cloud storage
+  handleUploadPhoto = event => {
+  event.preventDefault();
+  try {
+      const uploadTask = storage
+      .ref(`images/${this.state.photo.name}`)
+      .put(this.state.photo);
+      uploadTask.on(
+      "state_changed",
+      snapshot => {
+          //progress Function
+          const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.setState({ progress });
+      },
+      error => {
+          console.log(error);
+      },
+      () => {
+          //Complete Function
+          storage
+          .ref("images")
+          .child(this.state.photo.name)
+          .getDownloadURL()
+          .then(url => {
+              this.setState({ urlPhoto: url });
+              console.log(this.state.urlPhoto);
+          });
+      }
+      );
+  } catch (err) {
+      console.log("File Kosong");
+  }
   };
 
   render() {
@@ -168,12 +214,17 @@ class Location extends React.Component {
                         />
                         <br />
                         <br />
-                        <p style={{ fontSize: "15px", margin: "0" }}>
-                          Pilih Foto
-                        </p>
-                        <div className="text-left">
-                          <Upload />
-                        </div>
+                        <label for="inputPhotoURL">Pilih Foto Lalu Klik Upload</label>
+                        <br />
+                        <progress value={this.state.progress} max="100" style={{ width: "100%" }} />
+                        <br />
+                        <input type="file" onChange={this.handleChangePhoto} />
+                        <image src={this.state.photo}/>
+                        <br />
+                        <br />
+                        <button onClick={this.handleUploadPhoto}>Upload</button>
+                        <br/>
+                        <br/>
                       </div>
                       <MDBBtn
                         onClick={this.sweetAlertFunction}
