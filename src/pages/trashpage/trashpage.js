@@ -17,9 +17,8 @@ import Footer from "../../component/footer";
 import { Link } from "react-router-dom";
 import EditProfile from "../../component/editprofile.js/editprofile";
 import Header from "../../component/header";
-import { borderRadius } from "@material-ui/system";
 
-const Help = () => {
+const ListSampah = () => {
   return (
     <div>
       <Header />
@@ -63,9 +62,9 @@ const Help = () => {
                         margin: "0",
                         border: "0.5px solid green",
                         borderLeft: "0.5px solid green",
-                        borderRight: "0.5px solid green"
-                        // borderTopLeftRadius: "15px",
-                        // borderTopRightRadius: "15px"
+                        borderRight: "0.5px solid green",
+                        borderTopLeftRadius: "15px",
+                        borderTopRightRadius: "15px"
                       }}
                     >
                       <h3
@@ -77,12 +76,12 @@ const Help = () => {
                           margin: "0"
                         }}
                       >
-                        Bantuan
+                        Kategori Sampah
                       </h3>
                     </div>
                   </div>
                   <div
-                    className="row justify-content-center link"
+                    className="row justify-content-center list"
                     style={{
                       padding: "0",
                       margin: "0"
@@ -91,21 +90,27 @@ const Help = () => {
                     <div
                       className="col-11 text-left px-0 py-0 "
                       style={{
-                        border: "0.5px solid green"
+                        border: "0.5px solid green",
+                        borderBottomLeftRadius: "15px",
+                        borderBottomRightRadius: "15px"
                       }}
                     >
-                      <Link to="./listsampah">
-                        <h4 className="mx-3 mt-4 pb-2 font border-bottom">
-                          List Sampah
-                        </h4>
-                      </Link>
+                      <h4
+                        className="mx-3 mt-4 pb-2 font border-bottom"
+                        style={{ color: "black", textDecoration: "None" }}
+                      >
+                        Sampah Plastik
+                      </h4>
                       <h4 className="mx-3 mt-1 pb-2 border-bottom font">
-                        Cara Order
+                        Sampah Kertas
+                      </h4>
+                      <h4 className="mx-3 mt-1 pb-2 border-bottom font">
+                        Sampah Kaca
                       </h4>
                       <h4 className="mx-3 mt-1 pb-2 mb-3 border-bottom font">
-                        FAQ
+                        Sampah Logam
                       </h4>
-                      <Link to="./home">
+                      <Link to="./help">
                         <div
                           className="mb-4 mx-3 text-center"
                           style={{
@@ -137,4 +142,4 @@ const Help = () => {
   );
 };
 
-export default Help;
+export default ListSampah;
