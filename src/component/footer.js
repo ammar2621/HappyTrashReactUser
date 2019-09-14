@@ -51,10 +51,12 @@ const Footer = () => {
                         <Link to="/home">
                           <img
                             style={{ width: "25px" }}
-                            src="https://image.flaticon.com/icons/svg/263/263115.svg"
+                            src="https://i.ibb.co/nsNx54W/home.png"
+                            alt="home"
+                            border="0"
                           ></img>
                           <br />
-                          <p className="my-0">Home</p>
+                          <p className="my-0 font">Home</p>
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
@@ -66,7 +68,7 @@ const Footer = () => {
                             border="0"
                           />
                           <br />
-                          <p className="my-0">Pesanan</p>
+                          <p className="my-0 font">Pesanan</p>
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
@@ -78,7 +80,7 @@ const Footer = () => {
                             border="0"
                           />
                           <br />
-                          <p className="my-0">Bantuan</p>
+                          <p className="my-0 font">Bantuan</p>
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
@@ -90,7 +92,7 @@ const Footer = () => {
                             border="0"
                           />
                           <br />
-                          <p className="my-0">Me</p>
+                          <p className="my-0 font">Me</p>
                         </Link>
                       </div>
                     </div>

@@ -1,29 +1,97 @@
-import React from "react";
-import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
+import React, { Component } from "react";
+import { MDBTable, MDBTableBody } from "mdbreact";
+import axios from "axios";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
-const TableProfile = props => {
-  const data = {
-    rows: [
-      {
-        key: "Nama",
-        value: "Ammar Al Faruqi"
-      },
-      {
-        key: "Email",
-        value: "ammar@alterra.id"
-      },
-      {
-        key: "Nomor Handphone",
-        value: "082278787878"
-      }
-    ]
+class TableProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      name: "",
+      email: "",
+      password: "",
+      mobile_number: null,
+      data: []
+    };
+  }
+
+  setName = e => {
+    e.preventDefault();
+    this.setState({ name: e.target.value });
   };
 
-  return (
-    <MDBTable responsive>
-      <MDBTableBody rows={data.rows} />
-    </MDBTable>
-  );
-};
+  setEmail = e => {
+    e.preventDefault();
+    this.setState({ email: e.target.value });
+  };
 
-export default TableProfile;
+  setMobile_number = e => {
+    e.preventDefault();
+    this.setState({ mobile_number: e.target.value });
+  };
+
+  setPassword = e => {
+    e.preventDefault();
+    this.setState({ password: e.target.value });
+  };
+
+  componentDidMount() {
+    const self = this;
+    var config = {
+      headers: {
+        Authorization: "Bearer " + this.props.token
+      }
+    };
+    console.log("token", this.props.token);
+    axios
+      .get(self.props.base_url + "/users/" + localStorage.getItem("id"), config)
+      .then(response => {
+        self.setState({ data: response.data });
+        self.setState({
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password,
+          mobile_number: response.data.mobile_number
+        });
+        console.log("haloo");
+      })
+      .catch(error => {
+        console.log("error profile", error);
+      });
+  }
+
+  render() {
+    console.log("woi", this.state.data);
+    const self = this;
+    const data = {
+      rows: [
+        {
+          key: "Nama",
+          value: "{this.state.name}"
+        },
+        {
+          key: "Email",
+          value: "{this.state.email}"
+        },
+        {
+          key: "Nomor Handphone",
+          value: "{this.state.mobile_number}"
+        }
+      ]
+    };
+    return (
+      <MDBTable responsive>
+        <MDBTableBody rows={data.rows} />
+        {this.state.mobile_number}
+      </MDBTable>
+    );
+  }
+}
+
+export default connect(
+  "is_login, base_url, token",
+  actions
+)(withRouter(TableProfile));
