@@ -31,16 +31,21 @@ const Header = () => {
               }}
             >
               <h1
-                className="font text-center "
+                className="font text-center pt-3 pb-4 "
                 style={{
                   color: "white",
-                  fontWeight: "900",
-                  padding: "0",
-                  margin: 0,
-                  backgroundColor: "#377C4E"
+                  fontWeight: "900"
                 }}
               >
-                Happy Trash
+                Happy
+                <img
+                  className="mx-2"
+                  style={{ width: "40px" }}
+                  src="https://i.ibb.co/9vKwZGT/new-white.png"
+                  alt="new-white"
+                  border="0"
+                />
+                Trash
               </h1>
             </div>
           </MDBCol>

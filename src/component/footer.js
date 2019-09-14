@@ -58,11 +58,13 @@ const Footer = () => {
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
-                        <Link to="/order">
+                        <Link to="/orderhistory">
                           <img
                             style={{ width: "25px" }}
-                            src="https://image.flaticon.com/icons/svg/151/151917.svg"
-                          ></img>
+                            src="https://i.ibb.co/st4hBVd/list.png"
+                            alt="list"
+                            border="0"
+                          />
                           <br />
                           <p className="my-0">Pesanan</p>
                         </Link>
@@ -71,18 +73,22 @@ const Footer = () => {
                         <Link to="/help">
                           <img
                             style={{ width: "25px" }}
-                            src="https://image.flaticon.com/icons/svg/906/906794.svg"
-                          ></img>
+                            src="https://i.ibb.co/CBhWx2w/information.png"
+                            alt="list"
+                            border="0"
+                          />
                           <br />
-                          <p className="my-0">Help</p>
+                          <p className="my-0">Bantuan</p>
                         </Link>
                       </div>
                       <div className="col-2" style={{ padding: "0" }}>
                         <Link to="/profile">
                           <img
                             style={{ width: "25px" }}
-                            src="https://image.flaticon.com/icons/svg/1738/1738760.svg"
-                          ></img>
+                            src="https://i.ibb.co/DW2f78j/account.png"
+                            alt="account"
+                            border="0"
+                          />
                           <br />
                           <p className="my-0">Me</p>
                         </Link>

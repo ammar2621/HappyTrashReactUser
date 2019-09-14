@@ -40,18 +40,18 @@ const Home = () => {
                 </div>
               </div>
               <div
-                className="row justify-content-center"
+                className="row justify-content-center link"
                 style={{
                   padding: "0",
                   margin: "0"
                 }}
               >
                 <div className="col-6">
-                  <Link to="/service">
+                  <Link to="/order">
                     <MDBCard
                       border="success"
-                      className="m-3"
-                      style={{ maxWidth: "18rem" }}
+                      className="mt-3"
+                      style={{ maxWidth: "18rem", width: "100%" }}
                     >
                       <MDBCardHeader
                         className="font"
@@ -72,8 +72,8 @@ const Home = () => {
                   <Link to="/reward">
                     <MDBCard
                       border="success"
-                      className="m-3"
-                      style={{ maxWidth: "18rem" }}
+                      className="mt-3"
+                      style={{ maxWidth: "18rem", width: "100%" }}
                     >
                       <MDBCardHeader
                         className="font"
@@ -98,11 +98,11 @@ const Home = () => {
                 </div>
               </div>
               <div
-                className="row justify-content-center"
-                style={{ padding: "0", margin: "0" }}
+                className="row justify-content-center pb-5"
+                style={{ margin: "0" }}
               >
                 <div
-                  className="col-10"
+                  className="col-11"
                   style={{
                     backgroundColor: "black",
                     borderTopLeftRadius: "20px",
@@ -130,7 +130,7 @@ const Home = () => {
                   <br />
                 </div>
                 <div
-                  className="col-10"
+                  className="col-11 pt-2"
                   style={{
                     borderLeft: "0.5px solid grey",
                     borderRight: "0.5px solid grey",
@@ -147,9 +147,6 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <br />
-              <br />
-              <br />
               <br />
               <br />
               <br />
