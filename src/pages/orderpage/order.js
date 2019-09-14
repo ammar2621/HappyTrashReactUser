@@ -88,20 +88,27 @@ class Location extends React.Component {
   doOrder = async e => {
     e.preventDefault();
     const self = this;
+    var year = self.state.startDate.getFullYear()
+    var month = self.state.startDate.getMonth()
+    var date = self.state.startDate.getDate()
+    var hour = self.state.startDate.getHours()
+    var minute = self.state.startDate.getMinutes()
+    var second = self.state.startDate.getSeconds()
+    // var mili = self.state.startDate.getMiliseconds()
     var config = {
       headers: {
         Authorization: "Bearer " + this.props.token
       },
       data: {
         adress: self.state.adress,
-        time: self.state.startDate,
+        time: year + "-" + month + "-" + date + "T" + hour + ":" + minute + ":" + second + ".000",
         photo: this.state.urlPhoto
       },
       method: "POST",
       url: self.props.base_url + "/orders"
     };
     axios(config)
-      .then(function(response) {
+      .then(function (response) {
         self.props.history.push("/orderhistory");
         swal(
           "Terima Kasih, Sudah Order!",
@@ -109,7 +116,7 @@ class Location extends React.Component {
           "success"
         );
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });

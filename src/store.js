@@ -1,22 +1,23 @@
-import createStore from "unistore";
+import createStore from 'unistore';
 
 export const store = createStore({
-  email: "",
-  full_name: "",
+  email: '',
+  full_name: '',
   is_login: false,
-  api_key: "",
-  keyword: "",
+  api_key: '',
+  keyword: '',
   values: [],
   jumlah: 0,
-  total: "",
+  total: '',
   listName: [],
-  gender: "",
-  name: "",
-  token: "",
-  base_url: "http://backend.fikriamri.xyz/v1"
+  gender: '',
+  name: '',
+  token: '',
+  // base_url: "http://backend.fikriamri.xyz/v1"
+  base_url: 'http://localhost:5000/v1',
 });
 
-export const actions = store => ({
+export const actions = (store) => ({
   setEmail(state, value) {
     return { email: value };
   },
@@ -47,11 +48,11 @@ export const actions = store => ({
   setPic(state, value) {
     return { pic: value };
   },
-  ubahMale: state => {
-    store.setState({ gender: "male" });
+  ubahMale: (state) => {
+    store.setState({ gender: 'male' });
   },
-  ubahFemale: state => {
-    store.setState({ gender: "female" });
+  ubahFemale: (state) => {
+    store.setState({ gender: 'female' });
   },
   ubahListName: (state, baru) => {
     store.setState({ listName: baru });
@@ -61,5 +62,5 @@ export const actions = store => ({
   },
   setToken: (state, value) => {
     store.setState({ token: value });
-  }
+  },
 });
