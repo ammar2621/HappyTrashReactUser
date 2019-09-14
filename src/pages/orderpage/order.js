@@ -20,10 +20,8 @@ class Location extends React.Component {
       photo: null,
       urlPhoto: "",
       progress: 0,
-      adress: null,
-      time: null
+      adress: null
     };
-    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
 
   setAdress = e => {
@@ -35,17 +33,6 @@ class Location extends React.Component {
     e.preventDefault();
     this.setState({ password: e.target.value });
   };
-
-  sweetAlertFunction() {
-    const self = this;
-    console.log("button clicks");
-    swal(
-      "Terima Kasih, Ammar!",
-      "Harap tunggu tim kami akan menghubungi kamu!",
-      "success"
-    );
-    self.props.history.push("/home");
-  }
 
   // funtion to store date by user choose
   handleChange = date => {
@@ -101,29 +88,42 @@ class Location extends React.Component {
   doOrder = async e => {
     e.preventDefault();
     const self = this;
-    axios
-      .post(self.props.base_url + "/users", {
-        name: self.state.username,
-        email: self.state.email,
-        password: self.state.password,
-        mobile_number: self.state.mobile_number,
-        status: false
-      })
-      .then(function(response) {
-        self.props.history.push("/home");
+    var year = self.state.startDate.getFullYear()
+    var month = self.state.startDate.getMonth()
+    var date = self.state.startDate.getDate()
+    var hour = self.state.startDate.getHours()
+    var minute = self.state.startDate.getMinutes()
+    var second = self.state.startDate.getSeconds()
+    // var mili = self.state.startDate.getMiliseconds()
+    var config = {
+      headers: {
+        Authorization: "Bearer " + this.props.token
+      },
+      data: {
+        adress: self.state.adress,
+        time: year + "-" + month + "-" + date + "T" + hour + ":" + minute + ":" + second + ".000",
+        photo: this.state.urlPhoto
+      },
+      method: "POST",
+      url: self.props.base_url + "/orders"
+    };
+    axios(config)
+      .then(function (response) {
+        self.props.history.push("/orderhistory");
         swal(
-          "Terima Kasih, Sudah Login!",
-          "Sampah Online siap membantumu!",
+          "Terima Kasih, Sudah Order!",
+          "Tim kami akan menghubungimu secepatnya!",
           "success"
         );
       })
-      .catch(function(error) {
-        console.log("errrrrrr", error);
+      .catch(function (error) {
+        console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <div>
         <Header />
@@ -197,7 +197,8 @@ class Location extends React.Component {
                         Dimana tempat penjemputan sampahmu?
                       </h6>
                       <input
-                        type="email"
+                        onChange={this.setAdress}
+                        type="text"
                         id="defaultFormLoginEmailEx"
                         className="form-control"
                       />
@@ -246,7 +247,9 @@ class Location extends React.Component {
                         <br />
                       </div>
                       <MDBBtn
-                        onClick={this.sweetAlertFunction}
+                        onClick={e => {
+                          this.doOrder(e);
+                        }}
                         style={{ width: "100%", borderRadius: "15px" }}
                         target="_blank"
                         color="dark-green"
@@ -267,4 +270,7 @@ class Location extends React.Component {
   }
 }
 
-export default Location;
+export default connect(
+  "is_login, base_url, token",
+  actions
+)(withRouter(Location));
