@@ -19,11 +19,68 @@ import swal from "sweetalert";
 import TabReward from "./tabreward";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
+import axios from "axios";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
 class RewardPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modal: false,
+      name: "",
+      point: null,
+      photo: "",
+      stock: null,
+      data: []
+    };
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+  }
+
+  setName = e => {
+    e.preventDefault();
+    this.setState({ name: e.target.value });
+  };
+
+  setPoint = e => {
+    e.preventDefault();
+    this.setState({ point: e.target.value });
+  };
+
+  setPhoto = e => {
+    e.preventDefault();
+    this.setState({ photo: e.target.value });
+  };
+
+  setStock = e => {
+    e.preventDefault();
+    this.setState({ stock: e.target.value });
+  };
+
+  componentDidMount() {
+    const self = this;
+    var config = {
+      headers: {
+        Authorization: "Bearer " + this.props.token
+      }
+    };
+    console.log("token", this.props.token);
+    axios
+      .get(self.props.base_url + "/rewards", config)
+      .then(response => {
+        self.setState({ data: response.data });
+        self.setState({
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password,
+          mobile_number: response.data.mobile_number
+        });
+        console.log("haloo");
+      })
+      .catch(error => {
+        console.log("error rewards", error);
+      });
   }
 
   sweetAlertFunction() {
@@ -135,4 +192,7 @@ class RewardPage extends React.Component {
   }
 }
 
-export default RewardPage;
+export default connect(
+  "is_login, base_url, token",
+  actions
+)(withRouter(RewardPage));
