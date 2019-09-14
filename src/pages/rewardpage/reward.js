@@ -72,11 +72,11 @@ class RewardPage extends React.Component {
         self.setState({ data: response.data });
         self.setState({
           name: response.data.name,
-          email: response.data.email,
-          password: response.data.password,
-          mobile_number: response.data.mobile_number
+          point: response.data.point,
+          photo: response.data.photo,
+          stock: response.data.stock
         });
-        console.log("haloo");
+        console.log(self.state.data);
       })
       .catch(error => {
         console.log("error rewards", error);

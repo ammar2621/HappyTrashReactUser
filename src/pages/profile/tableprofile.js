@@ -41,26 +41,39 @@ class TableProfile extends Component {
   componentDidMount() {
     const self = this;
     var config = {
+      method: "GET",
+      url: self.props.base_url + "/auth",
       headers: {
         Authorization: "Bearer " + this.props.token
       }
     };
-    console.log("token", this.props.token);
-    axios
-      .get(self.props.base_url + "/users/" + localStorage.getItem("id"), config)
-      .then(response => {
-        self.setState({ data: response.data });
-        self.setState({
-          name: response.data.name,
-          email: response.data.email,
-          password: response.data.password,
-          mobile_number: response.data.mobile_number
-        });
-        console.log("haloo");
+    axios(config)
+      .then(function(response) {
+        console.log(response.data);
+        localStorage.setItem("id", response.data.claims.id);
+        axios
+          .get(
+            self.props.base_url + "/users/" + localStorage.getItem("id"),
+            config
+          )
+          .then(response => {
+            self.setState({ data: response.data });
+            self.setState({
+              name: response.data.name,
+              email: response.data.email,
+              password: response.data.password,
+              mobile_number: response.data.mobile_number
+            });
+            console.log("haloo");
+          })
+          .catch(error => {
+            console.log("error profile", error);
+          });
       })
-      .catch(error => {
-        console.log("error profile", error);
+      .then(function(error) {
+        console.log(error);
       });
+    console.log("token", this.props.token);
   }
 
   render() {
@@ -70,22 +83,21 @@ class TableProfile extends Component {
       rows: [
         {
           key: "Nama",
-          value: "{this.state.name}"
+          value: this.state.name
         },
         {
           key: "Email",
-          value: "{this.state.email}"
+          value: this.state.email
         },
         {
           key: "Nomor Handphone",
-          value: "{this.state.mobile_number}"
+          value: this.state.mobile_number
         }
       ]
     };
     return (
       <MDBTable responsive>
         <MDBTableBody rows={data.rows} />
-        {this.state.mobile_number}
       </MDBTable>
     );
   }

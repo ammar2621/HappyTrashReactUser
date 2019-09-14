@@ -62,6 +62,7 @@ class SignIn extends React.Component {
         self.props.setLogin(true);
         self.props.setToken(response.data.token);
         console.log(response.data.status);
+        console.log(self.props);
         self.props.history.replace("/profile");
         swal(
           "Terima Kasih, Sudah Login!",
@@ -135,6 +136,6 @@ class SignIn extends React.Component {
 }
 
 export default connect(
-  "is_login, base_url",
+  "is_login, base_url, token",
   actions
 )(withRouter(SignIn));

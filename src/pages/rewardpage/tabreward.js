@@ -15,15 +15,84 @@ import Tab from "@material-ui/core/Tab";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import SwipeableViews from "react-swipeable-views";
+import axios from "axios";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
 class TabReward extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      index: 0,
+      name: "",
+      point: null,
+      photo: "",
+      stock: null,
+      data: []
+    };
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
-  state = {
-    index: 0
+
+  setName = e => {
+    e.preventDefault();
+    this.setState({ name: e.target.value });
   };
+
+  setPoint = e => {
+    e.preventDefault();
+    this.setState({ point: e.target.value });
+  };
+
+  setPhoto = e => {
+    e.preventDefault();
+    this.setState({ photo: e.target.value });
+  };
+
+  setStock = e => {
+    e.preventDefault();
+    this.setState({ stock: e.target.value });
+  };
+
+  componentDidMount() {
+    const self = this;
+    var config = {
+      headers: {
+        Authorization: "Bearer " + this.props.token
+      }
+    };
+    console.log("token", this.props.token);
+    axios
+      .get(self.props.base_url + "/rewards", config)
+      .then(response => {
+        self.setState({ data: response.data });
+        self.setState({
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password,
+          mobile_number: response.data.mobile_number
+        });
+        console.log("haloo");
+      })
+      .catch(error => {
+        console.log("error rewards", error);
+      });
+    axios
+      .get(self.props.base_url + "/reward_history/user", config)
+      .then(response => {
+        self.setState({ data: response.data });
+        self.setState({
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password,
+          mobile_number: response.data.mobile_number
+        });
+        console.log("haloo");
+      })
+      .catch(error => {
+        console.log("error rewards history", error);
+      });
+  }
 
   handleChange = (event, value) => {
     this.setState({
@@ -166,4 +235,7 @@ const styles = {
   }
 };
 
-export default TabReward;
+export default connect(
+  "base_url, token",
+  actions
+)(withRouter(TabReward));

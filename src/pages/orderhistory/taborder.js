@@ -13,12 +13,22 @@ import {
   MDBNavLink,
   MDBMedia
 } from "mdbreact";
+import axios from "axios";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
 class TabOrder extends React.Component {
-  state = {
-    index: 0
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0,
+      adress: null,
+      time: null,
+      photo: null,
+      status: null
+    };
+  }
   handleChange = (event, value) => {
     this.setState({
       index: value
