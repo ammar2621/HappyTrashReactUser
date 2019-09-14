@@ -12,7 +12,8 @@ export const store = createStore({
   listName: [],
   gender: "",
   name: "",
-  token: ""
+  token: "",
+  base_url: "http://backend.fikriamri.xyz/v1"
 });
 
 export const actions = store => ({

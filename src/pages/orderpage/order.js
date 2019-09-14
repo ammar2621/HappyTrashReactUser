@@ -17,9 +17,27 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Time from "../../component/time/time";
-import Upload from "../../component/time/foto";
+import Upload from "./foto";
+import swal from "sweetalert";
+import Header from "../../component/header";
 
 class Location extends React.Component {
+  constructor(props) {
+    super(props);
+    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+  }
+
+  sweetAlertFunction() {
+    const self = this;
+    console.log("button clicks");
+    swal(
+      "Terima Kasih, Ammar!",
+      "Harap tunggu tim kami akan menghubungi kamu!",
+      "success"
+    );
+    self.props.history.push("/home");
+  }
+
   state = {
     startDate: new Date(),
     startTime: new Time()
@@ -34,6 +52,7 @@ class Location extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <MDBContainer>
           <MDBRow className="justify-content-center" style={{ padding: "0" }}>
             <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
@@ -45,29 +64,12 @@ class Location extends React.Component {
                   padding: "0"
                 }}
               >
-                <br />
-                <h1
-                  className="font"
-                  style={{ color: "#377C4E", fontWeight: "900", padding: "0" }}
-                >
-                  Sampah Online
-                </h1>
-                <br />
-                <br />
-                <div className="row" style={{ padding: "0", margin: "0" }}>
-                  <div className="col-10 text-left">
-                    <h2 className="font">Tukar Sampahmu</h2>
-                  </div>
-                </div>
                 <div
                   style={{
                     height: "100vh",
                     backgroundColor: "white",
                     textAlign: "center",
                     padding: "0",
-                    // borderTop: "0.5px solid grey",
-                    // borderLeft: "0.5px solid grey",
-                    // borderRight: "0.5px solid grey",
                     borderTopLeftRadius: "20px",
                     borderTopRightRadius: "20px"
                   }}
@@ -80,29 +82,14 @@ class Location extends React.Component {
                     }}
                   ></div>
                   <br />
-
+                  <div className="col-10 text-left">
+                    <h2 className="font">Tukar Sampahmu</h2>
+                  </div>
                   <div
                     className="row justify-content-center"
                     style={{ padding: "0", margin: "0" }}
                   ></div>
-                  <div class="mapouter">
-                    <div class="gmap_canvas">
-                      <iframe
-                        width="400"
-                        height="300"
-                        id="gmap_canvas"
-                        src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                        frameborder="0"
-                        scrolling="no"
-                        marginheight="0"
-                        marginwidth="0"
-                      ></iframe>
-                      Google Maps Generator by{" "}
-                      <a href="https://www.embedgooglemap.net">
-                        embedgooglemap.net
-                      </a>
-                    </div>
-                  </div>
+
                   <br />
                   <div
                     className="row text-center justify-content-center"
@@ -112,15 +99,41 @@ class Location extends React.Component {
                     }}
                   >
                     <div className="col-11">
+                      <div class="mapouter">
+                        <div class="gmap_canvas">
+                          <iframe
+                            width="100%"
+                            padding="10px"
+                            height="300"
+                            id="gmap_canvas"
+                            src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0"
+                            scrolling="no"
+                            marginheight="0"
+                            marginwidth="0"
+                          ></iframe>
+                          Google Maps Generator by{" "}
+                          <a href="https://www.embedgooglemap.net">
+                            embedgooglemap.net
+                          </a>
+                        </div>
+                      </div>
+                      <br />
                       <h6 className="text-left">
                         Dimana tempat penjemputan sampahmu?
                       </h6>
-                      <MDBInput label="Lokasi" />
+                      <input
+                        type="email"
+                        id="defaultFormLoginEmailEx"
+                        className="form-control"
+                      />
+                      <br />
                       <div className="text-left">
                         <p style={{ fontSize: "15px", margin: "0" }}>
                           Tentukan tanggal
                         </p>
                         <DatePicker
+                          dateFormat="dd-MM-yyyy"
                           label="Tentukan tanggal"
                           style={{ width: "100%" }}
                           selected={this.state.startDate}
@@ -132,17 +145,29 @@ class Location extends React.Component {
                           Tentukan Waktu
                         </p>
                         <DatePicker
-                          label="Tentukan tanggal"
+                          timeFormat="HH:mm"
+                          label="Tentukan waktu"
                           style={{ width: "100%" }}
                           selected={this.state.startDate}
                           onChange={this.handleChange}
                           showTimeSelect
                           showTimeSelectOnly
-                          timeIntervals={15}
+                          timeIntervals={30}
                           timeCaption="Time"
-                          dateFormat="h:mm aa"
+                          dateFormat="HH:mm"
                         />
-                        <MDBInput label="Masukkan Note" size="lg" />
+                        <br />
+                        <br />
+                        <p style={{ fontSize: "15px", margin: "0" }}>
+                          Masukkan Note
+                        </p>
+                        <input
+                          type="text-area"
+                          id="defaultFormLoginEmailEx"
+                          className="form-control"
+                        />
+                        <br />
+                        <br />
                         <p style={{ fontSize: "15px", margin: "0" }}>
                           Pilih Foto
                         </p>
@@ -151,8 +176,8 @@ class Location extends React.Component {
                         </div>
                       </div>
                       <MDBBtn
-                        style={{ width: "100%" }}
-                        href="https://www.mdbootstrap.com"
+                        onClick={this.sweetAlertFunction}
+                        style={{ width: "100%", borderRadius: "15px" }}
                         target="_blank"
                         color="dark-green"
                       >

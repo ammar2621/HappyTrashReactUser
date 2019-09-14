@@ -1,0 +1,18 @@
+.footer {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.footer a {
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+
+.link a {
+  color: black;
+  text-decoration: none;
+}

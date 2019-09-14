@@ -15,21 +15,22 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
+import swal from "sweetalert";
 
-class SignIn extends Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      username: "",
-      password: ""
+      email: null,
+      password: null
     };
     this.doLogin = this.doLogin.bind(this);
   }
 
-  setUsername = e => {
+  setEmail = e => {
     e.preventDefault();
-    this.setState({ username: e.target.value });
+    this.setState({ email: e.target.value });
   };
 
   setPassword = e => {
@@ -49,11 +50,12 @@ class SignIn extends Component {
     });
   };
 
-  doLogin = async e => {
+  doLogin = e => {
+    e.preventDefault();
     const self = this;
     axios
-      .post("http://api.alfaruqi.xyz/auth", {
-        username: self.state.username,
+      .post(self.props.base_url + "/auth", {
+        email: self.state.email,
         password: self.state.password
       })
       .then(function(response) {
@@ -61,11 +63,17 @@ class SignIn extends Component {
         self.props.setToken(response.data.token);
         console.log(response.data.status);
         self.props.history.replace("/profile");
+        swal(
+          "Terima Kasih, Sudah Login!",
+          "Sampah Online siap membantumu!",
+          "success"
+        );
+        self.props.history.push("/home");
       })
       .catch(function(error) {
         console.log("errrrrrr", error);
+        swal("Email atau passwordmu salah!", "Coba lagi!", "error");
       });
-    alert("Selamat Datang Orang Baik!");
   };
 
   render() {
@@ -84,16 +92,18 @@ class SignIn extends Component {
             <MDBContainer>
               <MDBRow className="text-left">
                 <MDBCol md="10">
-                  <MDBIcon className="text-left" icon="mobile-alt" size="3x" />
-
+                  {/* <MDBIcon className="text-left" icon="mobile-alt" size="3x" /> */}
                   <form>
-                    <div className="grey-text">
+                    <div
+                      className="grey-text"
+                      style={{ width: "100%", margin: "0" }}
+                    >
                       <MDBInput
-                        label="Masukkan nomor handphone mu"
+                        label="Masukkan emailmu"
                         group
                         type="text"
                         validate="number"
-                        onChange={this.setUsername}
+                        onChange={this.setEmail}
                       />
                       <MDBInput
                         label="Masukkan passwordmu"
@@ -115,7 +125,7 @@ class SignIn extends Component {
               isOpen={this.state.modal14}
               color="dark-green"
             >
-              Login
+              Masuk
             </MDBBtn>
           </MDBModalFooter>
         </MDBModal>
@@ -125,6 +135,6 @@ class SignIn extends Component {
 }
 
 export default connect(
-  "is_login",
+  "is_login, base_url",
   actions
 )(withRouter(SignIn));

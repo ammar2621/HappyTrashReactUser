@@ -1,10 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css";
-
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+// import "../../pages/orderpage/node_modules/react-datepicker/dist/react-datepicker.css";
 
 class Time extends React.Component {
   state = {
