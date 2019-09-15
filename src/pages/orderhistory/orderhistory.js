@@ -21,11 +21,15 @@ import "./order.css";
 import DemoTabs from "./coba";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
+import axios from "axios";
 
 class Order extends React.Component {
   constructor(props) {
     super(props);
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+    this.state = {
+      orders: []
+    }
   }
 
   sweetAlertFunction() {

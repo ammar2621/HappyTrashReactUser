@@ -2,36 +2,37 @@ import React from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
 
 const TableTrash = props => {
+  const details = props.details ? props.details : [{ trash_detail: { trash_name: null } }];
   const data = {
     columns: [
       {
         label: "Jenis Sampah",
-        field: "id",
-        sort: "asc"
+        field: "id"
+        // sort: "asc"
       },
       {
         label: "Jumlah Berat",
-        field: "heading0",
-        sort: "asc"
+        field: "qty"
+        // sort: "asc"
       },
       {
         label: "Dapat Point",
-        field: "heading1",
-        sort: "asc"
+        field: "point"
+        // sort: "asc"
       }
     ],
-    rows: [
-      {
-        id: "Plastik PP",
-        heading0: "5 Kg",
-        point: "5 Points"
-      },
-      {
-        id: "Kertas HVS",
-        heading0: "6 Kg",
-        point: "6 Points"
-      }
-    ]
+    rows: details.map((elm, key) => {
+      const name = elm.trash_detail.trash_name ? elm.trash_detail.trash_name : 0;
+      const point = elm.point ? elm.point : 0;
+      const qty = elm.qty ? elm.qty : 0;
+      return (
+        {
+          id: name,
+          qty,
+          point
+        }
+      )
+    })
   };
 
   return (
