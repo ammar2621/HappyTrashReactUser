@@ -107,12 +107,14 @@ class TrashPage extends Component {
                       >
                         {this.props.trashCategories.map((item, index) => {
                           return (
+                            <Link to={"/listsampah/" + item.category_name}>
                             <h4
                           className="mx-3 mt-4 pb-2 font border-bottom"
                           style={{ color: "black", textDecoration: "None" }}
-                        >
-                          {item.category_name}
-                        </h4>
+                            >
+                              {item.category_name}
+                            </h4>
+                            </Link>
                           );
                         })}
                         {/* <h4
