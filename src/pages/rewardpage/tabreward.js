@@ -72,6 +72,7 @@ class TabReward extends Component {
 
     axios(config).then(function (response) {
       console.log(response.data)
+      localStorage.setItem('point', response.data.user_point)
     }).catch(function (error) {
       console.log(error)
     })

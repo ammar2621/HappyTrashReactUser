@@ -173,7 +173,7 @@ class RewardPage extends React.Component {
                       className="text-center font"
                       style={{ fontWeight: "600" }}
                     >
-                      11 Points
+                      {localStorage.getItem('point')} Points
                     </h3>
                   </div>
                 </div>
