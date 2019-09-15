@@ -43,6 +43,29 @@ class TabOrder extends React.Component {
     });
   };
 
+  cancelOrder = (e, id) => {
+    e.preventDefault();
+    const self = this;
+    let config = {
+      method: "PUT",
+      url: self.props.base_url + "/orders/" + id,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
+      data: {
+        status: 'cancelled'
+      }
+    }
+    axios(config)
+      .then(function (response) {
+        console.log(response);
+        self.componentDidMount();
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
   componentDidMount() {
     const self = this;
     let config = {
@@ -57,7 +80,7 @@ class TabOrder extends React.Component {
       .then(function (response) {
         console.log(response);
         response.data.forEach(element => {
-          if (element.Order.status === 'waiting' || element.Order.status === 'waiting') {
+          if (element.Order.status === 'waiting' || element.Order.status === 'confirmed') {
             self.state.waiting.push(element)
           } else {
             self.state.orders.push(element)
@@ -93,7 +116,7 @@ class TabOrder extends React.Component {
                 color = "yellow";
                 status = "Menunggu Konfirmasi";
                 cancel = (<div>
-                  <button className="btn btn-success">
+                  <button className="btn btn-success" onClick={e => this.cancelOrder(e, elm.Order.id)}>
                     Batalkan
                   </button>
                 </div>)
