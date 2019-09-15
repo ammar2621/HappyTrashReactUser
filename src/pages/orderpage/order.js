@@ -88,14 +88,14 @@ class Location extends React.Component {
   doOrder = async e => {
     e.preventDefault();
     const self = this;
-    var year = self.state.startDate.getFullYear()
-    var month = self.state.startDate.getMonth()
-    var date = self.state.startDate.getDate()
-    var hour = self.state.startDate.getHours()
-    var minute = self.state.startDate.getMinutes()
-    var second = self.state.startDate.getSeconds()
+    const year = self.state.startDate.getFullYear()
+    const month = self.state.startDate.getMonth()
+    const date = self.state.startDate.getDate()
+    const hour = self.state.startDate.getHours()
+    const minute = self.state.startDate.getMinutes()
+    const second = self.state.startDate.getSeconds()
     // var mili = self.state.startDate.getMiliseconds()
-    var config = {
+    let config = {
       headers: {
         Authorization: "Bearer " + this.props.token
       },

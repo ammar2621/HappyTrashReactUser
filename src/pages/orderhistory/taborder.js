@@ -162,7 +162,7 @@ class TabOrder extends React.Component {
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
                     <p style={{ margin: "0" }}>ID Pesanan: {elm.Order.id}</p>
-                    <p style={{ margin: "0", color: color }}>Status: {status}</p>
+                    <p style={{ margin: "0", color }}>Status: {status}</p>
                     <p style={{ margin: "0" }}>{elm.Order.time}</p>
                     {detail}
                   </MDBMedia>

@@ -20,10 +20,16 @@ import TablePage from "../../component/table/tableorder";
 import TableTrash from "../../component/table/trashdetails";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
+import axios from 'axios';
+import { connect } from "unistore/react";
+import { actions } from "../../store";
 
 class OrderDetails extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      order: { Order: { time: null, id: null }, User: null, Details: null }
+    }
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
 
@@ -36,7 +42,32 @@ class OrderDetails extends React.Component {
     );
   }
 
+  componentDidMount() {
+    const self = this;
+    let config = {
+      method: "GET",
+      url: self.props.base_url + "/orders/user",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    }
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data)
+        let id = self.props.match.params.id;
+        let order = response.data.filter((elm) => {
+          return elm.Order.id == id
+        })
+        self.setState({ order: order[0] })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
   render() {
+
     return (
       <div>
         <Header />
@@ -118,7 +149,7 @@ class OrderDetails extends React.Component {
                             fontSize: "13px"
                           }}
                         >
-                          26 September 2019
+                          {this.state.order.Order.time}
                         </h6>
                         <h6
                           className="font"
@@ -129,7 +160,7 @@ class OrderDetails extends React.Component {
                             fontSize: "13px"
                           }}
                         >
-                          TS-2715100132
+                          {this.state.order.Order.id}
                         </h6>
                       </div>
                     </div>
@@ -147,7 +178,7 @@ class OrderDetails extends React.Component {
                     <div className="text-left" style={{ fontWeight: "800" }}>
                       Detail Service
                     </div>
-                    <TablePage />
+                    <TablePage summary={this.state.order.Order} />
                   </div>
                 </div>
                 <br />
@@ -162,7 +193,7 @@ class OrderDetails extends React.Component {
                     <div className="text-left" style={{ fontWeight: "800" }}>
                       Detail Sampah
                     </div>
-                    <TableTrash />
+                    <TableTrash details={this.state.order.Details} />
                   </div>
                 </div>
                 <br />
@@ -206,4 +237,4 @@ class OrderDetails extends React.Component {
   }
 }
 
-export default OrderDetails;
+export default connect("base_url", actions)(OrderDetails);

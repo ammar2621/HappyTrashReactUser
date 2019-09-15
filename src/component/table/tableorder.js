@@ -6,19 +6,15 @@ const TableOrder = props => {
     rows: [
       {
         key: "Lokasi",
-        value: "Jalan Raya Tidar No 23 A"
-      },
-      {
-        key: "Tanggal",
-        value: "26 September 2019"
+        value: props.summary.adress
       },
       {
         key: "Waktu",
-        value: "14.00"
+        value: props.summary.time
       },
       {
         key: "Jumlah Sampah",
-        value: "11 Kg"
+        value: props.summary.total_qty + " Kg"
       }
     ]
   };
