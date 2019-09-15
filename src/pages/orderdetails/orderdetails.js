@@ -214,10 +214,10 @@ class OrderDetails extends React.Component {
                     <div className="text-center">
                       <div className="mt-2 font">
                         <h4 className="font" style={{ fontWeight: "900" }}>
-                          Kamu mendapat Rp 11.000!
+                          Kamu mendapat Rp {this.state.order.Order.total_price} !
                         </h4>
                         <h4 style={{ fontWeight: "200" }}>
-                          Dan mendapat 11 Points
+                          Dan mendapat {this.state.order.Order.total_point} Points
                         </h4>
                         <h4 style={{ fontWeight: "200" }}>Dari Order ini.</h4>
                       </div>
