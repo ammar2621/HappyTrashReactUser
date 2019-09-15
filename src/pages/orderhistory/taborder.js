@@ -59,6 +59,7 @@ class TabOrder extends React.Component {
     axios(config)
       .then(function (response) {
         console.log(response);
+        self.setState({ orders: [], waiting: [] })
         self.componentDidMount();
       })
       .catch(function (error) {

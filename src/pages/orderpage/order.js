@@ -97,7 +97,7 @@ class Location extends React.Component {
     // var mili = self.state.startDate.getMiliseconds()
     let config = {
       headers: {
-        Authorization: "Bearer " + this.props.token
+        Authorization: "Bearer " + localStorage.getItem("token")
       },
       data: {
         adress: self.state.adress,
