@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import TableProfile from "./tableprofile";
 import EditProfile from "../../component/editprofile.js/editprofile";
 import Header from "../../component/header";
+import swal from "sweetalert";
 
 const Profile = () => {
   return (
@@ -119,6 +120,19 @@ const Profile = () => {
                             className="font"
                             style={{ width: "125px", borderRadius: "15px" }}
                             color="dark-green"
+                            onClick={() => {
+                              localStorage.removeItem('token')
+                              localStorage.removeItem('isLogin')
+                              localStorage.removeItem('id')
+                              localStorage.removeItem('name')
+                              localStorage.removeItem('email')
+                              localStorage.removeItem('mobile_number')
+                              swal(
+                                "Anda berhasil keluar",
+                                "Terima kasih",
+                                "success"
+                              );
+                            }}
                           >
                             Keluar
                           </MDBBtn>
