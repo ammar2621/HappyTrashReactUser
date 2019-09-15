@@ -40,7 +40,7 @@ class TableProfile extends Component {
 
   componentDidMount() {
     const self = this;
-    var config = {
+    const config = {
       method: "GET",
       url: self.props.base_url + "/auth",
       headers: {

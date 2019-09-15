@@ -50,26 +50,59 @@ class SignIn extends React.Component {
     });
   };
 
-  doLogin = e => {
+  doLogin = async e => {
     e.preventDefault();
     const self = this;
-    axios
-      .post(self.props.base_url + "/auth", {
-        email: self.state.email,
-        password: self.state.password
-      })
-      .then(function(response) {
-        self.props.setLogin(true);
+    await axios
+        .post(self.props.base_url + "/auth", {
+          email: self.state.email,
+          password: self.state.password
+        })
+        .then(function(response) {
+          localStorage.setItem('token', response.data.token)
+          console.log(response.data.token)
+          // code Fikri
+          axios
+            .get(self.props.base_url + '/auth', {
+              headers: {
+                  Authorization: "Bearer " + response.data.token
+              }
+            })
+            .then(response => {
+              console.log(response)
+              if (response.data.claims.role === false) {
+                  localStorage.setItem('isLogin', true)
+                  localStorage.setItem('id', response.data.claims.id)
+                  localStorage.setItem('name', response.data.claims.name)
+                  localStorage.setItem('email', response.data.claims.email)
+                  localStorage.setItem('mobile_number', response.data.claims.mobile_number)
+                  self.props.history.replace("/profile");
+                  swal(
+                    "Terima Kasih, Sudah Login!",
+                    "Sampah Online siap membantumu!",
+                    "success"
+                  );
+                  self.props.history.push("/home");
+              } else {
+                  swal("Email atau passwordmu salah!", "Coba lagi!", "error")
+              }
+            })
+            .catch(function(error) {
+              console.log("errrrrrr", error);
+              swal("Email atau passwordmu salah!", "Coba lagi!", "error");
+            });
+
+        // self.props.setLogin(true);
         self.props.setToken(response.data.token);
-        console.log(response.data.status);
-        console.log(self.props);
-        self.props.history.replace("/profile");
-        swal(
-          "Terima Kasih, Sudah Login!",
-          "Sampah Online siap membantumu!",
-          "success"
-        );
-        self.props.history.push("/home");
+        // console.log(response.data.status);
+        // console.log(self.props);
+        // self.props.history.replace("/profile");
+        // swal(
+        //   "Terima Kasih, Sudah Login!",
+        //   "Sampah Online siap membantumu!",
+        //   "success"
+        // );
+        // self.props.history.push("/home");
       })
       .catch(function(error) {
         console.log("errrrrrr", error);
