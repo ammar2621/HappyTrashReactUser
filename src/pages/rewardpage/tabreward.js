@@ -29,50 +29,72 @@ class TabReward extends Component {
       point: null,
       photo: "",
       stock: null,
-      data: []
+      data: [],
+      history: []
     };
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
 
-  setName = e => {
-    e.preventDefault();
-    this.setState({ name: e.target.value });
-  };
+  // setName = e => {
+  // e.preventDefault();
+  // this.setState({ name: e.target.value });
+  // };
+  // 
+  // setPoint = e => {
+  // e.preventDefault();
+  // this.setState({ point: e.target.value });
+  // };
+  // 
+  // setPhoto = e => {
+  // e.preventDefault();
+  // this.setState({ photo: e.target.value });
+  // };
+  // 
+  // setStock = e => {
+  // e.preventDefault();
+  // this.setState({ stock: e.target.value });
+  // };
+  // 
 
-  setPoint = e => {
+  claimReward = (e, id) => {
     e.preventDefault();
-    this.setState({ point: e.target.value });
-  };
+    const self = this;
+    const config = {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('token')
+      },
+      data: {
+        "stock": 1
+      },
+      url: self.props.base_url + "/rewards/" + id
+    }
 
-  setPhoto = e => {
-    e.preventDefault();
-    this.setState({ photo: e.target.value });
-  };
-
-  setStock = e => {
-    e.preventDefault();
-    this.setState({ stock: e.target.value });
-  };
-
+    axios(config).then(function (response) {
+      console.log(response.data)
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
   componentDidMount() {
     const self = this;
     var config = {
       headers: {
-        Authorization: "Bearer " + this.props.token
+        Authorization: "Bearer " + localStorage.getItem('token')
       }
     };
-    console.log("token", this.props.token);
+    console.log("token", localStorage.getItem('token'));
     axios
       .get(self.props.base_url + "/rewards", config)
       .then(response => {
         self.setState({ data: response.data });
-        self.setState({
-          name: response.data.name,
-          email: response.data.email,
-          password: response.data.password,
-          mobile_number: response.data.mobile_number
-        });
-        console.log("haloo");
+        // self.setState({
+        // name: response.data.name,
+        // email: response.data.email,
+        // password: response.data.password,
+        // mobile_number: response.data.mobile_number
+        // });
+        console.log("data", response.data);
       })
       .catch(error => {
         console.log("error rewards", error);
@@ -80,14 +102,14 @@ class TabReward extends Component {
     axios
       .get(self.props.base_url + "/reward_history/user", config)
       .then(response => {
-        self.setState({ data: response.data });
-        self.setState({
-          name: response.data.name,
-          email: response.data.email,
-          password: response.data.password,
-          mobile_number: response.data.mobile_number
-        });
-        console.log("haloo");
+        self.setState({ history: response.data });
+        // self.setState({
+        // name: response.data.name,
+        // email: response.data.email,
+        // password: response.data.password,
+        // mobile_number: response.data.mobile_number
+        // });
+        console.log("history", response.data);
       })
       .catch(error => {
         console.log("error rewards history", error);
@@ -157,48 +179,33 @@ class TabReward extends Component {
         <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
           {/* Tab 1 */}
           <div style={Object.assign({}, styles.slide)}>
-            <MDBMedia className="mt-3" style={{ width: "100%" }}>
-              <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
-                <img
-                  style={{
-                    width: "75px"
-                  }}
-                  src="https://image.flaticon.com/icons/svg/481/481368.svg"
-                />
-              </MDBMedia>
-              <MDBMedia body className="text-left font">
-                <p style={{ margin: "0" }}>Voucher Indomaret Rp 10.000</p>
-                <p style={{ margin: "0" }}>Point: 10</p>
-                <MDBBadge
-                  onClick={this.sweetAlertFunction}
-                  style={{ width: "70px", height: "20px" }}
-                  color="primary"
-                >
-                  Beli
+            {this.state.data.map((elm, key) => {
+              return (
+                <MDBMedia className="mt-3" style={{ width: "100%" }}>
+                  <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
+                    <img
+                      style={{
+                        width: "75px"
+                      }}
+                      src={elm.photo}
+                      alt={elm.photo}
+                    />
+                  </MDBMedia>
+                  <MDBMedia body className="text-left font">
+                    <p style={{ margin: "0" }}>{elm.name}</p>
+                    <p style={{ margin: "0" }}>Point yang dibutuhkan : {elm.point_to_claim}</p>
+                    <MDBBadge
+                      // onClick={this.sweetAlertFunction}
+                      onClick={e => this.claimReward(e, elm.id)}
+                      style={{ width: "70px", height: "20px" }}
+                      color="primary"
+                    >
+                      Beli
                 </MDBBadge>
-              </MDBMedia>
-            </MDBMedia>
-            <MDBMedia className="mt-3" style={{ width: "100%" }}>
-              <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
-                <img
-                  style={{
-                    width: "75px"
-                  }}
-                  src="https://image.flaticon.com/icons/svg/481/481368.svg"
-                />
-              </MDBMedia>
-              <MDBMedia body className="text-left font">
-                <p style={{ margin: "0" }}>Voucher Indomaret Rp 20.000</p>
-                <p style={{ margin: "0" }}>Point: 20</p>
-                <MDBBadge
-                  onClick={this.sweetAlertFunction}
-                  style={{ width: "70px", height: "20px" }}
-                  color="primary"
-                >
-                  Beli
-                </MDBBadge>
-              </MDBMedia>
-            </MDBMedia>
+                  </MDBMedia>
+                </MDBMedia>
+              )
+            })}
           </div>
 
           {/* Tab 2 */}
