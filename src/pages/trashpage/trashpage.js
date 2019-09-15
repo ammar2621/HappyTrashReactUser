@@ -17,8 +17,10 @@ import Footer from "../../component/footer";
 import { Link } from "react-router-dom";
 import EditProfile from "../../component/editprofile.js/editprofile";
 import Header from "../../component/header";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
 
-const ListSampah = () => {
+const TrashPage = () => {
   return (
     <div>
       <Header />
@@ -142,4 +144,4 @@ const ListSampah = () => {
   );
 };
 
-export default ListSampah;
+export default TrashPage;
