@@ -26,7 +26,7 @@ class MainRoute extends React.Component {
           <Route exact path="/home" component={Home} />
           <Route path="/order" component={Location} />
           <Route path="/orderhistory" component={Order} />
-          <Route path="/orderdetails" component={OrderDetails} />
+          <Route path="/orderdetails/:id" component={OrderDetails} />
           <Route path="/reward" component={RewardPage} />
           <Route path="/profile" component={Profile} />
           <Route path="/footer" component={Footer} />
