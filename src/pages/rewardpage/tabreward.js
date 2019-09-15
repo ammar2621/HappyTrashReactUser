@@ -76,7 +76,10 @@ class TabReward extends Component {
     }).catch(function (error) {
       console.log(error)
     })
+
+    self.componentDidMount()
   }
+
   componentDidMount() {
     const self = this;
     var config = {
@@ -211,21 +214,25 @@ class TabReward extends Component {
 
           {/* Tab 2 */}
           <div style={Object.assign({}, styles.slide)}>
-            <MDBMedia className="mt-3" style={{ width: "100%" }}>
-              <MDBMedia left className="mr-3 ml-3" href="#">
-                <img
-                  style={{
-                    width: "75px"
-                  }}
-                  src="https://image.flaticon.com/icons/svg/1996/1996901.svg"
-                />
-              </MDBMedia>
-              <MDBMedia body className="text-left font">
-                <p style={{ margin: "0" }}>Sedotan Stainless</p>
-                <p style={{ margin: "0", color: "red" }}>Status: Berhasil</p>
-                <p style={{ margin: "0" }}>26 September 2019</p>
-              </MDBMedia>
-            </MDBMedia>
+            {this.state.history.map((elm, key) => {
+              return (
+                <MDBMedia className="mt-3" style={{ width: "100%" }}>
+                  <MDBMedia left className="mr-3 ml-3" href="#">
+                    <img
+                      style={{
+                        width: "75px"
+                      }}
+                      src="https://image.flaticon.com/icons/svg/1996/1996901.svg"
+                    />
+                  </MDBMedia>
+                  <MDBMedia body className="text-left font">
+                    <p style={{ margin: "0" }}>{elm.reward_name}</p>
+                    <p style={{ margin: "0", color: "blue" }}>ID hadiah : {elm.id}</p>
+                    <p style={{ margin: "0" }}>{elm.created_at}</p>
+                  </MDBMedia>
+                </MDBMedia>
+              )
+            })}
           </div>
         </SwipeableViews>
       </div>
