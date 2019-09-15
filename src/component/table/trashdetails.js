@@ -22,7 +22,7 @@ const TableTrash = props => {
       }
     ],
     rows: details.map((elm, key) => {
-      const name = elm.trash_id ? elm.trash_id : 0;
+      const name = elm.trash_detail.trash_name ? elm.trash_detail.trash_name : 0;
       const point = elm.point ? elm.point : 0;
       const qty = elm.qty ? elm.qty : 0;
       return (
