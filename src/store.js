@@ -13,8 +13,8 @@ export const store = createStore({
   gender: '',
   name: '',
   token: '',
-  // base_url: "http://backend.fikriamri.xyz/v1"
-  base_url: 'http://localhost:5000/v1',
+  base_url: "http://backend.fikriamri.xyz/v1"
+  // base_url: 'http://localhost:5000/v1',
 });
 
 export const actions = (store) => ({
