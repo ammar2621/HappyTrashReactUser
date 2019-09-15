@@ -15,8 +15,8 @@ export const store = createStore({
   name: '',
   token: '',
 
-  // base_url: 'http://backend.fikriamri.xyz/v1',
-  base_url: 'http://localhost:5000/v1',
+  base_url: 'http://backend.fikriamri.xyz/v1',
+  // base_url: 'http://localhost:5000/v1',
 
   // data (made by Fikri)
   trashCategories: [],
