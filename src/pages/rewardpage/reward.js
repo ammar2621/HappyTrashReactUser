@@ -58,30 +58,33 @@ class RewardPage extends React.Component {
     this.setState({ stock: e.target.value });
   };
 
-  componentDidMount() {
-    const self = this;
-    var config = {
-      headers: {
-        Authorization: "Bearer " + this.props.token
-      }
-    };
-    console.log("token", this.props.token);
-    axios
-      .get(self.props.base_url + "/rewards", config)
-      .then(response => {
-        self.setState({ data: response.data });
-        self.setState({
-          name: response.data.name,
-          point: response.data.point,
-          photo: response.data.photo,
-          stock: response.data.stock
-        });
-        console.log(self.state.data);
-      })
-      .catch(error => {
-        console.log("error rewards", error);
-      });
-  }
+  // componentDidMount() {
+  // const self = this;
+  // const config = {
+  // headers: {
+  // Authorization: "Bearer " + localStorage.getItem('token')
+  // }
+  // };
+  // console.log("token", this.props.token);
+  // axios
+  // .get(self.props.base_url + "/rewards", config)
+  // .then(response => {
+  // self.setState({ data: response.data });
+  // self.setState({
+  // name: response.data.name,
+  // point: response.data.point,
+  // photo: response.data.photo,
+  // stock: response.data.stock
+  // });
+  // console.log(self.state.data);
+  // })
+  // .catch(error => {
+  // console.log("error rewards", error);
+  // });
+
+
+
+  // }
 
   sweetAlertFunction() {
     console.log("button clicks");
@@ -170,7 +173,7 @@ class RewardPage extends React.Component {
                       className="text-center font"
                       style={{ fontWeight: "600" }}
                     >
-                      11 Points
+                      {localStorage.getItem('point')} Points
                     </h3>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import createStore from 'unistore';
-import axios from "axios";
+import axios from 'axios';
 
 export const store = createStore({
   email: '',
@@ -15,19 +15,19 @@ export const store = createStore({
   name: '',
   token: '',
 
-  base_url: "http://backend.fikriamri.xyz/v1",
+  base_url: 'http://backend.fikriamri.xyz/v1',
   // base_url: 'http://localhost:5000/v1',
 
   // data (made by Fikri)
   trashCategories: [],
 
   // url
-  urlBase: "http://backend.fikriamri.xyz/v1",
-  urlTrashCategories: "/trash_category"
+  urlBase: 'http://backend.fikriamri.xyz/v1',
+  urlTrashCategories: '/trash_category',
 
 });
 
-export const actions = store => ({
+export const actions = (store) => ({
   setEmail(state, value) {
     return { email: value };
   },
@@ -76,19 +76,19 @@ export const actions = store => ({
 
   async setTrashCategories(state) {
     const req = {
-      method: "get",
+      method: 'get',
       url: store.getState().urlBase + store.getState().urlTrashCategories,
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     };
     await axios(req)
-      .then(response => {
+      .then((response) => {
         store.setState({ trashCategories: response.data });
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error);
       });
   },
-  
+
 });
