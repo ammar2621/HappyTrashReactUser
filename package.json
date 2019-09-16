@@ -18,7 +18,8 @@
     "react-swipeable-views": "^0.13.3",
     "sweetalert": "^2.1.2",
     "sweetalert-react": "^0.4.11",
-    "unistore": "^3.4.1"
+    "unistore": "^3.4.1",
+    "zxcvbn": "^4.4.2"
   },
   "scripts": {
     "start": "react-scripts start",

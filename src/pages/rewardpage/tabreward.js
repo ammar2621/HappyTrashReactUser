@@ -142,8 +142,8 @@ class TabReward extends Component {
       icon: "warning",
       buttons: true,
       dangerMode: true
-    }).then(willDelete => {
-      if (willDelete) {
+    }).then(claimReward => {
+      if (claimReward) {
         swal(
           "Poof! Hadiah berhasil dibeli dan akan dikirimkan saat order kamu selanjutnya.",
           {

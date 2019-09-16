@@ -6,12 +6,10 @@ export const store = createStore({
   full_name: "",
   is_login: false,
   api_key: "",
-  keyword: "",
   values: [],
   jumlah: 0,
   total: "",
   listName: [],
-  gender: "",
   name: "",
   token: "",
 
@@ -46,24 +44,6 @@ export const actions = store => ({
   },
   setApiKey(state, value) {
     return { api_key: value };
-  },
-  setQuestion(state, value) {
-    return { question: value };
-  },
-  setTotal(state, value) {
-    return { total: value };
-  },
-  setJumlah(state, value) {
-    return { jumlah: value };
-  },
-  setPic(state, value) {
-    return { pic: value };
-  },
-  ubahMale: state => {
-    store.setState({ gender: "male" });
-  },
-  ubahFemale: state => {
-    store.setState({ gender: "female" });
   },
   ubahListName: (state, baru) => {
     store.setState({ listName: baru });
