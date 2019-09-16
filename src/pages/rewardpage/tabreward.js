@@ -71,15 +71,22 @@ class TabReward extends Component {
     };
 
     axios(config)
-      .then(function(response) {
+      .then(async function (response) {
         console.log(response.data);
         localStorage.setItem("point", response.data.user_point);
+        await swal(
+          'Terbeli ! Hadiahmu akan dikirim pada transaksi berikutnya',
+          {
+            icon: 'success'
+          }
+        )
+        window.location.reload()
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
-    self.componentDidMount();
+    // self.componentDidMount();
   };
 
   componentDidMount() {
@@ -93,13 +100,10 @@ class TabReward extends Component {
     axios
       .get(self.props.base_url + "/rewards", config)
       .then(response => {
-        self.setState({ data: response.data });
-        // self.setState({
-        // name: response.data.name,
-        // email: response.data.email,
-        // password: response.data.password,
-        // mobile_number: response.data.mobile_number
-        // });
+        let data = response.data.filter(elm => {
+          return elm.status === true
+        })
+        self.setState({ data });
         console.log("data", response.data);
       })
       .catch(error => {
@@ -109,12 +113,6 @@ class TabReward extends Component {
       .get(self.props.base_url + "/reward_history/user", config)
       .then(response => {
         self.setState({ history: response.data });
-        // self.setState({
-        // name: response.data.name,
-        // email: response.data.email,
-        // password: response.data.password,
-        // mobile_number: response.data.mobile_number
-        // });
         console.log("history", response.data);
       })
       .catch(error => {
@@ -203,7 +201,6 @@ class TabReward extends Component {
                       Point yang dibutuhkan : {elm.point_to_claim}
                     </p>
                     <MDBBadge
-                      // onClick={this.sweetAlertFunction}
                       onClick={e => this.claimReward(e, elm.id)}
                       style={{ width: "70px", height: "20px" }}
                       color="primary"
