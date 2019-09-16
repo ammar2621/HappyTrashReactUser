@@ -57,10 +57,10 @@ class SignUp extends Component {
     let errors = this.state.errors;
     console.log(name, value);
     switch (name) {
-      case "username":
-        errors.username =
-          value.length < 5 ? "Nama Lengkap must be 5 characters long!" : "";
-        break;
+      // case "username":
+      // errors.username =
+      //   value.length < 5 ? "Nama Lengkap must be 5 characters long!" : "";
+      // break;
       case "email":
         errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
         break;
@@ -261,9 +261,9 @@ class SignUp extends Component {
                         noValidate
                         name="username"
                       />
-                      {errors.username.length > 0 && (
+                      {/* {errors.username.length > 0 && (
                         <span className="error">{errors.username}</span>
-                      )}
+                      )} */}
                       <MDBInput
                         style={{ marginBottom: "15px" }}
                         label="Masukkan Emailmu"
