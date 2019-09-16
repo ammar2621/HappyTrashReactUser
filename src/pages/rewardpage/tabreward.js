@@ -189,7 +189,8 @@ class TabReward extends Component {
                   <MDBMedia left className="mr-3 ml-3">
                     <img
                       style={{
-                        width: "75px"
+                        height: 75,
+                        width: 75
                       }}
                       src={elm.photo}
                       alt={elm.photo}
@@ -221,7 +222,8 @@ class TabReward extends Component {
                   <MDBMedia left className="mr-3 ml-3" href="#">
                     <img
                       style={{
-                        width: "75px"
+                        height: 75,
+                        width: 75
                       }}
                       src="https://image.flaticon.com/icons/svg/1996/1996901.svg"
                     />
