@@ -5,10 +5,11 @@ const Header = () => {
   return (
     <div>
       <MDBContainer
+        fluid
         style={{ maxWidth: "100%", padding: "0", backgroundColor: "#377C4E" }}
-        className="container-fluid justify-content-center"
+        className="justify-content-center"
       >
-        <MDBRow className="justify-content-center p-0">
+        <MDBRow className="justify-content-center p-0 m-0">
           <MDBCol
             className="justify-content-center text-center"
             style={{
