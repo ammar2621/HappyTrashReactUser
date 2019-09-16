@@ -17,6 +17,7 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import swal from "sweetalert";
 import zxcvbn from "zxcvbn";
 import "./register.css";
+import Swal from "sweetalert2";
 
 const validateForm = errors => {
   let valid = true;
@@ -42,7 +43,7 @@ class SignUp extends Component {
       password: null,
       mobile_number: null,
       status: false,
-      type: "input",
+      type: "password",
       score: "null",
       errors: {
         username: "",
@@ -81,16 +82,7 @@ class SignUp extends Component {
     event.preventDefault();
     this.setState({ password: event.target.value });
     console.log("dsadsa");
-    if (event.target.value === "") {
-      this.setState({
-        score: "null"
-      });
-    } else {
-      var pw = zxcvbn(event.target.value);
-      this.setState({
-        score: pw.score
-      });
-    }
+
     const { name, value } = event.target;
     let errors = this.state.errors;
     console.log(name, value);
@@ -110,6 +102,16 @@ class SignUp extends Component {
       case "password":
         errors.password =
           value.length < 8 ? "Password harus lebih dari 8 huruf!" : "";
+        if (event.target.value === "") {
+          this.setState({
+            score: "null"
+          });
+        } else {
+          var pw = zxcvbn(event.target.value);
+          this.setState({
+            score: pw.score
+          });
+        }
         break;
       default:
         break;
@@ -162,7 +164,24 @@ class SignUp extends Component {
 
   doRegister = async e => {
     e.preventDefault();
+    const regex_name = /^[a-zA-Z ]{2,30}$/;
     const self = this;
+    // check the name validation
+    if (!regex_name.test(this.state.username)) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Gunakan Huruf Untuk Nama (Minimal 2 Huruf)!"
+      });
+      return false;
+    } else if (this.state.password.length < 8) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Password harus lebih dari 8 karakter!"
+      });
+      return false;
+    }
     await axios
       .post(self.props.base_url + "/users", {
         name: self.state.username,
@@ -309,7 +328,7 @@ class SignUp extends Component {
                         <span className="error">{errors.username}</span>
                       )} */}
                       <MDBInput
-                        style={{ marginBottom: "5px" }}
+                        style={{ marginBottom: "5px", marginTop: "13px" }}
                         label="Masukkan Emailmu"
                         group
                         type="email"
@@ -324,7 +343,7 @@ class SignUp extends Component {
                         <span className="error">{errors.email}</span>
                       )}
                       <MDBInput
-                        style={{ marginBottom: "5px" }}
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
                         label="Masukkan Nomor Handphonemu"
                         group
                         type="text"
@@ -340,7 +359,7 @@ class SignUp extends Component {
                         <MDBInput
                           className="password__input"
                           onChange={this.handleChange}
-                          style={{ marginBottom: "5px" }}
+                          style={{ marginBottom: "5px", marginTop: "10px" }}
                           label="Masukkan Passwordmu"
                           group
                           type={this.state.type}
@@ -350,16 +369,21 @@ class SignUp extends Component {
                           name="password"
                         />
                         <span
-                          className="password__show"
+                          className="password__show mb-3"
                           onClick={this.showHide}
                         >
                           {this.state.type === "input" ? "Hide" : "Show"}
                         </span>
+                        <div className="row">
+                          <div style={{ fontSize: "10px" }} className="col-4">
+                            Kekuatan Password
+                          </div>
 
-                        <span
-                          className="password__strength"
-                          data-score={this.state.score}
-                        ></span>
+                          <span
+                            className="password__strength m-0 p-0"
+                            data-score={this.state.score}
+                          ></span>
+                        </div>
                       </label>
                       {errors.password.length > 0 && (
                         <span className="error">{errors.password}</span>

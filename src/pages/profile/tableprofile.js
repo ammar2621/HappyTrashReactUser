@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
+import { async } from "q";
 
 class TableProfile extends Component {
   constructor(props) {
@@ -38,43 +39,29 @@ class TableProfile extends Component {
     this.setState({ password: e.target.value });
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const self = this;
-    const config = {
+    const configProfile = {
       method: "GET",
-      url: self.props.base_url + "/auth",
+      url: self.props.base_url + "/users/" + localStorage.getItem("id"),
       headers: {
-        Authorization: "Bearer " + this.props.token
+        Authorization: "Bearer " + localStorage.getItem("token")
       }
     };
-    axios(config)
+    await axios(configProfile)
       .then(function(response) {
-        console.log(response.data);
-        localStorage.setItem("id", response.data.claims.id);
-        axios
-          .get(
-            self.props.base_url + "/users/" + localStorage.getItem("id"),
-            config
-          )
-          .then(response => {
-            self.setState({ data: response.data });
-            self.setState({
-              name: response.data.name,
-              email: response.data.email,
-              password: response.data.password,
-              mobile_number: response.data.mobile_number
-            });
-            console.log("haloo");
-          })
-          .catch(error => {
-            console.log("error profile", error);
-          });
+        // console.log(response.data);
+        // console.log(response.data.name);
+        self.setState({
+          name: response.data.name,
+          email: response.data.email,
+          mobile_number: response.data.mobile_number
+        });
       })
       .then(function(error) {
         console.log(error);
       });
-    console.log("token", this.props.token);
-  }
+  };
 
   render() {
     console.log("woi", this.state.data);

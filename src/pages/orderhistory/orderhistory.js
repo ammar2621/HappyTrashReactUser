@@ -22,6 +22,7 @@ import DemoTabs from "./coba";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Order extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Order extends React.Component {
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
     this.state = {
       orders: []
-    }
+    };
   }
 
   sweetAlertFunction() {
@@ -42,75 +43,80 @@ class Order extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header />
-        <MDBContainer>
-          <MDBRow className="justify-content-center" style={{ padding: "0" }}>
-            <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
-              <div
-                style={{
-                  height: "100vh",
-                  backgroundColor: "#FFFFFF",
-                  textAlign: "center",
-                  padding: "0"
-                }}
-              >
-                <br />
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      return (
+        <div>
+          <Header />
+          <MDBContainer>
+            <MDBRow className="justify-content-center" style={{ padding: "0" }}>
+              <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  className="row justify-content-center"
                   style={{
-                    padding: "0",
-                    margin: "0"
+                    height: "100vh",
+                    backgroundColor: "#FFFFFF",
+                    textAlign: "center",
+                    padding: "0"
                   }}
                 >
+                  <br />
                   <div
-                    className="col-11 text-left"
+                    className="row justify-content-center"
                     style={{
-                      borderBottom: "1px solid grey",
-                      padding: "0"
+                      padding: "0",
+                      margin: "0"
                     }}
                   >
                     <div
-                      className="row justify-content-center"
+                      className="col-11 text-left"
                       style={{
-                        padding: "0",
-                        margin: "0"
+                        borderBottom: "1px solid grey",
+                        padding: "0"
                       }}
                     >
                       <div
-                        className="col-12"
+                        className="row justify-content-center"
                         style={{
                           padding: "0",
                           margin: "0"
                         }}
                       >
-                        <h5
-                          className="font"
+                        <div
+                          className="col-12"
                           style={{
-                            marginTop: "5px",
-                            marginBottom: "10px",
-                            fontWeight: "700"
+                            padding: "0",
+                            margin: "0"
                           }}
                         >
-                          Pesanan
-                        </h5>
+                          <h5
+                            className="font"
+                            style={{
+                              marginTop: "5px",
+                              marginBottom: "10px",
+                              fontWeight: "700"
+                            }}
+                          >
+                            Pesanan
+                          </h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="row justify-content-center">
-                  <div className=" col-11 text-center">
-                    <TabOrder />
+                  <div className="row justify-content-center">
+                    <div className=" col-11 text-center">
+                      <TabOrder />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-        <Footer />
-      </div>
-    );
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+          <Footer />
+        </div>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
 

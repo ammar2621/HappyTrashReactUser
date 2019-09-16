@@ -23,7 +23,7 @@ class SignIn extends React.Component {
     this.state = {
       modal: false,
       email: null,
-      type: "input",
+      type: "password",
       password: null
     };
     this.doLogin = this.doLogin.bind(this);

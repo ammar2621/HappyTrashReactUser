@@ -22,7 +22,7 @@ class TabOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
+      index: 1,
       adress: null,
       time: null,
       photo: null,
