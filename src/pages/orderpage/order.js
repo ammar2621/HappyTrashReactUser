@@ -11,6 +11,7 @@ import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../component/footer";
 
 class Location extends React.Component {
   constructor(props) {
@@ -88,12 +89,12 @@ class Location extends React.Component {
   doOrder = async e => {
     e.preventDefault();
     const self = this;
-    const year = self.state.startDate.getFullYear()
-    const month = self.state.startDate.getMonth()
-    const date = self.state.startDate.getDate()
-    const hour = self.state.startDate.getHours()
-    const minute = self.state.startDate.getMinutes()
-    const second = self.state.startDate.getSeconds()
+    const year = self.state.startDate.getFullYear();
+    const month = self.state.startDate.getMonth();
+    const date = self.state.startDate.getDate();
+    const hour = self.state.startDate.getHours();
+    const minute = self.state.startDate.getMinutes();
+    const second = self.state.startDate.getSeconds();
     // var mili = self.state.startDate.getMiliseconds()
     let config = {
       headers: {
@@ -101,14 +102,26 @@ class Location extends React.Component {
       },
       data: {
         adress: self.state.adress,
-        time: year + "-" + month + "-" + date + "T" + hour + ":" + minute + ":" + second + ".000",
+        time:
+          year +
+          "-" +
+          month +
+          "-" +
+          date +
+          "T" +
+          hour +
+          ":" +
+          minute +
+          ":" +
+          second +
+          ".000",
         photo: this.state.urlPhoto
       },
       method: "POST",
       url: self.props.base_url + "/orders"
     };
     axios(config)
-      .then(function (response) {
+      .then(function(response) {
         self.props.history.push("/orderhistory");
         swal(
           "Terima Kasih, Sudah Order!",
@@ -116,7 +129,7 @@ class Location extends React.Component {
           "success"
         );
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
@@ -133,7 +146,7 @@ class Location extends React.Component {
               <div
                 style={{
                   height: "100vh",
-                  backgroundColor: "blue",
+                  backgroundColor: "white",
                   textAlign: "center",
                   padding: "0"
                 }}
@@ -250,7 +263,11 @@ class Location extends React.Component {
                         onClick={e => {
                           this.doOrder(e);
                         }}
-                        style={{ width: "100%", borderRadius: "15px" }}
+                        style={{
+                          width: "100%",
+                          borderRadius: "15px",
+                          marginBottom: "100px"
+                        }}
                         target="_blank"
                         color="dark-green"
                       >
@@ -265,6 +282,7 @@ class Location extends React.Component {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        <Footer />
       </div>
     );
   }

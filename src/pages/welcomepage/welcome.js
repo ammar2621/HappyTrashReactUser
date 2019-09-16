@@ -30,7 +30,7 @@ const EcommercePage = () => {
               className="font"
               style={{ color: "#377C4E", fontWeight: "900", padding: "0" }}
             >
-              Sampah Online
+              Happy Trash
             </h1>
             <div className="welcome" style={{ paddingTop: "100px" }}>
               <img
@@ -43,8 +43,11 @@ const EcommercePage = () => {
             </div>
             <br />
             <br />
-            <h5 className="font" style={{ fontWeight: "bold" }}>
-              Selamat Datang di Sampah Online
+            <h5
+              className="font"
+              style={{ fontWeight: "bold", fontSize: "21px" }}
+            >
+              Selamat Datang di Happy Trash
             </h5>
             <MDBRow
               className="justify-content-center"

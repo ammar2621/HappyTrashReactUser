@@ -42,7 +42,7 @@ const Footer = () => {
                   >
                     <div className="row justify-content-center text-center py-0">
                       <div
-                        className="col-2 "
+                        className="col-2 mx-2"
                         style={{
                           padding: "0",
                           margin: "0"
@@ -59,7 +59,7 @@ const Footer = () => {
                           <p className="my-0 font">Home</p>
                         </Link>
                       </div>
-                      <div className="col-2" style={{ padding: "0" }}>
+                      <div className="col-2 mx-2" style={{ padding: "0" }}>
                         <Link to="/orderhistory">
                           <img
                             style={{ width: "25px" }}
@@ -71,7 +71,7 @@ const Footer = () => {
                           <p className="my-0 font">Pesanan</p>
                         </Link>
                       </div>
-                      <div className="col-2" style={{ padding: "0" }}>
+                      <div className="col-2 mx-2" style={{ padding: "0" }}>
                         <Link to="/help">
                           <img
                             style={{ width: "25px" }}
@@ -83,7 +83,7 @@ const Footer = () => {
                           <p className="my-0 font">Bantuan</p>
                         </Link>
                       </div>
-                      <div className="col-2" style={{ padding: "0" }}>
+                      <div className="col-2 mx-2" style={{ padding: "0" }}>
                         <Link to="/profile">
                           <img
                             style={{ width: "25px" }}

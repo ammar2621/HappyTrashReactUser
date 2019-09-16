@@ -15,7 +15,8 @@ import RewardPage from "./pages/rewardpage/reward";
 import Profile from "./pages/profile/profile";
 import Register from "./validcoba";
 import Help from "./pages/helppage/helppage";
-import TrashPage from "./pages/trashpage/trashpage";
+import TrashPage from "./pages/trashpage/trashcategorypage";
+import Trash from "./pages/trashpage/trashpage";
 
 class MainRoute extends React.Component {
   render() {
@@ -33,7 +34,8 @@ class MainRoute extends React.Component {
           <Route path="/header" component={Header} />
           <Route path="/register" component={Register} />
           <Route path="/help" component={Help} />
-          <Route path="/listsampah" component={TrashPage} />
+          <Route path="/trashcategory" component={TrashPage} />
+          <Route path="/trash" component={Trash} />
           <Route component={NotFound} />
         </Switch>
       </Router>
