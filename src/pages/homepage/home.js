@@ -79,7 +79,7 @@ const Home = () => {
                         className="font"
                         style={{ fontSize: "13px" }}
                       >
-                        Tukar Pointmu
+                        Tukar Poinmu
                       </MDBCardHeader>
                       <MDBCardBody className="text-success">
                         <img
