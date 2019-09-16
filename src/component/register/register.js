@@ -134,6 +134,28 @@ class SignUp extends Component {
         status: false
       })
       .then(function(response) {
+        axios
+          .post(self.props.base_url + "/auth", {
+            email: self.state.email,
+            password: self.state.password
+          })
+          .then(function(response) {
+            self.props.setLogin(true);
+            self.props.setToken(response.data.token);
+            console.log(response.data.status);
+            console.log(self.props);
+            self.props.history.replace("/profile");
+            swal(
+              "Terima Kasih, Sudah Login!",
+              "Sampah Online siap membantumu!",
+              "success"
+            );
+            self.props.history.push("/home");
+          })
+          .catch(function(error) {
+            console.log("errrrrrr", error);
+            swal("Email atau passwordmu salah!", "Coba lagi!", "error");
+          });
         self.props.history.push("/home");
         swal(
           "Terima Kasih, Sudah Login!",

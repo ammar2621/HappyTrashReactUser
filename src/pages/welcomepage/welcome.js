@@ -20,7 +20,7 @@ const EcommercePage = () => {
           <div
             style={{
               height: "100vh",
-              backgroundColor: "#F0F0F0",
+              backgroundColor: "white",
               textAlign: "center",
               padding: "0"
             }}
@@ -32,21 +32,15 @@ const EcommercePage = () => {
             >
               Sampah Online
             </h1>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <img
-              src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              style={{
-                width: "200px",
-                borderRadius: "30%"
-              }}
-            ></img>
+            <div className="welcome" style={{ paddingTop: "100px" }}>
+              <img
+                src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                style={{
+                  width: "200px",
+                  borderRadius: "30%"
+                }}
+              ></img>
+            </div>
             <br />
             <br />
             <h5 className="font" style={{ fontWeight: "bold" }}>

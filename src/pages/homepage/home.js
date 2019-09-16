@@ -27,7 +27,7 @@ const Home = () => {
             <div
               style={{
                 height: "100vh",
-                backgroundColor: "blue",
+                backgroundColor: "white",
                 textAlign: "center",
                 padding: "0"
               }}
