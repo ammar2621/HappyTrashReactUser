@@ -57,12 +57,12 @@ class TabOrder extends React.Component {
       }
     };
     axios(config)
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
         self.setState({ orders: [], waiting: [] });
         self.componentDidMount();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   };
@@ -78,8 +78,7 @@ class TabOrder extends React.Component {
     };
 
     axios(config)
-      .then(function(response) {
-        console.log(response);
+      .then(function (response) {
         response.data.forEach(element => {
           if (
             element.Order.status === "waiting" ||
@@ -90,8 +89,9 @@ class TabOrder extends React.Component {
             self.state.orders.push(element);
           }
         });
+        self.handleChangeIndex(0)
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -117,13 +117,14 @@ class TabOrder extends React.Component {
               let status = null;
               let cancel = null;
               if (elm.Order.status === "waiting") {
-                color = "yellow";
+                color = "green";
                 status = "Menunggu Konfirmasi";
                 cancel = (
                   <div>
                     <button
                       className="btn btn-success"
                       onClick={e => this.cancelOrder(e, elm.Order.id)}
+                      style={{ padding: 5 }}
                     >
                       Batalkan
                     </button>
@@ -140,7 +141,7 @@ class TabOrder extends React.Component {
                   <MDBMedia left className="mr-3" href="/orderdetails">
                     <img
                       style={{
-                        width: "75px"
+                        height: "100px"
                       }}
                       src="https://image.flaticon.com/icons/svg/401/401176.svg"
                     />
@@ -169,7 +170,7 @@ class TabOrder extends React.Component {
                 detail = (
                   <div>
                     <Link to={"/orderdetails/" + elm.Order.id}>
-                      <button className="btn btn-success">Detail</button>
+                      <button className="btn btn-info" style={{ padding: 5 }}>Detail</button>
                     </Link>
                   </div>
                 );
@@ -187,7 +188,7 @@ class TabOrder extends React.Component {
                   <MDBMedia left className="mr-3" href="/orderdetails">
                     <img
                       style={{
-                        width: "75px"
+                        height: "100px"
                       }}
                       src="https://image.flaticon.com/icons/svg/401/401176.svg"
                     />

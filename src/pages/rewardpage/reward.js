@@ -152,7 +152,7 @@ class RewardPage extends React.Component {
                               margin: "0"
                             }}
                           >
-                            Jumlah Pointmu
+                            Jumlah Poinmu
                           </h3>
                         </div>
                       </div>
@@ -169,13 +169,13 @@ class RewardPage extends React.Component {
                       }}
                     >
                       <h6 className="text-center">
-                        Total kamu sudah mengumpulkan Point sebanyak
+                        Total kamu sudah mengumpulkan Poin sebanyak
                       </h6>
                       <h3
                         className="text-center font"
                         style={{ fontWeight: "600" }}
                       >
-                        {localStorage.getItem("point")} Points
+                        {localStorage.getItem("point")} Poin
                       </h3>
                     </div>
                   </div>

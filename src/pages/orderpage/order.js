@@ -233,15 +233,7 @@ class Location extends React.Component {
                             onChange={this.handleChange}
                           />
                           <br />
-                          <br />
-                          <p style={{ fontSize: "15px", margin: "0" }}>
-                            Masukkan Note
-                          </p>
-                          <input
-                            type="text-area"
-                            id="defaultFormLoginEmailEx"
-                            className="form-control"
-                          />
+                    
                           <br />
                           <label for="inputPhotoURL">
                             Pilih Foto Lalu Klik Upload
