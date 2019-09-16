@@ -2,21 +2,20 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "unistore/react";
 import { actions } from "./store";
-import App from "./pages/welcomepage/welcome";
-import Home from "./pages/homepage/home";
-import Location from "./pages/orderpage/order";
-import Order from "./pages/orderhistory/orderhistory";
-import OrderDetails from "./pages/orderdetails/orderdetails";
-import NotFound from "./pages/notfound/NotFound";
-import Footer from "./component/footer";
-import Header from "./component/header";
-import TablePage from "./component/table/tableorder";
-import RewardPage from "./pages/rewardpage/reward";
-import Profile from "./pages/profile/profile";
+import App from "./pages/Welcome/WelcomePage";
+import Home from "./pages/Home/Home";
+import Location from "./pages/Order/OrderPage";
+import Order from "./pages/Order/OrderHistory";
+import OrderDetails from "./pages/Order/OrderDetails";
+import NotFound from "./pages/NotFound/NotFound";
+import Footer from "./component/Footer";
+import Header from "./component/Header";
+import RewardPage from "./pages/Reward/RewardPage";
+import Profile from "./pages/Profile/ProfilePage";
 import Register from "./validcoba";
-import Help from "./pages/helppage/helppage";
-import TrashPage from "./pages/trashpage/trashcategorypage";
-import Trash from "./pages/trashpage/trashpage";
+import Help from "./pages/Help/HelpPage";
+import TrashPage from "./pages/Trash/TrashCategorypage";
+import Trash from "./pages/Trash/TrashPage";
 
 class MainRoute extends React.Component {
   render() {
