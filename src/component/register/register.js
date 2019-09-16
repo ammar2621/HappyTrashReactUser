@@ -15,11 +15,8 @@ import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import swal from "sweetalert";
-
-const validEmailRegex = RegExp(
-  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-);
-const validPhoneRegex = RegExp(/^0[0-9]{9,}$/);
+import zxcvbn from "zxcvbn";
+import "./register.css";
 
 const validateForm = errors => {
   let valid = true;
@@ -29,6 +26,12 @@ const validateForm = errors => {
   );
   return valid;
 };
+
+const validEmailRegex = RegExp(
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
+const validPhoneRegex = RegExp(/^0[0-9]{9,}$/);
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +42,8 @@ class SignUp extends Component {
       password: null,
       mobile_number: null,
       status: false,
+      type: "input",
+      score: "null",
       errors: {
         username: "",
         email: "",
@@ -47,12 +52,45 @@ class SignUp extends Component {
       }
     };
     this.doRegister = this.doRegister.bind(this);
+    this.showHide = this.showHide.bind(this);
+    this.passwordStrength = this.passwordStrength.bind(this);
+  }
+
+  showHide(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({
+      type: this.state.type === "input" ? "password" : "input"
+    });
+  }
+
+  passwordStrength(e) {
+    if (e.target.value === "") {
+      this.setState({
+        score: "null"
+      });
+    } else {
+      var pw = zxcvbn(e.target.value);
+      this.setState({
+        score: pw.score
+      });
+    }
   }
 
   handleChange = event => {
     event.preventDefault();
+    this.setState({ password: event.target.value });
     console.log("dsadsa");
-
+    if (event.target.value === "") {
+      this.setState({
+        score: "null"
+      });
+    } else {
+      var pw = zxcvbn(event.target.value);
+      this.setState({
+        score: pw.score
+      });
+    }
     const { name, value } = event.target;
     let errors = this.state.errors;
     console.log(name, value);
@@ -62,16 +100,16 @@ class SignUp extends Component {
       //   value.length < 5 ? "Nama Lengkap must be 5 characters long!" : "";
       // break;
       case "email":
-        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+        errors.email = validEmailRegex.test(value) ? "" : "Email tidak valid!";
         break;
       case "mobile_number":
         errors.mobile_number = validPhoneRegex.test(value)
           ? ""
-          : "Phone is not valid!";
+          : "Nomor Handphonemu tidak valid!";
         break;
       case "password":
         errors.password =
-          value.length < 8 ? "Password must be 8 characters long!" : "";
+          value.length < 8 ? "Password harus lebih dari 8 huruf!" : "";
         break;
       default:
         break;
@@ -238,10 +276,16 @@ class SignUp extends Component {
         >
           DAFTAR
         </MDBBtn>
-        <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
+        <MDBModal
+          className="font"
+          isOpen={this.state.modal14}
+          toggle={this.toggle(14)}
+          centered
+        >
+          <MDBModalHeader toggle={this.toggle(14)}>Daftar</MDBModalHeader>
           <MDBModalBody>
             <MDBContainer>
-              <MDBRow className="justify-content-center">
+              <MDBRow className="justify-content-left font">
                 <MDBCol md="10">
                   <form onSubmit={this.handleSubmit} noValidate>
                     <div
@@ -249,7 +293,7 @@ class SignUp extends Component {
                       style={{ width: "100%", margin: "0" }}
                     >
                       <MDBInput
-                        style={{ marginBottom: "15px" }}
+                        style={{ marginBottom: "5px" }}
                         color="black"
                         label="Masukkan Namamu"
                         group
@@ -265,7 +309,7 @@ class SignUp extends Component {
                         <span className="error">{errors.username}</span>
                       )} */}
                       <MDBInput
-                        style={{ marginBottom: "15px" }}
+                        style={{ marginBottom: "5px" }}
                         label="Masukkan Emailmu"
                         group
                         type="email"
@@ -280,7 +324,7 @@ class SignUp extends Component {
                         <span className="error">{errors.email}</span>
                       )}
                       <MDBInput
-                        style={{ marginBottom: "15px" }}
+                        style={{ marginBottom: "5px" }}
                         label="Masukkan Nomor Handphonemu"
                         group
                         type="text"
@@ -292,16 +336,31 @@ class SignUp extends Component {
                       {errors.mobile_number.length > 0 && (
                         <span className="error">{errors.mobile_number}</span>
                       )}
-                      <MDBInput
-                        style={{ marginBottom: "15px" }}
-                        label="Masukkan Passwordmu"
-                        group
-                        type="password"
-                        validate
-                        onChange={this.handleChange}
-                        noValidate
-                        name="password"
-                      />
+                      <label className="password" style={{ width: "100%" }}>
+                        <MDBInput
+                          className="password__input"
+                          onChange={this.handleChange}
+                          style={{ marginBottom: "5px" }}
+                          label="Masukkan Passwordmu"
+                          group
+                          type={this.state.type}
+                          validate
+                          // onChange={this.handleChange}
+                          noValidate
+                          name="password"
+                        />
+                        <span
+                          className="password__show"
+                          onClick={this.showHide}
+                        >
+                          {this.state.type === "input" ? "Hide" : "Show"}
+                        </span>
+
+                        <span
+                          className="password__strength"
+                          data-score={this.state.score}
+                        ></span>
+                      </label>
                       {errors.password.length > 0 && (
                         <span className="error">{errors.password}</span>
                       )}
@@ -314,6 +373,7 @@ class SignUp extends Component {
           <MDBModalFooter>
             <div className="text-center">
               <MDBBtn
+                id="buttonHover"
                 className="font rounded-pill"
                 onClick={e => {
                   this.doRegister(e);
