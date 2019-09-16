@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MDBMedia, MDBBadge } from "mdbreact";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
@@ -21,7 +22,6 @@ class TabReward extends Component {
       data: [],
       history: []
     };
-    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
 
   // setName = e => {
@@ -45,37 +45,102 @@ class TabReward extends Component {
   // };
   //
 
+  // claimReward = (e, id) => {
+  //   e.preventDefault();
+  //   const self = this;
+  //   const config = {
+  //     method: "PUT",
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     },
+  //     data: {
+  //       stock: 1
+  //     },
+  //     url: self.props.base_url + "/rewards/" + id
+  //   };
+  //   axios(config)
+  //     .then(async function(response) {
+  //       console.log(response.data);
+  //       localStorage.setItem("point", response.data.user_point);
+  //       await swal(
+  //         "Terbeli ! Hadiahmu akan dikirim pada transaksi berikutnya",
+  //         {
+  //           icon: "success"
+  //         }
+  //       );
+  //       window.location.reload();
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+
+  //   // self.componentDidMount();
+  // };
+
   claimReward = (e, id) => {
     e.preventDefault();
     const self = this;
-    const config = {
-      method: "PUT",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
+    const swalConfirmations = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
       },
-      data: {
-        stock: 1
-      },
-      url: self.props.base_url + "/rewards/" + id
-    };
-
-    axios(config)
-      .then(async function(response) {
-        console.log(response.data);
-        localStorage.setItem("point", response.data.user_point);
-        await swal(
-          "Terbeli ! Hadiahmu akan dikirim pada transaksi berikutnya",
-          {
-            icon: "success"
-          }
-        );
-        window.location.reload();
+      buttonsStyling: false
+    });
+    // making the confirmaton first before it deleted
+    swalConfirmations
+      .fire({
+        title: "Apakah kamu yakin?",
+        text: "Untuk membeli hadiah ini dengan pointmu?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, aku yakin!",
+        cancelButtonText: "Tidak jadi deh!",
+        reverseButtons: true
       })
-      .catch(function(error) {
-        console.log(error);
+      .then(result => {
+        if (result.value) {
+          const config = {
+            method: "PUT",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            },
+            data: {
+              stock: 1
+            },
+            url: self.props.base_url + "/rewards/" + id
+          };
+          /* delete with axios */
+          axios(config)
+            .then(async function(response) {
+              localStorage.setItem("point", response.data.user_point);
+              await Swal.fire({
+                type: "success",
+                title: "Success",
+                text:
+                  "Poof! Hadiah berhasil dibeli dan akan dikirimkan saat order kamu selanjutnya."
+              });
+              window.location.reload();
+              self.componentDidMount();
+            })
+            .catch(function(error) {
+              Swal.fire({
+                type: "error",
+                title: "Oops....",
+                text: "Poinmu kurang untuk membeli hadiah ini!"
+              });
+            });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalConfirmations.fire(
+            "Ayo kumpulkan poinmu!",
+            "Dan cari hadiah yang lain",
+            "error"
+          );
+        }
       });
-
-    // self.componentDidMount();
   };
 
   componentDidMount() {
@@ -120,28 +185,6 @@ class TabReward extends Component {
       index
     });
   };
-
-  sweetAlertFunction() {
-    console.log("button clicks");
-    swal({
-      title: "Apa kamu yakin?",
-      text: "Untuk membeli hadiah ini dengan pointmu?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true
-    }).then(claimReward => {
-      if (claimReward) {
-        swal(
-          "Poof! Hadiah berhasil dibeli dan akan dikirimkan saat order kamu selanjutnya.",
-          {
-            icon: "success"
-          }
-        );
-      } else {
-        swal("Ayo cari hadiah lainnya!");
-      }
-    });
-  }
 
   state = {
     activeItem: "1"

@@ -217,7 +217,7 @@ class Register extends Component {
                     "mobile_number",
                     response.data.claims.mobile_number
                   );
-                  self.props.history.replace("/profile");
+                  self.props.history.replace("/home");
                   swal(
                     "Terima Kasih, Sudah Mendaftar!",
                     "Sampah Online siap membantumu!",
