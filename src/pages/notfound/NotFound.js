@@ -22,11 +22,11 @@ class NotFound extends React.Component {
 
   render() {
     return (
-      <div className="body">
-        <div className="text" data-text="BREAK">
-          BREAK
+      <notfound>
+        <div className="body">
+          <div className="warning">ERROR 404</div>
         </div>
-      </div>
+      </notfound>
     );
   }
 }

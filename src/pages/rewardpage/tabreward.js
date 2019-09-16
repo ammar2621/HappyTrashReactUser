@@ -39,22 +39,22 @@ class TabReward extends Component {
   // e.preventDefault();
   // this.setState({ name: e.target.value });
   // };
-  // 
+  //
   // setPoint = e => {
   // e.preventDefault();
   // this.setState({ point: e.target.value });
   // };
-  // 
+  //
   // setPhoto = e => {
   // e.preventDefault();
   // this.setState({ photo: e.target.value });
   // };
-  // 
+  //
   // setStock = e => {
   // e.preventDefault();
   // this.setState({ stock: e.target.value });
   // };
-  // 
+  //
 
   claimReward = (e, id) => {
     e.preventDefault();
@@ -62,32 +62,34 @@ class TabReward extends Component {
     const config = {
       method: "PUT",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem('token')
+        Authorization: "Bearer " + localStorage.getItem("token")
       },
       data: {
-        "stock": 1
+        stock: 1
       },
       url: self.props.base_url + "/rewards/" + id
-    }
+    };
 
-    axios(config).then(function (response) {
-      console.log(response.data)
-      localStorage.setItem('point', response.data.user_point)
-    }).catch(function (error) {
-      console.log(error)
-    })
+    axios(config)
+      .then(function(response) {
+        console.log(response.data);
+        localStorage.setItem("point", response.data.user_point);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
 
-    self.componentDidMount()
-  }
+    self.componentDidMount();
+  };
 
   componentDidMount() {
     const self = this;
     var config = {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem('token')
+        Authorization: "Bearer " + localStorage.getItem("token")
       }
     };
-    console.log("token", localStorage.getItem('token'));
+    console.log("token", localStorage.getItem("token"));
     axios
       .get(self.props.base_url + "/rewards", config)
       .then(response => {
@@ -186,7 +188,7 @@ class TabReward extends Component {
             {this.state.data.map((elm, key) => {
               return (
                 <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3 ml-3" href="/orderdetails">
+                  <MDBMedia left className="mr-3 ml-3">
                     <img
                       style={{
                         width: "75px"
@@ -197,7 +199,9 @@ class TabReward extends Component {
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
                     <p style={{ margin: "0" }}>{elm.name}</p>
-                    <p style={{ margin: "0" }}>Point yang dibutuhkan : {elm.point_to_claim}</p>
+                    <p style={{ margin: "0" }}>
+                      Point yang dibutuhkan : {elm.point_to_claim}
+                    </p>
                     <MDBBadge
                       // onClick={this.sweetAlertFunction}
                       onClick={e => this.claimReward(e, elm.id)}
@@ -205,10 +209,10 @@ class TabReward extends Component {
                       color="primary"
                     >
                       Beli
-                </MDBBadge>
+                    </MDBBadge>
                   </MDBMedia>
                 </MDBMedia>
-              )
+              );
             })}
           </div>
 
@@ -227,11 +231,13 @@ class TabReward extends Component {
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
                     <p style={{ margin: "0" }}>{elm.reward_name}</p>
-                    <p style={{ margin: "0", color: "blue" }}>ID hadiah : {elm.id}</p>
+                    <p style={{ margin: "0", color: "blue" }}>
+                      ID hadiah : {elm.id}
+                    </p>
                     <p style={{ margin: "0" }}>{elm.created_at}</p>
                   </MDBMedia>
                 </MDBMedia>
-              )
+              );
             })}
           </div>
         </SwipeableViews>

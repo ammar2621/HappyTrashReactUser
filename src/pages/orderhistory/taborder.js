@@ -53,19 +53,19 @@ class TabOrder extends React.Component {
         Authorization: "Bearer " + localStorage.getItem("token")
       },
       data: {
-        status: 'cancelled'
+        status: "cancelled"
       }
-    }
+    };
     axios(config)
-      .then(function (response) {
+      .then(function(response) {
         console.log(response);
-        self.setState({ orders: [], waiting: [] })
+        self.setState({ orders: [], waiting: [] });
         self.componentDidMount();
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
-      })
-  }
+      });
+  };
 
   componentDidMount() {
     const self = this;
@@ -75,22 +75,25 @@ class TabOrder extends React.Component {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
       }
-    }
+    };
 
     axios(config)
-      .then(function (response) {
+      .then(function(response) {
         console.log(response);
         response.data.forEach(element => {
-          if (element.Order.status === 'waiting' || element.Order.status === 'confirmed') {
-            self.state.waiting.push(element)
+          if (
+            element.Order.status === "waiting" ||
+            element.Order.status === "confirmed"
+          ) {
+            self.state.waiting.push(element);
           } else {
-            self.state.orders.push(element)
+            self.state.orders.push(element);
           }
         });
       })
-      .catch(function (error) {
-        console.log(error)
-      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -113,20 +116,24 @@ class TabOrder extends React.Component {
               let color = null;
               let status = null;
               let cancel = null;
-              if (elm.Order.status === 'waiting') {
+              if (elm.Order.status === "waiting") {
                 color = "yellow";
                 status = "Menunggu Konfirmasi";
-                cancel = (<div>
-                  <button className="btn btn-success" onClick={e => this.cancelOrder(e, elm.Order.id)}>
-                    Batalkan
-                  </button>
-                </div>)
-
-              } else if (elm.Order.status === 'confirmed') {
+                cancel = (
+                  <div>
+                    <button
+                      className="btn btn-success"
+                      onClick={e => this.cancelOrder(e, elm.Order.id)}
+                    >
+                      Batalkan
+                    </button>
+                  </div>
+                );
+              } else if (elm.Order.status === "confirmed") {
                 color = "blue";
                 status = "Diterima";
               } else {
-                console.log("error")
+                console.log("error");
               }
               return (
                 <MDBMedia className="mt-3" style={{ width: "100%" }}>
@@ -145,7 +152,7 @@ class TabOrder extends React.Component {
                     {cancel}
                   </MDBMedia>
                 </MDBMedia>
-              )
+              );
             })}
           </div>
 
@@ -156,23 +163,24 @@ class TabOrder extends React.Component {
               let color = null;
               let status = null;
               let detail = null;
-              if (elm.Order.status === 'done') {
+              if (elm.Order.status === "done") {
                 color = "green";
                 status = "Selesai";
-                detail = (<div><Link to={"/orderdetails/" + elm.Order.id}>
-                  <button className="btn btn-success">
-                    Detail
-                  </button></Link>
-                </div>)
-
-              } else if (elm.Order.status === 'rejected') {
+                detail = (
+                  <div>
+                    <Link to={"/orderdetails/" + elm.Order.id}>
+                      <button className="btn btn-success">Detail</button>
+                    </Link>
+                  </div>
+                );
+              } else if (elm.Order.status === "rejected") {
                 color = "red";
                 status = "Ditolak";
-              } else if (elm.Order.status === 'cancelled') {
+              } else if (elm.Order.status === "cancelled") {
                 color = "red";
                 status = "Dibatalkan";
               } else {
-                console.log("error")
+                console.log("error");
               }
               return (
                 <MDBMedia className="mt-3" style={{ width: "100%" }}>
@@ -191,7 +199,7 @@ class TabOrder extends React.Component {
                     {detail}
                   </MDBMedia>
                 </MDBMedia>
-              )
+              );
             })}
           </div>
         </SwipeableViews>
@@ -209,4 +217,7 @@ const styles = {
     minHeight: 100
   }
 };
-export default connect("base_url", actions)(TabOrder);
+export default connect(
+  "base_url",
+  actions
+)(TabOrder);

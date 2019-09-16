@@ -94,9 +94,9 @@ const Help = () => {
                         border: "0.5px solid green"
                       }}
                     >
-                      <Link to="./listsampah">
+                      <Link to="./trashcategory">
                         <h4 className="mx-3 mt-4 pb-2 font border-bottom">
-                          List Sampah
+                          Kategori Sampah
                         </h4>
                       </Link>
                       <h4 className="mx-3 mt-1 pb-2 border-bottom font">
