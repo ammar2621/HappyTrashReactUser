@@ -137,145 +137,156 @@ class Location extends React.Component {
 
   render() {
     const { errors } = this.state;
-    return (
-      <div>
-        <Header />
-        <MDBContainer>
-          <MDBRow className="justify-content-center" style={{ padding: "0" }}>
-            <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
-              <div
-                style={{
-                  height: "100vh",
-                  backgroundColor: "white",
-                  textAlign: "center",
-                  padding: "0"
-                }}
-              >
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      return (
+        <div>
+          <Header />
+          <MDBContainer>
+            <MDBRow className="justify-content-center" style={{ padding: "0" }}>
+              <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
                   style={{
                     height: "100vh",
                     backgroundColor: "white",
                     textAlign: "center",
-                    padding: "0",
-                    borderTopLeftRadius: "20px",
-                    borderTopRightRadius: "20px"
+                    padding: "0"
                   }}
                 >
                   <div
-                    className="row justify-content-center"
                     style={{
+                      height: "100vh",
+                      backgroundColor: "white",
+                      textAlign: "center",
                       padding: "0",
-                      margin: "0"
-                    }}
-                  ></div>
-                  <br />
-                  <div className="col-10 text-left">
-                    <h2 className="font">Tukar Sampahmu</h2>
-                  </div>
-                  <div
-                    className="row justify-content-center"
-                    style={{ padding: "0", margin: "0" }}
-                  ></div>
-
-                  <br />
-                  <div
-                    className="row text-center justify-content-center"
-                    style={{
-                      padding: "0",
-                      margin: "0"
+                      borderTopLeftRadius: "20px",
+                      borderTopRightRadius: "20px"
                     }}
                   >
-                    <div className="col-11">
-                      <div class="mapouter">
-                        <div class="gmap_canvas">
-                          <iframe
-                            width="100%"
-                            padding="10px"
-                            height="300"
-                            id="gmap_canvas"
-                            src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            frameborder="0"
-                            scrolling="no"
-                            marginheight="0"
-                            marginwidth="0"
-                          ></iframe>
-                          Google Maps Generator by{" "}
-                          <a href="https://www.embedgooglemap.net">
-                            embedgooglemap.net
-                          </a>
+                    <div
+                      className="row justify-content-center"
+                      style={{
+                        padding: "0",
+                        margin: "0"
+                      }}
+                    ></div>
+                    <br />
+                    <div className="col-10 text-left">
+                      <h2 className="font">Tukar Sampahmu</h2>
+                    </div>
+                    <div
+                      className="row justify-content-center"
+                      style={{ padding: "0", margin: "0" }}
+                    ></div>
+
+                    <br />
+                    <div
+                      className="row text-center justify-content-center"
+                      style={{
+                        padding: "0",
+                        margin: "0"
+                      }}
+                    >
+                      <div className="col-11">
+                        <div class="mapouter">
+                          <div class="gmap_canvas">
+                            <iframe
+                              width="100%"
+                              padding="10px"
+                              height="300"
+                              id="gmap_canvas"
+                              src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                              frameborder="0"
+                              scrolling="no"
+                              marginheight="0"
+                              marginwidth="0"
+                            ></iframe>
+                            Google Maps Generator by{" "}
+                            <a href="https://www.embedgooglemap.net">
+                              embedgooglemap.net
+                            </a>
+                          </div>
                         </div>
-                      </div>
-                      <br />
-                      <h6 className="text-left">
-                        Dimana tempat penjemputan sampahmu?
-                      </h6>
-                      <input
-                        onChange={this.setAdress}
-                        type="text"
-                        id="defaultFormLoginEmailEx"
-                        className="form-control"
-                      />
-                      <br />
-                      <div className="text-left">
-                        <p style={{ fontSize: "15px", margin: "0" }}>
-                          Tentukan tanggal
-                        </p>
-                        <DatePicker
-                          showTimeSelect
-                          timeFormat="HH:mm"
-                          timeIntervals={15}
-                          timeCaption="time"
-                          dateFormat="d MMMM, yyyy HH:mm"
-                          style={{ width: "200px" }}
-                          selected={this.state.startDate}
-                          onChange={this.handleChange}
+                        <br />
+                        <h6 className="text-left">
+                          Dimana tempat penjemputan sampahmu?
+                        </h6>
+                        <input
+                          onChange={this.setAdress}
+                          type="text"
+                          id="defaultFormLoginEmailEx"
+                          className="form-control"
                         />
                         <br />
-                        <br />
-                        <label for="inputPhotoURL">
-                          Pilih Foto Lalu Klik Upload
-                        </label>
-                        <br />
-                        <progress
-                          value={this.state.progress}
-                          max="100"
-                          style={{ width: "100%" }}
-                        />
-                        <br />
-                        <input type="file" onChange={this.handleChangePhoto} />
-                        <image src={this.state.photo} />
-                        <br />
-                        <br />
-                        <button onClick={this.handleUploadPhoto}>Upload</button>
-                        <br />
-                        <br />
+                        <div className="text-left">
+                          <p style={{ fontSize: "15px", margin: "0" }}>
+                            Tentukan tanggal
+                          </p>
+                          <DatePicker
+                            showTimeSelect
+                            timeFormat="HH:mm"
+                            timeIntervals={15}
+                            timeCaption="time"
+                            dateFormat="d MMMM, yyyy HH:mm"
+                            style={{ width: "200px" }}
+                            selected={this.state.startDate}
+                            onChange={this.handleChange}
+                          />
+                          <br />
+                    
+                          <br />
+                          <label for="inputPhotoURL">
+                            Pilih Foto Lalu Klik Upload
+                          </label>
+                          <br />
+                          <progress
+                            value={this.state.progress}
+                            max="100"
+                            style={{ width: "100%" }}
+                          />
+                          <br />
+                          <input
+                            type="file"
+                            onChange={this.handleChangePhoto}
+                          />
+                          <image src={this.state.photo} />
+                          <br />
+                          <br />
+                          <button onClick={this.handleUploadPhoto}>
+                            Upload
+                          </button>
+                          <br />
+                          <br />
+                        </div>
+                        <MDBBtn
+                          onClick={e => {
+                            this.doOrder(e);
+                          }}
+                          style={{
+                            width: "100%",
+                            borderRadius: "15px",
+                            marginBottom: "100px"
+                          }}
+                          target="_blank"
+                          color="dark-green"
+                        >
+                          Tukar Sampahmu
+                        </MDBBtn>
                       </div>
-                      <MDBBtn
-                        onClick={e => {
-                          this.doOrder(e);
-                        }}
-                        style={{
-                          width: "100%",
-                          borderRadius: "15px",
-                          marginBottom: "100px"
-                        }}
-                        target="_blank"
-                        color="dark-green"
-                      >
-                        Tukar Sampahmu
-                      </MDBBtn>
                     </div>
                   </div>
+                  <br />
+                  <br />
                 </div>
-                <br />
-                <br />
-              </div>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-        <Footer />
-      </div>
-    );
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+          <Footer />
+        </div>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
 

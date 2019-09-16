@@ -82,8 +82,6 @@ class RewardPage extends React.Component {
   // console.log("error rewards", error);
   // });
 
-
-
   // }
 
   sweetAlertFunction() {
@@ -96,102 +94,109 @@ class RewardPage extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header />
-        <MDBContainer>
-          <MDBRow className="justify-content-center" style={{ padding: "0" }}>
-            <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
-              <div
-                style={{
-                  height: "100vh",
-                  backgroundColor: "white",
-                  textAlign: "center",
-                  padding: "0"
-                }}
-              >
-                <br />
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      return (
+        <div>
+          <Header />
+          <MDBContainer>
+            <MDBRow className="justify-content-center" style={{ padding: "0" }}>
+              <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  className="row justify-content-center"
                   style={{
-                    padding: "0",
-                    margin: "0"
+                    height: "100vh",
+                    backgroundColor: "white",
+                    textAlign: "center",
+                    padding: "0"
                   }}
                 >
+                  <br />
                   <div
-                    className="col-11 text-left"
+                    className="row justify-content-center"
                     style={{
-                      borderTop: "0.5px solid green",
-                      borderLeft: "0.5px solid green",
-                      borderRight: "0.5px solid green",
-                      borderTopLeftRadius: "15px",
-                      borderTopRightRadius: "15px",
-                      padding: "5px 0 8px 0"
+                      padding: "0",
+                      margin: "0"
                     }}
                   >
                     <div
-                      className="row justify-content-center"
+                      className="col-11 text-left"
                       style={{
-                        padding: "0",
-                        margin: "0"
+                        borderTop: "0.5px solid green",
+                        borderLeft: "0.5px solid green",
+                        borderRight: "0.5px solid green",
+                        borderTopLeftRadius: "15px",
+                        borderTopRightRadius: "15px",
+                        padding: "5px 0 8px 0"
                       }}
                     >
                       <div
-                        className="col-11 text-center"
+                        className="row justify-content-center"
                         style={{
                           padding: "0",
                           margin: "0"
                         }}
                       >
-                        <h3
-                          className="font"
+                        <div
+                          className="col-11 text-center"
                           style={{
-                            marginTop: "5px",
-                            marginBottom: "10px",
-                            fontWeight: "600",
+                            padding: "0",
                             margin: "0"
                           }}
                         >
-                          Jumlah Poinmu
-                        </h3>
+                          <h3
+                            className="font"
+                            style={{
+                              marginTop: "5px",
+                              marginBottom: "10px",
+                              fontWeight: "600",
+                              margin: "0"
+                            }}
+                          >
+                            Jumlah Poinmu
+                          </h3>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    className="col-11 text-left"
-                    style={{
-                      borderBottom: "0.5px solid green",
-                      borderLeft: "0.5px solid green",
-                      borderRight: "0.5px solid green",
-                      paddingTop: "5px"
-                    }}
-                  >
-                    <h6 className="text-center">
-                      Total kamu sudah mengumpulkan Poin sebanyak
-                    </h6>
-                    <h3
-                      className="text-center font"
-                      style={{ fontWeight: "600" }}
+                    <div
+                      className="col-11 text-left"
+                      style={{
+                        borderBottom: "0.5px solid green",
+                        borderLeft: "0.5px solid green",
+                        borderRight: "0.5px solid green",
+                        paddingTop: "5px",
+                        borderBottomLeftRadius: "15px",
+                        borderBottomRightRadius: "15px"
+                      }}
                     >
-                      {localStorage.getItem('point')} Point
-                    </h3>
+                      <h6 className="text-center">
+                        Total kamu sudah mengumpulkan Poin sebanyak
+                      </h6>
+                      <h3
+                        className="text-center font"
+                        style={{ fontWeight: "600" }}
+                      >
+                        {localStorage.getItem("point")} Poin
+                      </h3>
+                    </div>
                   </div>
-                </div>
-                <div className="row justify-content-center">
-                  <div className=" col-11 text-center">
-                    <TabReward />
+                  <div className="row justify-content-center">
+                    <div className=" col-11 text-center">
+                      <TabReward />
+                    </div>
                   </div>
+                  <br />
+                  <br />
+                  <br />
                 </div>
-                <br />
-                <br />
-                <br />
-              </div>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-        <Footer />
-      </div>
-    );
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+          <Footer />
+        </div>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
 

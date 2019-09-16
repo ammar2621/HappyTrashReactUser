@@ -14,153 +14,158 @@ import {
   MDBContainer
 } from "mdbreact";
 import Footer from "../../component/footer";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import EditProfile from "../../component/editprofile.js/editprofile";
 import Header from "../../component/header";
 import { borderRadius } from "@material-ui/system";
 
 const Trash = () => {
-  return (
-    <div>
-      <Header />
-      <MDBContainer>
-        <MDBRow className="justify-content-center" style={{ padding: "0" }}>
-          <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
-            <div
-              style={{
-                height: "100vh",
-                backgroundColor: "white",
-                textAlign: "center",
-                padding: "0"
-              }}
-            >
-              <br />
-              <br />
+  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+  if (isLogin) {
+    return (
+      <div>
+        <Header />
+        <MDBContainer>
+          <MDBRow className="justify-content-center" style={{ padding: "0" }}>
+            <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
               <div
-                className="row justify-content-center"
                 style={{
-                  padding: "0",
-                  margin: "0"
+                  height: "100vh",
+                  backgroundColor: "white",
+                  textAlign: "center",
+                  padding: "0"
                 }}
               >
+                <br />
+                <br />
                 <div
-                  className="col-11 text-left"
+                  className="row justify-content-center"
                   style={{
-                    padding: "5px 0 8px 0"
+                    padding: "0",
+                    margin: "0"
                   }}
                 >
                   <div
-                    className="row justify-content-center"
+                    className="col-11 text-left"
                     style={{
-                      padding: "0",
-                      margin: "0"
+                      padding: "5px 0 8px 0"
                     }}
                   >
                     <div
-                      className="col-11 text-center"
+                      className="row justify-content-center"
                       style={{
                         padding: "0",
-                        margin: "0",
-                        border: "0.5px solid green",
-                        borderLeft: "0.5px solid green",
-                        borderRight: "0.5px solid green"
-                        // borderTopLeftRadius: "15px",
-                        // borderTopRightRadius: "15px"
+                        margin: "0"
                       }}
                     >
-                      <h3
-                        className="font pt-2 pb-2"
+                      <div
+                        className="col-11 text-center"
                         style={{
-                          marginTop: "5px",
-                          marginBottom: "10px",
-                          fontWeight: "700",
-                          margin: "0"
+                          padding: "0",
+                          margin: "0",
+                          border: "0.5px solid green",
+                          borderLeft: "0.5px solid green",
+                          borderRight: "0.5px solid green"
+                          // borderTopLeftRadius: "15px",
+                          // borderTopRightRadius: "15px"
                         }}
                       >
-                        Nama Sampah
-                      </h3>
-                    </div>
-                  </div>
-                  <div
-                    className="row justify-content-center link"
-                    style={{
-                      padding: "0",
-                      margin: "0"
-                    }}
-                  >
-                    <div
-                      className="col-11 text-left px-0 py-0 "
-                      style={{
-                        border: "0.5px solid green"
-                      }}
-                    >
-                      <MDBMedia
-                        className="mt-3 ml-3 pb-3 border-bottom"
-                        style={{ width: "100%" }}
-                      >
-                        <MDBMedia center className="mr-3">
-                          <img
-                            style={{
-                              width: "75px"
-                            }}
-                            src="https://image.flaticon.com/icons/svg/401/401176.svg"
-                          />
-                        </MDBMedia>
-                        <MDBMedia body className="text-left font">
-                          <p style={{ margin: "0" }}>Nama Sampah:</p>
-                          <p style={{ margin: "0" }}>Price: </p>
-                          <p style={{ margin: "0" }}>Point:</p>
-                        </MDBMedia>
-                      </MDBMedia>
-                      <MDBMedia
-                        className="mt-3 ml-3 pb-3 border-bottom"
-                        style={{ width: "100%" }}
-                      >
-                        <MDBMedia center className="mr-3">
-                          <img
-                            style={{
-                              width: "75px"
-                            }}
-                            src="https://image.flaticon.com/icons/svg/401/401176.svg"
-                          />
-                        </MDBMedia>
-                        <MDBMedia body className="text-left font">
-                          <p style={{ margin: "0" }}>Nama Sampah:</p>
-                          <p style={{ margin: "0" }}>Price: </p>
-                          <p style={{ margin: "0" }}>Point:</p>
-                        </MDBMedia>
-                      </MDBMedia>
-
-                      <Link to="./trashcategory">
-                        <div
-                          className="my-4  mx-3 text-center"
+                        <h3
+                          className="font pt-2 pb-2"
                           style={{
-                            height: "40px",
-                            width: "70px",
-                            backgroundColor: "green",
-                            borderRadius: "5px"
+                            marginTop: "5px",
+                            marginBottom: "10px",
+                            fontWeight: "700",
+                            margin: "0"
                           }}
                         >
-                          <img
-                            className="mt-2"
-                            style={{ width: "25px" }}
-                            src="https://i.ibb.co/f8v4bQx/left-arrow-1.png"
-                            alt="left-arrow-1"
-                            border="0"
-                          />
-                        </div>
-                      </Link>
+                          Nama Sampah
+                        </h3>
+                      </div>
+                    </div>
+                    <div
+                      className="row justify-content-center link"
+                      style={{
+                        padding: "0",
+                        margin: "0"
+                      }}
+                    >
+                      <div
+                        className="col-11 text-left px-0 py-0 "
+                        style={{
+                          border: "0.5px solid green"
+                        }}
+                      >
+                        <MDBMedia
+                          className="mt-3 ml-3 pb-3 border-bottom"
+                          style={{ width: "100%" }}
+                        >
+                          <MDBMedia center className="mr-3">
+                            <img
+                              style={{
+                                width: "75px"
+                              }}
+                              src="https://image.flaticon.com/icons/svg/401/401176.svg"
+                            />
+                          </MDBMedia>
+                          <MDBMedia body className="text-left font">
+                            <p style={{ margin: "0" }}>Nama Sampah:</p>
+                            <p style={{ margin: "0" }}>Price: </p>
+                            <p style={{ margin: "0" }}>Point:</p>
+                          </MDBMedia>
+                        </MDBMedia>
+                        <MDBMedia
+                          className="mt-3 ml-3 pb-3 border-bottom"
+                          style={{ width: "100%" }}
+                        >
+                          <MDBMedia center className="mr-3">
+                            <img
+                              style={{
+                                width: "75px"
+                              }}
+                              src="https://image.flaticon.com/icons/svg/401/401176.svg"
+                            />
+                          </MDBMedia>
+                          <MDBMedia body className="text-left font">
+                            <p style={{ margin: "0" }}>Nama Sampah:</p>
+                            <p style={{ margin: "0" }}>Price: </p>
+                            <p style={{ margin: "0" }}>Point:</p>
+                          </MDBMedia>
+                        </MDBMedia>
+
+                        <Link to="./trashcategory">
+                          <div
+                            className="my-4  mx-3 text-center"
+                            style={{
+                              height: "40px",
+                              width: "70px",
+                              backgroundColor: "green",
+                              borderRadius: "5px"
+                            }}
+                          >
+                            <img
+                              className="mt-2"
+                              style={{ width: "25px" }}
+                              src="https://i.ibb.co/f8v4bQx/left-arrow-1.png"
+                              alt="left-arrow-1"
+                              border="0"
+                            />
+                          </div>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-      <Footer />
-    </div>
-  );
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+        <Footer />
+      </div>
+    );
+  } else {
+    return <Redirect to="/" />;
+  }
 };
 
 export default Trash;
