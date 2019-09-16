@@ -79,7 +79,6 @@ class TabOrder extends React.Component {
 
     axios(config)
       .then(function (response) {
-        // console.log(response);
         response.data.forEach(element => {
           if (
             element.Order.status === "waiting" ||
@@ -90,7 +89,6 @@ class TabOrder extends React.Component {
             self.state.orders.push(element);
           }
         });
-        // console.log('waiting', self.state.waiting)
         self.handleChangeIndex(0)
       })
       .catch(function (error) {
