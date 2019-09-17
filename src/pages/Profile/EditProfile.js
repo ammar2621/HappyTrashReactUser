@@ -7,13 +7,17 @@ import {
   MDBModalFooter,
   MDBRow,
   MDBCol,
-  MDBInput
+  MDBInput,
+  MDBModalHeader
 } from "mdbreact";
 import axios from "axios";
 import swal from "sweetalert";
 import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter } from "react-router-dom";
+import zxcvbn from "zxcvbn";
+import "../../component/Register/register.css";
+import Swal from "sweetalert2";
 
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -34,10 +38,13 @@ class EditProfile extends Component {
     super(props);
     this.state = {
       modal: false,
-      username: "",
-      email: "",
-      password: "",
+      username: null,
+      email: null,
+      password: null,
+      mobile_number: null,
       status: false,
+      type: "password",
+      score: "null",
       errors: {
         username: "",
         email: "",
@@ -46,6 +53,29 @@ class EditProfile extends Component {
       }
     };
     this.doEdit = this.doEdit.bind(this);
+    this.showHide = this.showHide.bind(this);
+    this.passwordStrength = this.passwordStrength.bind(this);
+  }
+
+  showHide(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({
+      type: this.state.type === "input" ? "password" : "input"
+    });
+  }
+
+  passwordStrength(e) {
+    if (e.target.value === "") {
+      this.setState({
+        score: "null"
+      });
+    } else {
+      var pw = zxcvbn(e.target.value);
+      this.setState({
+        score: pw.score
+      });
+    }
   }
 
   handleChange = event => {
@@ -54,29 +84,35 @@ class EditProfile extends Component {
 
     const { name, value } = event.target;
     let errors = this.state.errors;
-    console.log(name, value);
+    // console.log(name, value);
     switch (name) {
-      case "username":
-        errors.username =
-          value.length < 5 ? "Nama Lengkap must be 5 characters long!" : "";
-        break;
       case "email":
-        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+        errors.email = validEmailRegex.test(value) ? "" : "Email tidak valid!";
         break;
       case "mobile_number":
         errors.mobile_number = validPhoneRegex.test(value)
           ? ""
-          : "Phone is not valid!";
+          : "Nomor Handphonemu tidak valid!";
         break;
       case "password":
         errors.password =
-          value.length < 8 ? "Password must be 8 characters long!" : "";
+          value.length < 8 ? "Password harus lebih dari 8 huruf!" : "";
+        if (event.target.value === "") {
+          this.setState({
+            score: "null"
+          });
+        } else {
+          var pw = zxcvbn(event.target.value);
+          this.setState({
+            score: pw.score
+          });
+        }
         break;
       default:
-        break;
+      // break;
     }
     this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
+      // console.log(errors);
     });
   };
 
@@ -133,8 +169,48 @@ class EditProfile extends Component {
       method: "PUT",
       url: self.props.base_url + "/users"
     };
-    console.log("token", self.props.token);
-    axios(config)
+    const regex_name = /^[a-zA-Z]{2,30}$/;
+    const regex_password = /^[a-zA-Z1-9]{8,15}$/;
+    // check the data validation
+    if (
+      this.state.username == null ||
+      this.state.email == null ||
+      this.state.mobile_number == null ||
+      this.state.password == null
+    ) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Lengkapi data terlebih dahulu!"
+      });
+      return false;
+    } else if (!regex_name.test(this.state.username)) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Gunakan Huruf Untuk Nama (Minimal 2 Huruf)!"
+      });
+      return false;
+    } else if (
+      !validEmailRegex.test(this.state.email) ||
+      !validPhoneRegex.test(this.state.mobile_number)
+    ) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Data yang anda masukan tidak valid!"
+      });
+      return false;
+    } else if (!regex_password.test(this.state.password)) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Password harus lebih dari 8 dan kurang dari 15 karakter!"
+      });
+      return false;
+    }
+    // console.log("token", self.props.token);
+    await axios(config)
       .then(function(response) {
         self.props.history.replace("/home");
         swal("Profile anda sudah diperbarui!", "success");
@@ -159,6 +235,7 @@ class EditProfile extends Component {
           Edit
         </MDBBtn>
         <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
+          <MDBModalHeader toggle={this.toggle(14)}>Edit</MDBModalHeader>
           <MDBModalBody>
             <MDBContainer>
               <MDBRow className="justify-content-center">
@@ -166,6 +243,7 @@ class EditProfile extends Component {
                   <form onSubmit={this.handleSubmit} noValidate>
                     <div className="grey-text">
                       <MDBInput
+                        style={{ marginBottom: "5px" }}
                         label="Masukkan Namamu"
                         group
                         type="text"
@@ -177,17 +255,9 @@ class EditProfile extends Component {
                         name="username"
                       />
                       <span className="error">{errors.username}</span>
+
                       <MDBInput
-                        label="Masukkan Nomor Handphonemu"
-                        group
-                        type="text"
-                        validate
-                        onChange={this.handleChange}
-                        noValidate
-                        name="mobile_number"
-                      />
-                      <span className="error">{errors.mobile_number}</span>
-                      <MDBInput
+                        style={{ marginBottom: "5px", marginTop: "13px" }}
                         label="Masukkan Emailmu"
                         group
                         type="email"
@@ -199,16 +269,48 @@ class EditProfile extends Component {
                         name="email"
                       />
                       <span className="error">{errors.email}</span>
-
                       <MDBInput
-                        label="Masukkan Passwordmu"
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
+                        label="Masukkan Nomor Handphonemu"
                         group
-                        type="password"
+                        type="text"
                         validate
                         onChange={this.handleChange}
                         noValidate
-                        name="password"
+                        name="mobile_number"
                       />
+                      <span className="error">{errors.mobile_number}</span>
+
+                      <label className="password" style={{ width: "100%" }}>
+                        <MDBInput
+                          className="password__input"
+                          onChange={this.handleChange}
+                          style={{ marginBottom: "5px", marginTop: "10px" }}
+                          label="Masukkan Passwordmu"
+                          group
+                          type={this.state.type}
+                          validate
+                          // onChange={this.handleChange}
+                          noValidate
+                          name="password"
+                        />
+                        <span
+                          className="password__show mb-3"
+                          onClick={this.showHide}
+                        >
+                          {this.state.type === "input" ? "Hide" : "Show"}
+                        </span>
+                        <div className="row">
+                          <div style={{ fontSize: "10px" }} className="col-4">
+                            Kekuatan Password
+                          </div>
+
+                          <span
+                            className="password__strength m-0 p-0"
+                            data-score={this.state.score}
+                          ></span>
+                        </div>
+                      </label>
                       {errors.password.length > 0 && (
                         <span className="error">{errors.password}</span>
                       )}

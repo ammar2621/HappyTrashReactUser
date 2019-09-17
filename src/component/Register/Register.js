@@ -40,7 +40,7 @@ class Register extends Component {
       modal: false,
       username: null,
       email: null,
-      password: "",
+      password: null,
       mobile_number: null,
       status: false,
       type: "password",
@@ -80,17 +80,13 @@ class Register extends Component {
 
   handleChange = event => {
     event.preventDefault();
-    this.setState({ password: event.target.value });
+    // this.setState({ password: event.target.value });
     console.log("dsadsa");
 
     const { name, value } = event.target;
     let errors = this.state.errors;
-    console.log(name, value);
+    // console.log(name, value);
     switch (name) {
-      // case "username":
-      // errors.username =
-      //   value.length < 5 ? "Nama Lengkap must be 5 characters long!" : "";
-      // break;
       case "email":
         errors.email = validEmailRegex.test(value) ? "" : "Email tidak valid!";
         break;
@@ -114,10 +110,10 @@ class Register extends Component {
         }
         break;
       default:
-        break;
+        // break;
     }
     this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
+      // console.log(errors);
     });
   };
 
@@ -165,13 +161,15 @@ class Register extends Component {
   // Function to user's regitser
   doRegister = async e => {
     e.preventDefault();
-    const regex_name = /^[a-zA-Z ]{2,30}$/;
+    const regex_name = /^[a-zA-Z]{2,30}$/;
+    const regex_password = /^[a-zA-Z1-9]{8,15}$/;
     const self = this;
     // check the data validation
     if (
       this.state.username == null ||
       this.state.email == null ||
-      this.state.mobile_number == null
+      this.state.mobile_number == null ||
+      this.state.password == null
     ) {
       Swal.fire({
         type: "error",
@@ -189,20 +187,18 @@ class Register extends Component {
     } else if (
       !validEmailRegex.test(this.state.email) ||
       !validPhoneRegex.test(
-        this.state.mobile_number || this.state.password.length < 8
-      )
-    ) {
+        this.state.mobile_number)) {
       Swal.fire({
         type: "error",
         title: "Oops...",
         text: "Data yang anda masukan tidak valid!"
       });
       return false;
-    } else if (this.state.password.length < 8 || this.state.password == "") {
+    } else if (!regex_password.test(this.state.password)) {
       Swal.fire({
         type: "error",
         title: "Oops...",
-        text: "Password harus lebih dari 8 karakter!"
+        text: "Password harus lebih dari 8 dan kurang dari 15 karakter!"
       });
       return false;
     }
@@ -242,11 +238,11 @@ class Register extends Component {
                     response.data.claims.mobile_number
                   );
                   self.props.history.replace("/home");
-                  swal(
-                    "Terima Kasih, Sudah Mendaftar!",
-                    "Sampah Online siap membantumu!",
-                    "success"
-                  );
+                  // swal(
+                  //   "Terima Kasih, Sudah Mendaftar!",
+                  //   "Sampah Online siap membantumu!",
+                  //   "success"
+                  // );
                   // self.props.history.push("/home");
                   // resita- get the user's point
                   axios
@@ -295,7 +291,7 @@ class Register extends Component {
           });
         self.props.history.push("/home");
         swal(
-          "Terima Kasih, Sudah Login!",
+          "Terima Kasih, Sudah Mendaftar!",
           "Sampah Online siap membantumu!",
           "success"
         );
