@@ -29,15 +29,15 @@ const Header = () => {
                   fontWeight: "900"
                 }}
               >
-                Happy
+                Loakin
                 <img
-                  className="mx-2 p-0"
+                  className="mx-2 mb-2 p-0"
                   style={{ width: "40px" }}
                   src="https://i.ibb.co/9vKwZGT/new-white.png"
                   alt="new-white"
                   border="0"
                 />
-                Trash
+                Online
               </h1>
             </div>
           </MDBCol>

@@ -10,6 +10,7 @@ import { actions } from "../../store";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../component/Footer";
+import Swal from "sweetalert2";
 
 class Order extends React.Component {
   constructor(props) {
@@ -43,44 +44,52 @@ class Order extends React.Component {
 
   // funtion to store photo uploaded by user
   handleChangePhoto = e => {
-    if (e.target.files[0]) {
-      this.state.photo = e.target.files[0];
+    e.preventDefault();
+    const regexImage = /([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    console.log(e.target.files[0]);
+    if (!regexImage.test(e.target.files[0].name)) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Gunakan ekstensi .jpg .png atau .gif saja! "
+      });
+      return false;
+    } else if (e.target.files[0]) {
       console.log(e.target.files[0]);
-    }
-  };
-
-  // function to upload photo to cloud storage
-  handleUploadPhoto = event => {
-    event.preventDefault();
-    try {
-      const uploadTask = storage
-        .ref(`images/${this.state.photo.name}`)
-        .put(this.state.photo);
-      uploadTask.on(
-        "state_changed",
-        snapshot => {
-          //progress Function
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.setState({ progress });
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          //Complete Function
-          storage
-            .ref("images")
-            .child(this.state.photo.name)
-            .getDownloadURL()
-            .then(url => {
-              this.setState({ urlPhoto: url });
-              console.log(this.state.urlPhoto);
-            });
-        }
-      );
-    } catch (err) {
-      console.log("File Kosong");
+      if (e.target.files[0].size < 5000000) {
+        this.setState({ photo: e.target.files[0] });
+        try {
+          const uploadTask = storage
+            .ref(`images/${e.target.files[0].name}`)
+            .put(e.target.files[0]);
+          uploadTask.on(
+            "state_changed",
+            snapshot => {
+              //progress Function
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              this.setState({ progress });
+            },
+            error => {},
+            () => {
+              //Complete Function
+              storage
+                .ref("images")
+                .child(this.state.photo.name)
+                .getDownloadURL()
+                .then(url => {
+                  this.setState({ urlPhoto: url });
+                });
+            }
+          );
+        } catch (err) {}
+      } else {
+        Swal.fire({
+          type: "error",
+          title: "Oops...",
+          text: "Maksimal file 5MB!"
+        });
+      }
     }
   };
 
@@ -250,9 +259,6 @@ class Order extends React.Component {
                           <image src={this.state.photo} />
                           <br />
                           <br />
-                          <button onClick={this.handleUploadPhoto}>
-                            Upload
-                          </button>
                           <br />
                           <br />
                         </div>
