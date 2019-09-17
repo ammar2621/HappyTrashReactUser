@@ -20,27 +20,27 @@ class MainRoute extends React.Component {
   render() {
     return (
       <Router>
-        <Route
+        {/* <Route
           render={({ location }) => (
             <TransitionGroup>
-              <CSSTransition key={location.key} timeout={450} classNames="fade">
-                <Switch location={location}>
-                  <Route exact path="/" component={App} />
-                  <Route exact path="/home" component={Home} />
-                  <Route path="/order" component={Order} />
-                  <Route path="/orderhistory" component={OrderHistory} />
-                  <Route path="/orderdetails/:id" component={OrderDetails} />
-                  <Route path="/reward" component={RewardPage} />
-                  <Route path="/profile" component={Profile} />
-                  <Route path="/register" component={Register} />
-                  <Route path="/help" component={Help} />
-                  <Route path="/trashcategory" component={TrashPage} />
-                  <Route component={NotFound} />
-                </Switch>
-              </CSSTransition>
+              <CSSTransition key={location.key} timeout={450} classNames="fade"> */}
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/home" component={Home} />
+          <Route path="/order" component={Order} />
+          <Route path="/orderhistory" component={OrderHistory} />
+          <Route path="/orderdetails/:id" component={OrderDetails} />
+          <Route path="/reward" component={RewardPage} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/register" component={Register} />
+          <Route path="/help" component={Help} />
+          <Route path="/trashcategory" component={TrashPage} />
+          <Route component={NotFound} />
+        </Switch>
+        {/* </CSSTransition>
             </TransitionGroup>
           )}
-        />
+        /> */}
       </Router>
     );
   }
