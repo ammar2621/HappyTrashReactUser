@@ -65,7 +65,7 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="wrapper">
+      <div className="wrapper page">
         <div className="form-wrapper">
           <h2>Register</h2>
           <form onSubmit={this.handleSubmit} noValidate>

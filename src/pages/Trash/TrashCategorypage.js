@@ -17,7 +17,7 @@ class TrashCategory extends Component {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       return (
-        <div>
+        <div className="page">
           <Header />
           <MDBContainer>
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>
@@ -108,7 +108,7 @@ class TrashCategory extends Component {
                                 </h4>
                               </Link> */}
                                 <div class="accordion" id={"accordion" + index}>
-                                  <div class="card">
+                                  <div class="card font">
                                     <div class="card-header" id="headingOne">
                                       <h2 class="mb-0">
                                         <button

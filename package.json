@@ -16,6 +16,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-swipeable-views": "^0.13.3",
+    "react-transition-group": "^4.3.0",
     "sweetalert": "^2.1.2",
     "sweetalert-react": "^0.4.11",
     "sweetalert2": "^8.17.2",

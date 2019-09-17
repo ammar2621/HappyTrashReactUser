@@ -305,7 +305,7 @@ class Register extends Component {
           <MDBModalBody>
             <MDBContainer>
               <MDBRow className="justify-content-left font">
-                <MDBCol md="10">
+                <MDBCol md="12">
                   <form onSubmit={this.handleSubmit} noValidate>
                     <div
                       className="grey-text"
