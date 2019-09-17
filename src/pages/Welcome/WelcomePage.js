@@ -87,9 +87,9 @@ class Welcome extends Component {
                     </div>
                   </div>
                   <br />
-                  <div className="row justify-content-center">
+                  <div className="row justify-content-left">
                     <div className="col-1 p-0">
-                      <div class="form-check">
+                      <div class="form-check pl-4 m-0 text-center">
                         <input
                           class="form-check-input position-static"
                           type="checkbox"

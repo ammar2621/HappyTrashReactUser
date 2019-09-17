@@ -161,7 +161,7 @@ class SignIn extends React.Component {
           <MDBModalBody>
             <MDBContainer>
               <MDBRow className="text-left">
-                <MDBCol md="10">
+                <MDBCol md="12">
                   {/* <MDBIcon className="text-left" icon="mobile-alt" size="3x" /> */}
                   <form>
                     <div
