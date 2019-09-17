@@ -40,7 +40,7 @@ class Register extends Component {
       modal: false,
       username: null,
       email: null,
-      password: null,
+      password: "",
       mobile_number: null,
       status: false,
       type: "password",
@@ -162,19 +162,43 @@ class Register extends Component {
     this.setState({ status: e.target.value });
   };
 
+  // Function to user's regitser
   doRegister = async e => {
     e.preventDefault();
     const regex_name = /^[a-zA-Z ]{2,30}$/;
     const self = this;
-    // check the name validation
-    if (!regex_name.test(this.state.username)) {
+    // check the data validation
+    if (
+      this.state.username == null ||
+      this.state.email == null ||
+      this.state.mobile_number == null
+    ) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Lengkapi data terlebih dahulu!"
+      });
+      return false;
+    } else if (!regex_name.test(this.state.username)) {
       Swal.fire({
         type: "error",
         title: "Oops...",
         text: "Gunakan Huruf Untuk Nama (Minimal 2 Huruf)!"
       });
       return false;
-    } else if (this.state.password.length < 8) {
+    } else if (
+      !validEmailRegex.test(this.state.email) ||
+      !validPhoneRegex.test(
+        this.state.mobile_number || this.state.password.length < 8
+      )
+    ) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Data yang anda masukan tidak valid!"
+      });
+      return false;
+    } else if (this.state.password.length < 8 || this.state.password == "") {
       Swal.fire({
         type: "error",
         title: "Oops...",

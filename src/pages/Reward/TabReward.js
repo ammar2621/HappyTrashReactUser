@@ -9,6 +9,7 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../store";
 import { withRouter } from "react-router-dom";
+import "../Order/order.css";
 
 class TabReward extends Component {
   constructor(props) {
@@ -216,33 +217,35 @@ class TabReward extends Component {
           {/* Tab 1 */}
           <div style={Object.assign({}, styles.slide)}>
             {this.state.data.map((elm, key) => {
-              return (
-                <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3 ml-3">
-                    <img
-                      style={{
-                        height: 75,
-                        width: 75
-                      }}
-                      src={elm.photo}
-                      alt={elm.photo}
-                    />
+              if (elm.stock > 0)
+                return (
+                  <MDBMedia className="mt-3" style={{ width: "100%" }}>
+                    <MDBMedia left className="mr-3 ml-3">
+                      <img
+                        style={{
+                          height: 75,
+                          width: 75
+                        }}
+                        src={elm.photo}
+                        alt={elm.photo}
+                      />
+                    </MDBMedia>
+                    <MDBMedia body className="text-left font">
+                      <p style={{ margin: "0" }}>{elm.name}</p>
+                      <p style={{ margin: "0" }}>
+                        Point yang dibutuhkan : {elm.point_to_claim}
+                      </p>
+                      <p className="m-0 p-0">Stok Hadiah: {elm.stock}</p>
+                      <MDBBadge
+                        onClick={e => this.claimReward(e, elm.id)}
+                        style={{ width: "70px", height: "20px" }}
+                        color="primary"
+                      >
+                        Beli
+                      </MDBBadge>
+                    </MDBMedia>
                   </MDBMedia>
-                  <MDBMedia body className="text-left font">
-                    <p style={{ margin: "0" }}>{elm.name}</p>
-                    <p style={{ margin: "0" }}>
-                      Point yang dibutuhkan : {elm.point_to_claim}
-                    </p>
-                    <MDBBadge
-                      onClick={e => this.claimReward(e, elm.id)}
-                      style={{ width: "70px", height: "20px" }}
-                      color="primary"
-                    >
-                      Beli
-                    </MDBBadge>
-                  </MDBMedia>
-                </MDBMedia>
-              );
+                );
             })}
           </div>
 

@@ -6,7 +6,7 @@ const Header = () => {
     <div>
       <MDBContainer
         fluid
-        style={{ maxWidth: "100%", padding: "0", backgroundColor: "#377C4E" }}
+        style={{ maxWidth: "100%", padding: "0", backgroundColor: "#49B462" }}
         className="justify-content-center"
       >
         <MDBRow className="justify-content-center p-0 m-0">

@@ -1,16 +1,45 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
+import {
+  MDBRow,
+  MDBCol,
+  MDBContainer,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter,
+  MDBBtn
+} from "mdbreact";
 import Footer from "../../component/Footer";
 import { Link, Redirect } from "react-router-dom";
 import Header from "../../component/Header";
 import { connect } from "unistore/react";
 import { actions } from "../../store";
+import Swal from "sweetalert2";
 
 class TrashCategory extends Component {
   componentDidMount = async () => {
     await this.props.setTrashCategories();
     await this.props.setTrashes();
     console.log(this.props.trashCategories);
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false
+    };
+  }
+
+  toggle = (e, photo, price, point) => {
+    e.preventDefault();
+    let modalNumber = "modal";
+    Swal.fire({
+      imageUrl: photo,
+      imageWidth: "100%",
+      width: "80vw",
+      html: `<p>Rp ${price} <br> Poin: ${point}</p>`
+    });
+    console.log("bisa woi");
   };
 
   render() {
@@ -86,7 +115,7 @@ class TrashCategory extends Component {
                         }}
                       >
                         <div
-                          className="col-11 text-left px-0 py-0 "
+                          className="col-11 text-left px-0 py-0 mb-5 "
                           style={{
                             border: "0.5px solid green",
                             borderBottomLeftRadius: "15px",
@@ -96,28 +125,20 @@ class TrashCategory extends Component {
                           {this.props.trashCategories.map((item, index) => {
                             return (
                               <div>
-                                {/* <Link to={"/trashcategory/" + item.category_name}>
-                                <h4
-                                  className="mx-3 mt-4 pb-2 font border-bottom"
-                                  style={{
-                                    color: "black",
-                                    textDecoration: "None"
-                                  }}
-                                >
-                                  {item.category_name}
-                                </h4>
-                              </Link> */}
                                 <div class="accordion" id={"accordion" + index}>
                                   <div class="card font">
-                                    <div class="card-header" id="headingOne">
+                                    <div
+                                      class="card-header"
+                                      data-toggle="collapse"
+                                      data-target={"#collapse" + index}
+                                      aria-expanded="true"
+                                      aria-controls="collapseOne"
+                                      id="headingOne"
+                                    >
                                       <h2 class="mb-0">
                                         <button
                                           class="btn btn-link"
                                           type="button"
-                                          data-toggle="collapse"
-                                          data-target={"#collapse" + index}
-                                          aria-expanded="true"
-                                          aria-controls="collapseOne"
                                         >
                                           {item.category_name}
                                         </button>
@@ -140,7 +161,26 @@ class TrashCategory extends Component {
                                               );
                                             })
                                             .map((elm, key) => {
-                                              return <li>{elm.trash_name}</li>;
+                                              return (
+                                                <li>
+                                                  <div className="row">
+                                                    <div className="col-6">
+                                                      <a
+                                                        onClick={e =>
+                                                          this.toggle(
+                                                            e,
+                                                            elm.photo,
+                                                            elm.price,
+                                                            elm.point
+                                                          )
+                                                        }
+                                                      >
+                                                        {elm.trash_name}
+                                                      </a>
+                                                    </div>
+                                                  </div>
+                                                </li>
+                                              );
                                             })}
                                         </ul>
                                       </div>

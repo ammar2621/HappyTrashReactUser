@@ -69,6 +69,8 @@ class TabOrder extends React.Component {
 
     axios(config)
       .then(function(response) {
+        self.setState({ waiting: [] });
+        self.setState({ orders: [] });
         response.data.forEach(element => {
           if (
             element.Order.status === "waiting" ||
@@ -92,15 +94,20 @@ class TabOrder extends React.Component {
     return (
       <div>
         <Tabs
+          className="slideColor"
           value={index}
           fullWidth
           onChange={this.handleChange}
           style={styles.tabs}
         >
-          <Tab label="Dalam Pesanan" />
-          <Tab label="Riwayat Pesanan" />
+          <Tab className="slideColor" label="Dalam Pesanan" />
+          <Tab className="slideColor" label="Riwayat Pesanan" />
         </Tabs>
-        <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+        <SwipeableViews
+          className="slideColor"
+          index={index}
+          onChangeIndex={this.handleChangeIndex}
+        >
           <div style={Object.assign({}, styles.slide)}>
             {this.state.waiting.map((elm, key) => {
               let color = null;
