@@ -56,7 +56,7 @@ class OrderDetails extends React.Component {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       return (
-        <div>
+        <div className="page">
           <Header />
           <MDBContainer>
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>

@@ -5,7 +5,7 @@ import "./footer.css";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="page">
       <MDBContainer
         style={{ maxWidth: "100%", padding: "0" }}
         className="container-fluid justify-content-center"
