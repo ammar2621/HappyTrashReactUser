@@ -6,11 +6,14 @@ import swal from "sweetalert";
 import Header from "../../component/Header";
 import { storage } from "../../firebase/index";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/ActionOrderPage";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../component/Footer";
 import Swal from "sweetalert2";
+import GoogleMaps from "./GoogleMaps"
+import './order.css'
+
 
 class Order extends React.Component {
   constructor(props) {
@@ -142,9 +145,16 @@ class Order extends React.Component {
       });
   };
 
-  render() {
-    const { errors } = this.state;
+  componentDidMount = async () => {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+
+    }
+  };
+
+  render() {
+    const isLogin = true;
+    // const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       return (
         <div>
@@ -195,7 +205,26 @@ class Order extends React.Component {
                       }}
                     >
                       <div className="col-11">
-                        <div class="mapouter">
+                      <h6 className="text-left">
+                          Dimana tempat penjemputan sampahmu?
+                        </h6>
+                   
+                        <input
+                          onChange={this.setAdress}
+                          type="text"
+                          id="defaultFormLoginEmailEx"
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="col-11">
+                        <div className="maps">
+                          
+
+                        <GoogleMaps/>
+                        </div>
+                      </div>
+                      <div className="col-11">
+                        {/* <div class="mapouter">
                           <div class="gmap_canvas">
                             <iframe
                               width="100%"
@@ -213,17 +242,10 @@ class Order extends React.Component {
                               embedgooglemap.net
                             </a>
                           </div>
-                        </div>
+                        </div> */}
                         <br />
-                        <h6 className="text-left">
-                          Dimana tempat penjemputan sampahmu?
-                        </h6>
-                        <input
-                          onChange={this.setAdress}
-                          type="text"
-                          id="defaultFormLoginEmailEx"
-                          className="form-control"
-                        />
+                        
+                 
                         <br />
                         <div className="text-left">
                           <p style={{ fontSize: "15px", margin: "0" }}>
@@ -262,6 +284,7 @@ class Order extends React.Component {
                           <br />
                           <br />
                         </div>
+                        
                         <MDBBtn
                           onClick={e => {
                             this.doOrder(e);
@@ -295,6 +318,6 @@ class Order extends React.Component {
 }
 
 export default connect(
-  "is_login, base_url, token",
+  "is_login, base_url, token, provinces",
   actions
 )(withRouter(Order));

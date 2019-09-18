@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import swal from "sweetalert";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/Store";
 import { withRouter } from "react-router-dom";
 import zxcvbn from "zxcvbn";
 import "../../component/Register/register.css";

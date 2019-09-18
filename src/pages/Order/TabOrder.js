@@ -5,7 +5,7 @@ import SwipeableViews from "react-swipeable-views";
 import { MDBMedia } from "mdbreact";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/Store";
 import { withRouter, Link, Redirect } from "react-router-dom";
 
 class TabOrder extends React.Component {

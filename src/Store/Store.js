@@ -12,18 +12,18 @@ export const store = createStore({
   listName: [],
   name: "",
   token: "",
-
-  base_url: "http://backend.fikriamri.xyz/v1",
-  // base_url: 'http://localhost:5000/v1',
-
-  // data (made by Fikri)
+  
+  // data for trash category page
   trashCategories: [],
   trashes: [],
-
+  
   // url
-  urlBase: "http://backend.fikriamri.xyz/v1",
+  base_url: "https://api.loakin.online/v1",
+  urlBase: "https://api.loakin.online/v1",
   urlTrashCategories: "/trash_category",
-  urlTrashes: "/trash"
+  urlTrashes: "/trash",
+
+
 });
 
 export const actions = store => ({
@@ -55,22 +55,22 @@ export const actions = store => ({
     store.setState({ token: value });
   },
 
-  async setTrashCategories(state) {
-    const req = {
-      method: "get",
-      url: store.getState().urlBase + store.getState().urlTrashCategories,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    };
-    await axios(req)
-      .then(response => {
-        store.setState({ trashCategories: response.data });
-      })
-      .catch(error => {
-        alert(error);
-      });
-  },
+  // async setTrashCategories(state) {
+  //   const req = {
+  //     method: "get",
+  //     url: store.getState().urlBase + store.getState().urlTrashCategories,
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`
+  //     }
+  //   };
+  //   await axios(req)
+  //     .then(response => {
+  //       store.setState({ trashCategories: response.data });
+  //     })
+  //     .catch(error => {
+  //       alert(error);
+  //     });
+  // },
 
   async setTrashes(state) {
     const req = {

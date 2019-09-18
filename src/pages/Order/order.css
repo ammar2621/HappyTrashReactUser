@@ -31,3 +31,16 @@
   background-color: green !important;
   color: #fff;
 }
+
+.maps {
+  height: 300px;
+  /* width: 100px; */
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
