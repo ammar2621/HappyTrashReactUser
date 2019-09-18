@@ -128,9 +128,9 @@ const Home = () => {
                   <div
                     className="col-11 pt-2"
                     style={{
-                      borderLeft: "0.5px solid grey",
-                      borderRight: "0.5px solid grey",
-                      borderBottom: "0.5px solid grey"
+                      borderLeft: "0.5px solid #51C953",
+                      borderRight: "0.5px solid #51C953",
+                      borderBottom: "0.5px solid #51C953"
                     }}
                   >
                     <h4 className="font">Mari lestarikan lingkungan.</h4>

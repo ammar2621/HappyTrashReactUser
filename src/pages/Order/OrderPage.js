@@ -39,13 +39,13 @@ class Order extends React.Component {
     this.setState({
       startDate: date
     });
-    console.log(this.state.startDate);
+    // console.log(this.state.startDate);
   };
 
   // funtion to store photo uploaded by user
   handleChangePhoto = e => {
     e.preventDefault();
-    const regexImage = /([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    const regexImage = /([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/;
     console.log(e.target.files[0]);
     if (!regexImage.test(e.target.files[0].name)) {
       Swal.fire({
@@ -127,6 +127,21 @@ class Order extends React.Component {
       method: "POST",
       url: self.props.base_url + "/orders"
     };
+    if (this.state.urlPhoto == "") {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Pilih foto terlebih dahulu!"
+      });
+      return false;
+    } else if (this.state.adress == "") {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Lengkapi data terlebih dahulu!"
+      });
+      return false;
+    }
     axios(config)
       .then(function(response) {
         self.props.history.push("/orderhistory");
@@ -138,7 +153,7 @@ class Order extends React.Component {
       })
       .catch(function(error) {
         console.log("error Order", error);
-        swal("Oooppss!", "Ada yang error!", "error");
+        swal("Oooppss!", "Lengkapi data terlebih dahulu!", "error");
       });
   };
 
@@ -209,9 +224,6 @@ class Order extends React.Component {
                               marginwidth="0"
                             ></iframe>
                             Google Maps Generator by{" "}
-                            <a href="https://www.embedgooglemap.net">
-                              embedgooglemap.net
-                            </a>
                           </div>
                         </div>
                         <br />
@@ -263,6 +275,7 @@ class Order extends React.Component {
                           <br />
                         </div>
                         <MDBBtn
+                          id="buttonHover"
                           onClick={e => {
                             this.doOrder(e);
                           }}

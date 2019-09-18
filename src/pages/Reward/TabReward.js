@@ -237,9 +237,10 @@ class TabReward extends Component {
                       </p>
                       <p className="m-0 p-0">Stok Hadiah: {elm.stock}</p>
                       <MDBBadge
+                        id="buttonHover"
                         onClick={e => this.claimReward(e, elm.id)}
                         style={{ width: "70px", height: "20px" }}
-                        color="primary"
+                        color="green"
                       >
                         Beli
                       </MDBBadge>
@@ -254,13 +255,14 @@ class TabReward extends Component {
             {this.state.history.map((elm, key) => {
               return (
                 <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3 ml-3" href="#">
+                  <MDBMedia left className="mr-3 ml-3">
                     <img
                       style={{
                         height: 75,
                         width: 75
                       }}
-                      src="https://image.flaticon.com/icons/svg/1996/1996901.svg"
+                      src={elm.photo}
+                      alt={elm.photo}
                     />
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
