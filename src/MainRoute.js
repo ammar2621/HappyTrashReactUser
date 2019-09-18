@@ -14,6 +14,7 @@ import Register from "./validcoba";
 import Help from "./pages/Help/HelpPage";
 import TrashPage from "./pages/Trash/TrashCategorypage";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import OnBoarding from "./pages/OnBoarding/OnBoarding";
 import "./index.css";
 
 class MainRoute extends React.Component {
@@ -35,6 +36,7 @@ class MainRoute extends React.Component {
           <Route path="/register" component={Register} />
           <Route path="/help" component={Help} />
           <Route path="/trashcategory" component={TrashPage} />
+          <Route path="/onboarding" component={OnBoarding} />
           <Route component={NotFound} />
         </Switch>
         {/* </CSSTransition>

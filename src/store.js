@@ -13,7 +13,7 @@ export const store = createStore({
   name: "",
   token: "",
 
-  base_url: "http://backend.fikriamri.xyz/v1",
+  base_url: "http://api.loakin.online/v1",
   // base_url: 'http://localhost:5000/v1',
 
   // data (made by Fikri)
@@ -21,7 +21,7 @@ export const store = createStore({
   trashes: [],
 
   // url
-  urlBase: "http://backend.fikriamri.xyz/v1",
+  urlBase: "http://api.loakin.online/v1",
   urlTrashCategories: "/trash_category",
   urlTrashes: "/trash"
 });
@@ -56,6 +56,8 @@ export const actions = store => ({
   },
 
   async setTrashCategories(state) {
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin == false) return false;
     const req = {
       method: "get",
       url: store.getState().urlBase + store.getState().urlTrashCategories,

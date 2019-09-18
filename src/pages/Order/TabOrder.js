@@ -15,7 +15,7 @@ class TabOrder extends React.Component {
       index: 1,
       adress: null,
       time: null,
-      photo: null,
+      photo: "https://image.flaticon.com/icons/svg/401/401176.svg",
       status: null,
       orders: [],
       waiting: []
@@ -119,7 +119,7 @@ class TabOrder extends React.Component {
                 cancel = (
                   <div>
                     <button
-                      className="btn btn-success"
+                      className="btn btn-success mx-0  mt-1"
                       onClick={e => this.cancelOrder(e, elm.Order.id)}
                       style={{ padding: 5 }}
                     >
@@ -134,22 +134,25 @@ class TabOrder extends React.Component {
                 console.log("error");
               }
               return (
-                <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3" href="/orderdetails">
-                    <img
-                      style={{
-                        height: "100px"
-                      }}
-                      src="https://image.flaticon.com/icons/svg/401/401176.svg"
-                    />
+                <div>
+                  <MDBMedia className="mt-3" style={{ width: "100%" }}>
+                    <MDBMedia left className="mr-3">
+                      <img
+                        className="p-2"
+                        style={{
+                          height: "100px"
+                        }}
+                        src={elm.Order.photo}
+                      />
+                    </MDBMedia>
+                    <MDBMedia body className="text-left font">
+                      <p style={{ margin: "0" }}>ID Pesanan: {elm.Order.id}</p>
+                      <p style={{ margin: "0", color }}>Status: {status}</p>
+                      <p style={{ margin: "0" }}>{elm.Order.time}</p>
+                      {cancel}
+                    </MDBMedia>
                   </MDBMedia>
-                  <MDBMedia body className="text-left font">
-                    <p style={{ margin: "0" }}>ID Pesanan: {elm.Order.id}</p>
-                    <p style={{ margin: "0", color }}>Status: {status}</p>
-                    <p style={{ margin: "0" }}>{elm.Order.time}</p>
-                    {cancel}
-                  </MDBMedia>
-                </MDBMedia>
+                </div>
               );
             })}
           </div>
@@ -167,7 +170,10 @@ class TabOrder extends React.Component {
                 detail = (
                   <div>
                     <Link to={"/orderdetails/" + elm.Order.id}>
-                      <button className="btn btn-info" style={{ padding: 5 }}>
+                      <button
+                        className="btn btn-success mx-0 mt-1 px-3"
+                        style={{ padding: 5 }}
+                      >
                         Detail
                       </button>
                     </Link>
@@ -183,13 +189,17 @@ class TabOrder extends React.Component {
                 console.log("error");
               }
               return (
-                <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3" href="/orderdetails">
+                <MDBMedia
+                  className="mt-3 h-100 w-100"
+                  style={{ width: "100%" }}
+                >
+                  <MDBMedia left className="mr-3">
                     <img
+                      className="p-2"
                       style={{
                         height: "100px"
                       }}
-                      src="https://image.flaticon.com/icons/svg/401/401176.svg"
+                      src={elm.Order.photo}
                     />
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
