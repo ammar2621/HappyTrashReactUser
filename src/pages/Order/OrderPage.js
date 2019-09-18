@@ -11,7 +11,8 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../component/Footer";
 import Swal from "sweetalert2";
-import GoogleMaps from "./GoogleMaps"
+// import GoogleMaps from "./GoogleMaps"
+import GoogleMaps2 from "./GoogleMaps2"
 import './order.css'
 
 
@@ -23,7 +24,9 @@ class Order extends React.Component {
       photo: null,
       urlPhoto: "",
       progress: 0,
-      adress: null
+      adress: null,
+      center: { lat: -7.966486300000001, lng: 112.6103729 }, 
+      loading: true
     };
   }
 
@@ -145,12 +148,46 @@ class Order extends React.Component {
       });
   };
 
-  componentDidMount = async () => {
-    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
-    if (isLogin) {
+  handleMapDrag() {
+    let mapRef = this._mapComponent;
+    console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
+  }
 
+  handleMapLoad(map) {
+    this._mapComponent = map;
+}
+
+  componentDidUpdate(prevProps, prevState) {
+    if ((this.state.map !== prevState.map) ||
+      (this.state.position !== prevState.position)) {
+        this.onCenterChange(this.state.position)
     }
-  };
+  }
+
+
+  onCenterChange = async center => {
+    await this.setState({
+      center: center
+    })
+    console.log(this.state.center)
+  }
+
+  componentDidMount = async (props) => {
+    await navigator.geolocation.getCurrentPosition(
+       position => {
+        const { latitude, longitude } = position.coords;
+
+        this.setState({
+          center: { lat: latitude, lng: longitude },
+          loading: false
+        });
+        console.log(this.state.center)
+      },
+      () => {
+        this.setState({ loading: false });
+      }
+    ); 
+  }
 
   render() {
     const isLogin = true;
@@ -220,7 +257,12 @@ class Order extends React.Component {
                         <div className="maps">
                           
 
-                        <GoogleMaps/>
+                        <GoogleMaps2
+                        onMapLoad={this.handleMapLoad}
+                        center={this.state.center}
+                        loading={this.state.loading}
+
+                        />
                         </div>
                       </div>
                       <div className="col-11">
