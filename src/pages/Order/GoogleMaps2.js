@@ -66,6 +66,27 @@ class MapPage extends Component {
         this._mapComponent = map;
     }
 
+    componentDidMount = async (props) => {
+      await navigator.geolocation.getCurrentPosition(
+         position => {
+          const { latitude, longitude } = position.coords;
+  
+          this.setState({
+            markers: {
+              position: {lat: latitude, lng: longitude},
+              defaultAnimation: 2,
+              key: Date.now()
+          },
+          mapCenter: {lat: latitude, lng: longitude},
+          });
+          console.log(this.state.center)
+        },
+        () => {
+          // this.setState({ loading: false });
+        }
+      ); 
+    }
+
     render() {
         const GoogleMapWrapper = withGoogleMap(props => (
             <GoogleMap
