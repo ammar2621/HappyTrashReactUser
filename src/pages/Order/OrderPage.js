@@ -24,9 +24,22 @@ class Order extends React.Component {
       photo: null,
       urlPhoto: "",
       progress: 0,
-      adress: null,
-      center: { lat: -7.966486300000001, lng: 112.6103729 }, 
-      loading: true
+      adress: "Alamat belum dipilih",
+      markers: {
+        position: {
+            lat: -7.9666204,
+            lng: 112.6326321,
+        },
+        key: Date.now(),
+        defaultAnimation: 2,
+      },
+      mapCenter: { lat: -7.9666204, lng: 112.6326321 },
+      // access_token: 'AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo',
+      // address: '',
+      mapRef: null,
+      lat: -7.9666204,
+      lng: 112.6326321,
+
     };
   }
 
@@ -148,28 +161,32 @@ class Order extends React.Component {
       });
   };
 
-  handleMapDrag() {
+  handleMapClick = (event) => {
+    let that = this;
     let mapRef = this._mapComponent;
     console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
+    this.setState({
+        markers: {
+            position: event.latLng,
+            defaultAnimation: 2,
+            key: Date.now()
+        },
+        mapCenter: event.latLng,
+        lat: mapRef.getCenter().lat(),
+        lng: mapRef.getCenter().lng()
+    });
+    console.log(this.state.lat)
+    console.log(this.state.lng)
   }
 
-  handleMapLoad(map) {
+  handleMapDrag = () => {
+    let mapRef = this._mapComponent;
+    console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
+    console.log(this.state.markers.position)
+  }
+
+  handleMapLoad = (map) => {
     this._mapComponent = map;
-}
-
-  componentDidUpdate(prevProps, prevState) {
-    if ((this.state.map !== prevState.map) ||
-      (this.state.position !== prevState.position)) {
-        this.onCenterChange(this.state.position)
-    }
-  }
-
-
-  onCenterChange = async center => {
-    await this.setState({
-      center: center
-    })
-    console.log(this.state.center)
   }
 
   componentDidMount = async (props) => {
@@ -178,13 +195,16 @@ class Order extends React.Component {
         const { latitude, longitude } = position.coords;
 
         this.setState({
-          center: { lat: latitude, lng: longitude },
-          loading: false
+          markers: {
+            position: {lat: latitude, lng: longitude},
+            defaultAnimation: 2,
+            key: Date.now()
+        },
+        mapCenter: {lat: latitude, lng: longitude},
         });
-        console.log(this.state.center)
+        console.log(this.state.mapCenter)
       },
       () => {
-        this.setState({ loading: false });
       }
     ); 
   }
@@ -243,52 +263,39 @@ class Order extends React.Component {
                     >
                       <div className="col-11">
                       <h6 className="text-left">
-                          Dimana tempat penjemputan sampahmu?
+                          Klik posisi di peta untuk menentukan alamat penjemputan
                         </h6>
-                   
+                      </div>
+                      <div className="col-11">
+                        <div className="maps">              
+                        <GoogleMaps2
+                          markers={this.state.markers}
+                          center={this.state.mapCenter}
+                          handleMapLoad={this.handleMapLoad}
+                          handleMapDrag={this.handleMapDrag}
+                          handleMapClick={this.handleMapClick}
+                        />
+                        </div>
+                      </div>
+                     <br/>
+                     <br/>
+                     <br/>
+                      <div className="col-11">
+                      <h6 className="text-left">
+                          Alamat
+                        </h6>
+                        <p>{this.state.adress}</p>
+                        <h6 className="text-left">
+                          Keterangan tambahan (alamat)
+                        </h6>
                         <input
                           onChange={this.setAdress}
                           type="text"
                           id="defaultFormLoginEmailEx"
                           className="form-control"
                         />
-                      </div>
-                      <div className="col-11">
-                        <div className="maps">
-                          
-
-                        <GoogleMaps2
-                        onMapLoad={this.handleMapLoad}
-                        center={this.state.center}
-                        loading={this.state.loading}
-
-                        />
-                        </div>
-                      </div>
-                      <div className="col-11">
-                        {/* <div class="mapouter">
-                          <div class="gmap_canvas">
-                            <iframe
-                              width="100%"
-                              padding="10px"
-                              height="300"
-                              id="gmap_canvas"
-                              src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                              frameborder="0"
-                              scrolling="no"
-                              marginheight="0"
-                              marginwidth="0"
-                            ></iframe>
-                            Google Maps Generator by{" "}
-                            <a href="https://www.embedgooglemap.net">
-                              embedgooglemap.net
-                            </a>
-                          </div>
-                        </div> */}
                         <br />
-                        
                  
-                        <br />
                         <div className="text-left">
                           <p style={{ fontSize: "15px", margin: "0" }}>
                             Tentukan tanggal

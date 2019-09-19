@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-// import GoogleAddressAutocomplete from './googleaddressautocomplete.js';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import axios from 'axios';
-// import NavWrapper from './navwrapper.js';
+import { connect } from "unistore/react";
+import { actions } from "../../Store/ActionOrderPage";
+import { withRouter, Link, Redirect } from "react-router-dom";
 
 class MapPage extends Component {
     constructor(props) {
@@ -17,84 +18,23 @@ class MapPage extends Component {
                 defaultAnimation: 2,
             },
             mapCenter: { lat: -7.9666204, lng: 112.6326321 },
-            access_token: '',
-            address: '',
+            // access_token: 'AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo',
+            // address: '',
             mapRef: null,
-            lat: null,
-            lng: null,
+            lat: -7.9666204,
+            lng: 112.6326321,
         }
-    }
-
-    componentWillMount() {
-        
-    }
-
-    handleMapClick = this.handleMapClick.bind(this);
-    handleMapDrag = this.handleMapDrag.bind(this);
-    handleMapLoad = this.handleMapLoad.bind(this);
-
-    handleMapClick(event) {
-        let that = this;
-        let mapRef = this._mapComponent;
-        console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
-        this.setState({
-            markers: {
-                position: event.latLng,
-                defaultAnimation: 2,
-                key: Date.now()
-            },
-            mapCenter: event.latLng,
-            lat: mapRef.getCenter().lat(),
-            lng: mapRef.getCenter().lng()
-        });
-        console.log(this.state.lat)
-        console.log(this.state.lng)
-
-    }
-
-    // handleAddressChange(latLngObject, address) {
-    //     console.log('addr: => '+address);
-    // }
-
-    handleMapDrag() {
-        let mapRef = this._mapComponent;
-        console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
-        console.log(this.state.markers.position)
-    }
-
-    handleMapLoad(map) {
-        this._mapComponent = map;
-    }
-
-    componentDidMount = async (props) => {
-      await navigator.geolocation.getCurrentPosition(
-         position => {
-          const { latitude, longitude } = position.coords;
-  
-          this.setState({
-            markers: {
-              position: {lat: latitude, lng: longitude},
-              defaultAnimation: 2,
-              key: Date.now()
-          },
-          mapCenter: {lat: latitude, lng: longitude},
-          });
-          console.log(this.state.center)
-        },
-        () => {
-          // this.setState({ loading: false });
-        }
-      ); 
     }
 
     render() {
         const GoogleMapWrapper = withGoogleMap(props => (
             <GoogleMap
                 ref={props.onMapLoad}
-                defaultZoom={19}
+                defaultZoom={15}
                 defaultCenter={props.center}
                 onClick={props.onMapClick}
                 onDragEnd={props.onDragEnd}
+                className="map"
             >
                 <Marker {...props.markers} />
             </GoogleMap>
@@ -102,21 +42,19 @@ class MapPage extends Component {
 
         return (
             <div className="row-100">
-                {/* <NavWrapper/> */}
-                {/* <GoogleAddressAutocomplete addressChange={this.handleAddressChange.bind(this)} address={this.state.address}/> */}
                 <br />
                 <GoogleMapWrapper
                     containerElement={
-                        <div style={{ height: `100vh` }} />
+                        <div style={{ height: `260px`}} />
                     }
                     mapElement={
-                        <div style={{ height: `100vh` }} />
+                        <div style={{ height: `260px` }} />
                     }
-                    onMapClick={this.handleMapClick}
-                    onDragEnd={this.handleMapDrag}
-                    onMapLoad={this.handleMapLoad}
-                    markers={this.state.markers}
-                    center={this.state.mapCenter}
+                    onMapClick={this.props.handleMapClick}
+                    onDragEnd={this.props.handleMapDrag}
+                    onMapLoad={this.props.handleMapLoad}
+                    markers={this.props.markers}
+                    center={this.props.center}
                 />
             </div>
         )

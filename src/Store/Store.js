@@ -24,6 +24,8 @@ export const store = createStore({
   urlTrashes: "/trash",
 
 
+
+
 });
 
 export const actions = store => ({
