@@ -3,6 +3,7 @@ import SwipeableViews from "react-swipeable-views";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import Welcome from "../Welcome/WelcomePage";
 import Register from "../../validcoba";
+import SignIn from "../../component/SignIn/SignIn";
 
 const styles = {
   slide: {
@@ -12,16 +13,16 @@ const styles = {
     color: "#fff"
   },
   slide1: {
-    backgroundColor: "#FEA900"
+    backgroundColor: "#FFFFFF"
   },
   slide2: {
-    backgroundColor: "#B3DC4A"
+    backgroundColor: "#FFFFFF"
   },
   slide3: {
-    backgroundColor: "#6AC0FF"
+    backgroundColor: "#FFFFFF"
   },
   slide4: {
-    backgroundColor: "#F64842"
+    backgroundColor: "#FFFFFF"
   }
 };
 
@@ -69,10 +70,13 @@ function Intro() {
                         height: "400px",
                         paddingTop: "100px"
                       }}
-                      src="https://image.flaticon.com/icons/svg/1559/1559859.svg"
+                      src="https://i.ibb.co/z2MprCk/tracking-1.png"
                     />
                     <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
+                      <div
+                        className="col-10  text-center"
+                        style={{ color: "black" }}
+                      >
                         <h3 className="font">Tukar Sampahmu</h3>
                         <h5>Dengan Aplikasi Loakin</h5>
                         <h6>
@@ -96,7 +100,10 @@ function Intro() {
                       src="https://image.flaticon.com/icons/svg/138/138281.svg"
                     />
                     <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
+                      <div
+                        className="col-10  text-center"
+                        style={{ color: "black" }}
+                      >
                         <h3 className="font">Dapat Uang dan Poin</h3>
                         <h5>Dengan Aplikasi Loakin</h5>
                         <h6>
@@ -111,16 +118,19 @@ function Intro() {
                   <div style={Object.assign({}, styles.slide, styles.slide3)}>
                     <img
                       style={{
-                        width: "300px",
+                        width: "200px",
                         height: "300px",
                         paddingTop: "100px",
                         paddingBottom: "20px",
                         marginTop: "100px"
                       }}
-                      src="https://image.flaticon.com/icons/svg/1355/1355982.svg"
+                      src="https://i.ibb.co/1vg0tQV/treasure-2.png"
                     />
                     <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
+                      <div
+                        className="col-10  text-center"
+                        style={{ color: "black" }}
+                      >
                         <h3 className="font">Tukar Poin</h3>
                         <h5>Dengan Aplikasi Loakin</h5>
                         <h6>
@@ -146,10 +156,13 @@ function Intro() {
                       border="0"
                     />
                     <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
+                      <div
+                        className="col-10  text-center"
+                        style={{ color: "black" }}
+                      >
                         <a
                           style={{
-                            color: "white",
+                            color: "black",
                             fontSize: "40px",
                             fontWeight: "900",
                             paddingTop: "500px"
@@ -158,6 +171,7 @@ function Intro() {
                         >
                           Ayo Mulai
                         </a>
+                        <SignIn />
                       </div>
                     </div>
                   </div>

@@ -210,7 +210,7 @@ class Order extends React.Component {
                       }}
                     >
                       <div className="col-11">
-                        <div class="mapouter">
+                        <div class="mapouter font">
                           <div class="gmap_canvas">
                             <iframe
                               width="100%"
@@ -227,7 +227,7 @@ class Order extends React.Component {
                           </div>
                         </div>
                         <br />
-                        <h6 className="text-left">
+                        <h6 className="text-left font">
                           Dimana tempat penjemputan sampahmu?
                         </h6>
                         <input
@@ -237,7 +237,7 @@ class Order extends React.Component {
                           className="form-control"
                         />
                         <br />
-                        <div className="text-left">
+                        <div className="text-left font">
                           <p style={{ fontSize: "15px", margin: "0" }}>
                             Tentukan tanggal
                           </p>
@@ -254,7 +254,7 @@ class Order extends React.Component {
                           <br />
 
                           <br />
-                          <label for="inputPhotoURL">
+                          <label className="font" for="inputPhotoURL">
                             Pilih Foto Lalu Klik Upload
                           </label>
                           <br />
@@ -265,6 +265,7 @@ class Order extends React.Component {
                           />
                           <br />
                           <input
+                            className="font"
                             type="file"
                             onChange={this.handleChangePhoto}
                           />

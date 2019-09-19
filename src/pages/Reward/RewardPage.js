@@ -164,7 +164,8 @@ class RewardPage extends React.Component {
                       </h3>
                     </div>
                   </div>
-                  <div className="row justify-content-center">
+                  <br />
+                  <div className="row justify-content-center m-0">
                     <div className=" col-11 text-center">
                       <TabReward />
                     </div>

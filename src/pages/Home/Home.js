@@ -55,7 +55,7 @@ const Home = () => {
                           className="font"
                           style={{ fontSize: "13px" }}
                         >
-                          Tukar Sampahmu
+                          <h6 className="m-0">Tukar Sampahmu</h6>
                         </MDBCardHeader>
                         <MDBCardBody className="text-success h-100 pt-2 pb-3 px-2 w-100">
                           <img
@@ -79,7 +79,7 @@ const Home = () => {
                           className="font"
                           style={{ fontSize: "13px" }}
                         >
-                          Tukar Poinmu
+                          <h6 className="mx-2 my-0">Tukar Poinmu</h6>
                         </MDBCardHeader>
                         <MDBCardBody className="text-success h-100 w-100">
                           <img
@@ -163,24 +163,5 @@ const Home = () => {
     return <Redirect to="/" />;
   }
 };
-
-// const tour = new Shepherd.Tour({
-//   defaults: {
-//     classes: "shepherd-theme-arrows"
-//   }
-// });
-
-// tour.addStep("step-1", {
-//   text: "Ini adalah fitur untuk kamu menukar sampahmu",
-//   attachTo: ".first bottom",
-//   buttons: [
-//     {
-//       text: "Next",
-//       action: tour.next
-//     }
-//   ]
-// });
-
-// tour.start();
 
 export default Home;

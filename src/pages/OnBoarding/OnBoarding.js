@@ -7,6 +7,7 @@ import { async } from "q";
 import Home from "../Home/Home";
 import OrderPage from "../Order/OrderPage";
 import styled, { keyframes } from "styled-components";
+import axios from "axios";
 
 import { BeaconRenderProps } from "react-joyride";
 
@@ -134,10 +135,6 @@ class Basic extends React.Component {
               </strong>
             )
           },
-          // floaterProps: {
-          //   disableAnimation: true
-          // },
-          // spotlightPadding: 20,
           placement: "bottom",
           target: ".pesanan",
           title: "Pesanan"
@@ -158,11 +155,6 @@ class Basic extends React.Component {
               </strong>
             )
           },
-          // styles: {
-          //   options: {
-          //     width: 300
-          //   }
-          // },
           target: ".bantuan",
           title: "Events"
         },
@@ -184,30 +176,39 @@ class Basic extends React.Component {
           title: "Invitations"
         }
       ],
-      isLogin: localStorage.getItem("isLogin")
+      onboarding_status: localStorage.getItem("onboarding_status")
     };
   }
   componentWillMount = async () => {
-    // this.setState({ display: true });
-    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
-    if (isLogin) {
+    if (
+      localStorage.getItem("onboarding_status") === 1 ||
+      localStorage.getItem("onboarding_status") === true ||
+      localStorage.getItem("onboarding_status") === "true"
+    ) {
       this.setState({ run: true });
     }
+    localStorage.setItem("onboarding_status", false);
   };
 
-  componentDidMount = async () => {
-    let config = {
-      url: this.props.baseUrl + "users/after_first_login",
-      method: "get",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
-
-    let response = await Axios(config).then(() => {
-      localStorage.setItem("status_first_login", false);
-    });
-  };
+  // componentDidMount = async () => {
+  //   const self = this;
+  //   const config = {
+  //     method: "GET",
+  //     url: self.props.base_url + "/users/" + localStorage.getItem("id"),
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     }
+  //   };
+  //   await axios(config)
+  //     .then(function(response) {
+  //       console.log(response.data);
+  //       // console.log(response.data.name);
+  //       localStorage.setItem("status_first_login", false);
+  //     })
+  //     .then(function(error) {
+  //       console.log(error);
+  //     });
+  // };
 
   render() {
     const { run, steps } = this.state;
@@ -242,6 +243,6 @@ class Basic extends React.Component {
 }
 
 export default connect(
-  "baseUrl, allBookedDates",
+  "baseUrl",
   actions
 )(Basic);
