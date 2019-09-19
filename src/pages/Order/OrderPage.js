@@ -12,9 +12,8 @@ import axios from "axios";
 import Footer from "../../component/Footer";
 import Swal from "sweetalert2";
 // import GoogleMaps from "./GoogleMaps"
-import GoogleMaps2 from "./GoogleMaps2"
-import './order.css'
-
+import GoogleMaps2 from "./GoogleMaps2";
+import "./order.css";
 
 class Order extends React.Component {
   constructor(props) {
@@ -28,19 +27,18 @@ class Order extends React.Component {
       additialNotes: null,
       markers: {
         position: {
-            lat: -7.9666204,
-            lng: 112.6326321,
+          lat: -7.9666204,
+          lng: 112.6326321
         },
         key: Date.now(),
-        defaultAnimation: 2,
+        defaultAnimation: 2
       },
       mapCenter: { lat: -7.9666204, lng: 112.6326321 },
       // access_token: 'AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo',
       // address: '',
       mapRef: null,
       lat: -7.9666204,
-      lng: 112.6326321,
-
+      lng: 112.6326321
     };
   }
 
@@ -59,13 +57,13 @@ class Order extends React.Component {
     this.setState({
       startDate: date
     });
-    console.log(this.state.startDate);
+    // console.log(this.state.startDate);
   };
 
   // funtion to store photo uploaded by user
   handleChangePhoto = e => {
     e.preventDefault();
-    const regexImage = /([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+    const regexImage = /([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/;
     console.log(e.target.files[0]);
     if (!regexImage.test(e.target.files[0].name)) {
       Swal.fire({
@@ -117,7 +115,7 @@ class Order extends React.Component {
     e.preventDefault();
     const self = this;
     const year = self.state.startDate.getFullYear();
-    const month = self.state.startDate.getMonth();
+    const month = self.state.startDate.getMonth() + 1;
     const date = self.state.startDate.getDate();
     const hour = self.state.startDate.getHours();
     const minute = self.state.startDate.getMinutes();
@@ -152,6 +150,21 @@ class Order extends React.Component {
       method: "POST",
       url: self.props.base_url + "/orders"
     };
+    if (this.state.urlPhoto == "") {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Pilih foto terlebih dahulu!"
+      });
+      return false;
+    } else if (this.state.adress == "") {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Lengkapi data terlebih dahulu!"
+      });
+      return false;
+    }
     axios(config)
       .then(function(response) {
         self.props.history.push("/orderhistory");
@@ -163,85 +176,93 @@ class Order extends React.Component {
       })
       .catch(function(error) {
         console.log("error Order", error);
-        swal("Oooppss!", "Ada yang error!", "error");
+        swal("Oooppss!", "Lengkapi data terlebih dahulu!", "error");
       });
   };
 
-  handleMapClick = (event) => {
+  handleMapClick = event => {
     let that = this;
     let mapRef = this._mapComponent;
-    console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
+    console.log(mapRef.getCenter().lat() + "; " + mapRef.getCenter().lng());
     this.setState({
-        markers: {
-            position: event.latLng,
-            defaultAnimation: 2,
-            key: Date.now()
-        },
-        mapCenter: event.latLng,
-        lat: mapRef.getCenter().lat(),
-        lng: mapRef.getCenter().lng()
+      markers: {
+        position: event.latLng,
+        defaultAnimation: 2,
+        key: Date.now()
+      },
+      mapCenter: event.latLng,
+      lat: mapRef.getCenter().lat(),
+      lng: mapRef.getCenter().lng()
     });
     const self = this;
-    const config = {    
+    const config = {
       method: "GET",
-      url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + mapRef.getCenter().lat() + "," + mapRef.getCenter().lng() + "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        mapRef.getCenter().lat() +
+        "," +
+        mapRef.getCenter().lng() +
+        "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
     };
     axios(config)
       .then(function(response) {
-        self.setState({adress:response.data.results[0].formatted_address})
-        console.log(response.data.results[0].formatted_address)
-        console.log(response)
+        self.setState({ adress: response.data.results[0].formatted_address });
+        console.log(response.data.results[0].formatted_address);
+        console.log(response);
       })
       .catch(function(error) {
         console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
-    console.log(this.state.lat)
-    console.log(this.state.lng)
-  }
+    console.log(this.state.lat);
+    console.log(this.state.lng);
+  };
 
   handleMapDrag = () => {
     let mapRef = this._mapComponent;
-    console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
-    console.log(this.state.markers.position)
-  }
+    console.log(mapRef.getCenter().lat() + "; " + mapRef.getCenter().lng());
+    console.log(this.state.markers.position);
+  };
 
-  handleMapLoad = (map) => {
+  handleMapLoad = map => {
     this._mapComponent = map;
-  }
+  };
 
-  componentDidMount = async (props) => {
-    await navigator.geolocation.getCurrentPosition(
-       position => {
-        const { latitude, longitude } = position.coords;
+  componentDidMount = async props => {
+    await navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
 
-        this.setState({
-          markers: {
-            position: {lat: latitude, lng: longitude},
-            defaultAnimation: 2,
-            key: Date.now()
+      this.setState({
+        markers: {
+          position: { lat: latitude, lng: longitude },
+          defaultAnimation: 2,
+          key: Date.now()
         },
-        mapCenter: {lat: latitude, lng: longitude},
-        });
-        console.log(this.state.mapCenter)
-      },
-    );
+        mapCenter: { lat: latitude, lng: longitude }
+      });
+      console.log(this.state.mapCenter);
+    });
     const self = this;
-    const config = {    
+    const config = {
       method: "GET",
-      url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.state.lat + "," + this.state.lng + "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        this.state.lat +
+        "," +
+        this.state.lng +
+        "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
     };
     axios(config)
       .then(function(response) {
-        self.setState({adress:response.data.results[0].formatted_address})
-        console.log(response.data.results[0].formatted_address)
-        console.log(response)
+        self.setState({ adress: response.data.results[0].formatted_address });
+        console.log(response.data.results[0].formatted_address);
+        console.log(response);
       })
       .catch(function(error) {
         console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
-      }); 
-  }
+      });
+  };
 
   render() {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
@@ -295,31 +316,31 @@ class Order extends React.Component {
                       }}
                     >
                       <div className="col-11">
-                      <h6 className="text-left">
-                          Klik posisi di peta untuk menentukan alamat penjemputan
+                        <h6 className="text-left">
+                          Klik posisi di peta untuk menentukan alamat
+                          penjemputan
                         </h6>
                       </div>
                       <div className="col-11">
-                        <div className="maps">              
-                        <GoogleMaps2
-                          markers={this.state.markers}
-                          center={this.state.mapCenter}
-                          handleMapLoad={this.handleMapLoad}
-                          handleMapDrag={this.handleMapDrag}
-                          handleMapClick={this.handleMapClick}
-                        />
+                        <div className="maps">
+                          <GoogleMaps2
+                            markers={this.state.markers}
+                            center={this.state.mapCenter}
+                            handleMapLoad={this.handleMapLoad}
+                            handleMapDrag={this.handleMapDrag}
+                            handleMapClick={this.handleMapClick}
+                          />
                         </div>
                       </div>
-                     <br/>
-                     <br/>
-                     <br/>
+                      <br />
+                      <br />
+                      <br />
                       <div className="col-11">
-                      <h6 className="text-left">
-                          Alamat
-                        </h6>
+                        <h6 className="text-left">Alamat</h6>
                         <p className="text-left">{this.state.adress}</p>
                         <h6 className="text-left">
-                          Beri keterangan tambahan agar kami lebih mudah menemukan Anda
+                          Beri keterangan tambahan agar kami lebih mudah
+                          menemukan Anda
                         </h6>
                         <input
                           onChange={this.setAdditionalNotes}
@@ -328,7 +349,7 @@ class Order extends React.Component {
                           className="form-control"
                         />
                         <br />
-                 
+
                         <div className="text-left">
                           <p style={{ fontSize: "15px", margin: "0" }}>
                             Tentukan tanggal
@@ -366,8 +387,9 @@ class Order extends React.Component {
                           <br />
                           <br />
                         </div>
-                        
+
                         <MDBBtn
+                          id="buttonHover"
                           onClick={e => {
                             this.doOrder(e);
                           }}

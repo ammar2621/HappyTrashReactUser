@@ -10,6 +10,8 @@ import {
 import Footer from "../../component/Footer";
 import { Link, Redirect } from "react-router-dom";
 import Header from "../../component/Header";
+import Shepherd from "shepherd.js";
+import "./home.css";
 
 const Home = () => {
   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
@@ -46,7 +48,7 @@ const Home = () => {
                     <Link to="/order">
                       <MDBCard
                         border="success"
-                        className="mt-3"
+                        className="mt-3 first"
                         style={{ maxWidth: "18rem", width: "100%" }}
                       >
                         <MDBCardHeader
@@ -55,10 +57,12 @@ const Home = () => {
                         >
                           Tukar Sampahmu
                         </MDBCardHeader>
-                        <MDBCardBody className="text-success">
+                        <MDBCardBody className="text-success h-100 pt-2 pb-3 px-2 w-100">
                           <img
-                            style={{ width: "80px" }}
-                            src="https://image.flaticon.com/icons/svg/401/401176.svg"
+                            style={{ width: "95px" }}
+                            src="https://i.ibb.co/z2MprCk/tracking-1.png"
+                            alt="tracking-1"
+                            border="0"
                           ></img>
                         </MDBCardBody>
                       </MDBCard>
@@ -68,7 +72,7 @@ const Home = () => {
                     <Link to="/reward">
                       <MDBCard
                         border="success"
-                        className="mt-3"
+                        className="mt-3 second"
                         style={{ maxWidth: "18rem", width: "100%" }}
                       >
                         <MDBCardHeader
@@ -77,10 +81,12 @@ const Home = () => {
                         >
                           Tukar Poinmu
                         </MDBCardHeader>
-                        <MDBCardBody className="text-success">
+                        <MDBCardBody className="text-success h-100 w-100">
                           <img
                             style={{ width: "80px" }}
-                            src="https://image.flaticon.com/icons/svg/744/744922.svg"
+                            src="https://i.ibb.co/1vg0tQV/treasure-2.png"
+                            alt="treasure-2"
+                            border="0"
                           ></img>
                         </MDBCardBody>
                       </MDBCard>
@@ -128,16 +134,13 @@ const Home = () => {
                   <div
                     className="col-11 pt-2"
                     style={{
-                      borderLeft: "0.5px solid grey",
-                      borderRight: "0.5px solid grey",
-                      borderBottom: "0.5px solid grey"
+                      borderLeft: "0.5px solid #51C953",
+                      borderRight: "0.5px solid #51C953",
+                      borderBottom: "0.5px solid #51C953"
                     }}
                   >
                     <h4 className="font">Mari lestarikan lingkungan.</h4>
-                    <p
-                      className="font"
-                      style={{ fontWeight: "200", fontSize: "13px" }}
-                    >
+                    <p className="font" style={{ fontWeight: "200" }}>
                       20 Kg sampah yang kamu tukar di Sampah Online, setara
                       dengan 1 pohon yang kamu tanam.
                     </p>
@@ -151,11 +154,33 @@ const Home = () => {
           </MDBRow>
         </MDBContainer>
         <Footer />
+        <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
+        <script src="/node_modules/shepherd.js/dist/js/shepherd.min.js"></script>
+        <script></script>
       </div>
     );
   } else {
     return <Redirect to="/" />;
   }
 };
+
+// const tour = new Shepherd.Tour({
+//   defaults: {
+//     classes: "shepherd-theme-arrows"
+//   }
+// });
+
+// tour.addStep("step-1", {
+//   text: "Ini adalah fitur untuk kamu menukar sampahmu",
+//   attachTo: ".first bottom",
+//   buttons: [
+//     {
+//       text: "Next",
+//       action: tour.next
+//     }
+//   ]
+// });
+
+// tour.start();
 
 export default Home;

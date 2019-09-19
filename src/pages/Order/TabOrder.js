@@ -2,7 +2,7 @@ import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
-import { MDBMedia } from "mdbreact";
+import { MDBMedia, MDBBtn } from "mdbreact";
 import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/Store";
@@ -12,13 +12,15 @@ class TabOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 1,
+      index: 0,
       adress: null,
       time: null,
-      photo: null,
+      photo: "https://image.flaticon.com/icons/svg/401/401176.svg",
       status: null,
       orders: [],
-      waiting: []
+      waiting: [],
+      notFoundOrder: "---Tidak ada pesanan---",
+      notFoundWaiting: "-----Tidak ada pesanan-----"
     };
   }
   handleChange = (event, value) => {
@@ -80,6 +82,22 @@ class TabOrder extends React.Component {
           } else {
             self.state.orders.push(element);
           }
+          if (self.state.orders.length === 0) {
+            self.setState({
+              notFoundOrder: "Anda tidak memiliki pesanan yang belum selesai"
+            });
+          } else {
+            self.setState({
+              notFoundOrder: " "
+            });
+          }
+
+          if (self.state.waiting.length === 0) {
+            self.setState({ notFoundWaiting: "-----Tidak ada pesanan------" });
+          } else {
+            self.setState({ notFoundWaiting: " " });
+          }
+          console.log(element.Order.status);
         });
         self.handleChangeIndex(0);
       })
@@ -94,9 +112,10 @@ class TabOrder extends React.Component {
     return (
       <div>
         <Tabs
+          style={{ width: "480px" }}
           className="slideColor"
           value={index}
-          fullWidth
+          // fullWidth
           onChange={this.handleChange}
           style={styles.tabs}
         >
@@ -104,11 +123,15 @@ class TabOrder extends React.Component {
           <Tab className="slideColor" label="Riwayat Pesanan" />
         </Tabs>
         <SwipeableViews
+          style={{ width: "480px" }}
           className="slideColor"
           index={index}
           onChangeIndex={this.handleChangeIndex}
         >
           <div style={Object.assign({}, styles.slide)}>
+            <p className="text-center" style={{ fontSize: "20px" }}>
+              {this.state.notFoundWaiting}
+            </p>
             {this.state.waiting.map((elm, key) => {
               let color = null;
               let status = null;
@@ -119,7 +142,7 @@ class TabOrder extends React.Component {
                 cancel = (
                   <div>
                     <button
-                      className="btn btn-success"
+                      className="btn btn-success mx-0  mt-1"
                       onClick={e => this.cancelOrder(e, elm.Order.id)}
                       style={{ padding: 5 }}
                     >
@@ -134,29 +157,49 @@ class TabOrder extends React.Component {
                 console.log("error");
               }
               return (
-                <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3" href="/orderdetails">
-                    <img
-                      style={{
-                        height: "100px"
-                      }}
-                      src="https://image.flaticon.com/icons/svg/401/401176.svg"
-                    />
+                <div>
+                  <MDBMedia className="mt-3" style={{ width: "100%" }}>
+                    <MDBMedia left className="mr-3">
+                      <img
+                        className="p-2"
+                        style={{
+                          height: "100px"
+                        }}
+                        src={elm.Order.photo}
+                      />
+                    </MDBMedia>
+                    <MDBMedia body className="text-left font">
+                      <p style={{ margin: "0" }}>ID Pesanan: {elm.Order.id}</p>
+                      <p style={{ margin: "0", color }}>Status: {status}</p>
+                      <p style={{ margin: "0" }}>
+                        {elm.Order.time.slice(0, 22)}
+                      </p>
+                      {cancel}
+                    </MDBMedia>
                   </MDBMedia>
-                  <MDBMedia body className="text-left font">
-                    <p style={{ margin: "0" }}>ID Pesanan: {elm.Order.id}</p>
-                    <p style={{ margin: "0", color }}>Status: {status}</p>
-                    <p style={{ margin: "0" }}>{elm.Order.time}</p>
-                    {cancel}
-                  </MDBMedia>
-                </MDBMedia>
+                </div>
               );
             })}
+            {/* <img
+              style={{
+                marginLeft: "250px",
+                width: "50px",
+                marginBottom: "300px"
+                // position: "fixed",
+                // bottom: "0"
+              }}
+              src="https://i.ibb.co/YyQRkmm/add-button-inside-black-circle.png"
+              alt="add-button-inside-black-circle"
+              border="0"
+            ></img> */}
           </div>
 
           {/* Switch Tabs */}
 
           <div style={Object.assign({}, styles.slide)}>
+            <p className="text-center" style={{ fontSize: "20px" }}>
+              {this.state.notFoundOrder}
+            </p>
             {this.state.orders.map((elm, key) => {
               let color = null;
               let status = null;
@@ -167,7 +210,10 @@ class TabOrder extends React.Component {
                 detail = (
                   <div>
                     <Link to={"/orderdetails/" + elm.Order.id}>
-                      <button className="btn btn-info" style={{ padding: 5 }}>
+                      <button
+                        className="btn btn-success mx-0 mt-1 px-3"
+                        style={{ padding: 5 }}
+                      >
                         Detail
                       </button>
                     </Link>
@@ -183,19 +229,23 @@ class TabOrder extends React.Component {
                 console.log("error");
               }
               return (
-                <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                  <MDBMedia left className="mr-3" href="/orderdetails">
+                <MDBMedia
+                  className="mt-3 h-100 w-100"
+                  style={{ width: "100%" }}
+                >
+                  <MDBMedia left className="mr-3">
                     <img
+                      className="p-2"
                       style={{
                         height: "100px"
                       }}
-                      src="https://image.flaticon.com/icons/svg/401/401176.svg"
+                      src={elm.Order.photo}
                     />
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
                     <p style={{ margin: "0" }}>ID Pesanan: {elm.Order.id}</p>
                     <p style={{ margin: "0", color }}>Status: {status}</p>
-                    <p style={{ margin: "0" }}>{elm.Order.time}</p>
+                    <p style={{ margin: "0" }}>{elm.Order.time.slice(0, 22)}</p>
                     {detail}
                   </MDBMedia>
                 </MDBMedia>

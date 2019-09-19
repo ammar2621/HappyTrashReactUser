@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "unistore/react";
 import { actions } from "./Store/Store";
-import App from "./pages/Welcome/WelcomePage";
+import Welcome from "./pages/Welcome/WelcomePage";
 import Home from "./pages/Home/Home";
 import Order from "./pages/Order/OrderPage";
 import OrderHistory from "./pages/Order/OrderHistory";
@@ -14,6 +14,8 @@ import Register from "./validcoba";
 import Help from "./pages/Help/HelpPage";
 import TrashPage from "./pages/Trash/TrashCategorypage";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Basic from "./pages/OnBoarding/OnBoarding";
+import Intro from "./pages/intro/intro";
 import "./index.css";
 
 class MainRoute extends React.Component {
@@ -25,8 +27,9 @@ class MainRoute extends React.Component {
             <TransitionGroup>
               <CSSTransition key={location.key} timeout={450} classNames="fade"> */}
         <Switch>
-          <Route exact path="/" component={App} />
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/" component={Intro} />
+          <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/home" component={Basic} />
           <Route path="/order" component={Order} />
           <Route path="/orderhistory" component={OrderHistory} />
           <Route path="/orderdetails/:id" component={OrderDetails} />
@@ -35,6 +38,7 @@ class MainRoute extends React.Component {
           <Route path="/register" component={Register} />
           <Route path="/help" component={Help} />
           <Route path="/trashcategory" component={TrashPage} />
+          <Route path="/onboarding" component={Basic} />
           <Route component={NotFound} />
         </Switch>
         {/* </CSSTransition>

@@ -110,7 +110,7 @@ class Register extends Component {
         }
         break;
       default:
-        // break;
+      // break;
     }
     this.setState({ errors, [name]: value }, () => {
       // console.log(errors);
@@ -161,7 +161,7 @@ class Register extends Component {
   // Function to user's regitser
   doRegister = async e => {
     e.preventDefault();
-    const regex_name = /^[a-zA-Z]{2,30}$/;
+    const regex_name = /^(?![\s.]+$)[a-zA-Z\s.']*$/;
     const regex_password = /^[a-zA-Z1-9]{8,15}$/;
     const self = this;
     // check the data validation
@@ -186,8 +186,8 @@ class Register extends Component {
       return false;
     } else if (
       !validEmailRegex.test(this.state.email) ||
-      !validPhoneRegex.test(
-        this.state.mobile_number)) {
+      !validPhoneRegex.test(this.state.mobile_number)
+    ) {
       Swal.fire({
         type: "error",
         title: "Oops...",

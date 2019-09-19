@@ -169,7 +169,7 @@ class EditProfile extends Component {
       method: "PUT",
       url: self.props.base_url + "/users"
     };
-    const regex_name = /^[a-zA-Z]{2,30}$/;
+    const regex_name = /^(?![\s.]+$)[a-zA-Z\s.']*$/;
     const regex_password = /^[a-zA-Z1-9]{8,15}$/;
     // check the data validation
     if (
@@ -328,7 +328,7 @@ class EditProfile extends Component {
                   this.doEdit(e);
                 }}
                 isOpen={this.state.modal14}
-                color="dark-green"
+                color="#377c4e"
               >
                 Edit
               </MDBBtn>

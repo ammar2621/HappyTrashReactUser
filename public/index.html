@@ -27,6 +27,16 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo">
     </script>
     <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+    <!-- Link for onboarding -->
+    <link
+      rel="stylesheet"
+      href="/node_modules/shepherd.js/dist/css/shepherd-theme-arrows.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    />
+    <!-- <link rel="stylesheet" href="main.css" /> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -68,5 +78,28 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/node_modules/shepherd.js/dist/js/shepherd.min.js"></script>
+
+    <script>
+      const tour = new Shepherd.Tour({
+        defaults: {
+          classes: "shepherd-theme-arrows"
+        }
+      });
+
+      tour.addStep("step-1", {
+        text: "Ini adalah fitur untuk kamu menukar sampahmu",
+        attachTo: ".first bottom",
+        buttons: [
+          {
+            text: "Next",
+            action: tour.next
+          }
+        ]
+      });
+
+      tour.start();
+    </script>
   </body>
 </html>
