@@ -56,7 +56,7 @@ const Help = () => {
                           borderTopRightRadius: "15px"
                         }}
                       >
-                        <h3
+                        <h2
                           className="font pt-2 pb-2"
                           style={{
                             marginTop: "5px",
@@ -66,7 +66,7 @@ const Help = () => {
                           }}
                         >
                           Bantuan
-                        </h3>
+                        </h2>
                       </div>
                     </div>
                     <div

@@ -52,7 +52,7 @@ class Welcome extends Component {
                   >
                     Happy Trash
                   </h1>
-                  <div className="welcome" style={{ paddingTop: "100px" }}>
+                  <div className="welcome " style={{ paddingTop: "100px" }}>
                     <img
                       src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                       style={{

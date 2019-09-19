@@ -91,7 +91,9 @@ const Profile = () => {
                         <img
                           className="pt-3"
                           style={{ width: "25%" }}
-                          src="https://image.flaticon.com/icons/svg/1738/1738760.svg"
+                          src="https://i.ibb.co/ynBHG1g/account-1.png"
+                          alt="account-1"
+                          border="0"
                         ></img>
                         <br />
                         <br />
@@ -107,7 +109,11 @@ const Profile = () => {
                             <MDBBtn
                               id="buttonHover"
                               className="font"
-                              style={{ width: "125px", borderRadius: "15px" }}
+                              style={{
+                                width: "125px",
+                                borderRadius: "15px",
+                                backgroundColor: "#377c4e"
+                              }}
                               color="dark-green"
                               onClick={async () => {
                                 localStorage.removeItem("token");
