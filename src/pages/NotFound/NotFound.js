@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/Store";
 import "./notfound.css";
 
 class NotFound extends React.Component {

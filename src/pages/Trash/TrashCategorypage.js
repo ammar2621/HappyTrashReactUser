@@ -13,14 +13,17 @@ import Footer from "../../component/Footer";
 import { Link, Redirect } from "react-router-dom";
 import Header from "../../component/Header";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/ActionTrashCategoryPage";
 import Swal from "sweetalert2";
 
 class TrashCategory extends Component {
   componentDidMount = async () => {
-    await this.props.setTrashCategories();
-    await this.props.setTrashes();
-    console.log(this.props.trashCategories);
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      await this.props.setTrashCategories();
+      await this.props.setTrashes();
+      console.log(this.props.trashCategories);
+    }
   };
 
   constructor(props) {
