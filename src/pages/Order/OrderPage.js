@@ -24,7 +24,8 @@ class Order extends React.Component {
       photo: null,
       urlPhoto: "",
       progress: 0,
-      adress: "Alamat belum dipilih",
+      adress: null,
+      additialNotes: null,
       markers: {
         position: {
             lat: -7.9666204,
@@ -43,9 +44,9 @@ class Order extends React.Component {
     };
   }
 
-  setAdress = e => {
+  setAdditionalNotes = e => {
     e.preventDefault();
-    this.setState({ adress: e.target.value });
+    this.setState({ additialNotes: e.target.value });
   };
 
   setTime = e => {
@@ -127,7 +128,12 @@ class Order extends React.Component {
         Authorization: "Bearer " + localStorage.getItem("token")
       },
       data: {
-        adress: self.state.adress,
+        adress: {
+          adress: self.state.adress,
+          lat: self.state.lat,
+          lng: self.state.lng,
+          additialNotes: self.state.additialNotes
+        },
         time:
           year +
           "-" +
@@ -175,6 +181,21 @@ class Order extends React.Component {
         lat: mapRef.getCenter().lat(),
         lng: mapRef.getCenter().lng()
     });
+    const self = this;
+    const config = {    
+      method: "GET",
+      url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + mapRef.getCenter().lat() + "," + mapRef.getCenter().lng() + "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+    };
+    axios(config)
+      .then(function(response) {
+        self.setState({adress:response.data.results[0].formatted_address})
+        console.log(response.data.results[0].formatted_address)
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log("error Order", error);
+        swal("Oooppss!", "Ada yang error!", "error");
+      });
     console.log(this.state.lat)
     console.log(this.state.lng)
   }
@@ -204,14 +225,26 @@ class Order extends React.Component {
         });
         console.log(this.state.mapCenter)
       },
-      () => {
-      }
-    ); 
+    );
+    const self = this;
+    const config = {    
+      method: "GET",
+      url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.state.lat + "," + this.state.lng + "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+    };
+    axios(config)
+      .then(function(response) {
+        self.setState({adress:response.data.results[0].formatted_address})
+        console.log(response.data.results[0].formatted_address)
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log("error Order", error);
+        swal("Oooppss!", "Ada yang error!", "error");
+      }); 
   }
 
   render() {
-    const isLogin = true;
-    // const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       return (
         <div>
@@ -284,12 +317,12 @@ class Order extends React.Component {
                       <h6 className="text-left">
                           Alamat
                         </h6>
-                        <p>{this.state.adress}</p>
+                        <p className="text-left">{this.state.adress}</p>
                         <h6 className="text-left">
-                          Keterangan tambahan (alamat)
+                          Beri keterangan tambahan agar kami lebih mudah menemukan Anda
                         </h6>
                         <input
-                          onChange={this.setAdress}
+                          onChange={this.setAdditionalNotes}
                           type="text"
                           id="defaultFormLoginEmailEx"
                           className="form-control"
