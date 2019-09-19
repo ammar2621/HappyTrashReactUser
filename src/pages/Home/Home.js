@@ -12,7 +12,6 @@ import { Link, Redirect } from "react-router-dom";
 import Header from "../../component/Header";
 import Shepherd from "shepherd.js";
 import "./home.css";
-import "../../../node_modules/shepherd.js/dist/css/shepherd-theme-arrows.css";
 
 const Home = () => {
   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
