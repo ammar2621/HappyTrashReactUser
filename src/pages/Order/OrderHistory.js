@@ -86,7 +86,7 @@ class OrderHistory extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="row justify-content-center">
+                  <div className="row justify-content-center m-0">
                     <div className=" col-11 text-center p-0">
                       <TabOrder />
                     </div>

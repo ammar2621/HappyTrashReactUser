@@ -183,7 +183,7 @@ class TabReward extends Component {
         console.log("history", response.data);
         if (self.state.history.length === 0) {
           self.setState({
-            notFoundHistoryReward: "Anda belum memiliki riwayat hadiah"
+            notFoundHistoryReward: <p>Anda belum memiliki riwayat hadiah</p>
           });
         } else {
           self.setState({

@@ -112,7 +112,7 @@ class TabOrder extends React.Component {
     return (
       <div>
         <Tabs
-          style={{ width: "480px" }}
+          style={{ maxWidth: "480px" }}
           className="slideColor"
           value={index}
           // fullWidth
@@ -123,7 +123,7 @@ class TabOrder extends React.Component {
           <Tab className="slideColor" label="Riwayat Pesanan" />
         </Tabs>
         <SwipeableViews
-          style={{ width: "480px" }}
+          style={{ maxWidth: "480px" }}
           className="slideColor"
           index={index}
           onChangeIndex={this.handleChangeIndex}

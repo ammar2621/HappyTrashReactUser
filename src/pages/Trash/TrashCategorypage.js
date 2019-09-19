@@ -132,23 +132,23 @@ class TrashCategory extends Component {
                                   className="accordion"
                                   id={"accordion" + index}
                                 >
-                                  <div className="card font">
+                                  <div className="card font p-0">
                                     <div
-                                      className="card-header"
+                                      className="card-header p-0"
                                       data-toggle="collapse"
                                       data-target={"#collapse" + index}
                                       aria-expanded="true"
                                       aria-controls="collapseOne"
                                       id="headingOne"
                                     >
-                                      <h4 className="mb-0 font">
-                                        <button
-                                          className="btn btn-link"
-                                          type="button"
-                                        >
+                                      <button
+                                        className="btn btn-link"
+                                        type="button"
+                                      >
+                                        <h4 className="mb-0 font">
                                           {item.category_name}
-                                        </button>
-                                      </h4>
+                                        </h4>
+                                      </button>
                                     </div>
 
                                     <div
@@ -197,9 +197,9 @@ class TrashCategory extends Component {
                             );
                           })}
                           <br />
-                          {/* <Link to="./help">
+                          <Link to="./help">
                             <div
-                              className="mb-3 mt-3 mx-3 text-center"
+                              className="mb-4 mx-3 text-center"
                               style={{
                                 height: "40px",
                                 width: "70px",
@@ -215,7 +215,7 @@ class TrashCategory extends Component {
                                 border="0"
                               />
                             </div>
-                          </Link> */}
+                          </Link>
                         </div>
                       </div>
                     </div>

@@ -58,7 +58,7 @@ const Profile = () => {
                           borderTopRightRadius: "15px"
                         }}
                       >
-                        <h3
+                        <h2
                           className="font pt-2 pb-2"
                           style={{
                             marginTop: "5px",
@@ -68,7 +68,7 @@ const Profile = () => {
                           }}
                         >
                           Profile
-                        </h3>
+                        </h2>
                       </div>
                     </div>
                     <div
@@ -122,6 +122,9 @@ const Profile = () => {
                                 localStorage.removeItem("name");
                                 localStorage.removeItem("email");
                                 localStorage.removeItem("mobile_number");
+                                localStorage.removeItem("point");
+                                localStorage.removeItem("status_first_login");
+
                                 await swal(
                                   "Anda berhasil keluar",
                                   "Terima kasih",

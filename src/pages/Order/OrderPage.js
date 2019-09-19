@@ -316,6 +316,7 @@ class Order extends React.Component {
                       }}
                     >
                       <div className="col-11">
+
                         <h6 className="text-left">
                           Klik posisi di peta untuk menentukan alamat
                           penjemputan
@@ -341,6 +342,7 @@ class Order extends React.Component {
                         <h6 className="text-left">
                           Beri keterangan tambahan agar kami lebih mudah
                           menemukan Anda
+
                         </h6>
                         <input
                           onChange={this.setAdditionalNotes}
@@ -350,7 +352,8 @@ class Order extends React.Component {
                         />
                         <br />
 
-                        <div className="text-left">
+                        <div className="text-left font">
+
                           <p style={{ fontSize: "15px", margin: "0" }}>
                             Tentukan tanggal
                           </p>
@@ -367,7 +370,7 @@ class Order extends React.Component {
                           <br />
 
                           <br />
-                          <label for="inputPhotoURL">
+                          <label className="font" for="inputPhotoURL">
                             Pilih Foto Lalu Klik Upload
                           </label>
                           <br />
@@ -378,6 +381,7 @@ class Order extends React.Component {
                           />
                           <br />
                           <input
+                            className="font"
                             type="file"
                             onChange={this.handleChangePhoto}
                           />

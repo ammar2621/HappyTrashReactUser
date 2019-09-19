@@ -85,38 +85,24 @@ const Help = () => {
                         }}
                       >
                         <Link to="./trashcategory">
-                          <h4 className="mx-3 mt-4 pb-2 font border-bottom">
+                          <h4 className="mx-3 mt-4 pb-3 mb-4 font border-bottom">
                             Kategori Sampah
                           </h4>
                         </Link>
-                        <Link to="./onboarding">
-                          <h4 className="mx-3 mt-1 pb-2 border-bottom font">
+                        <Link
+                          to="./onboarding"
+                          onClick={async () => {
+                            localStorage.setItem("onboarding_status", true);
+                          }}
+                        >
+                          <h4 className="mx-3 mt-1 pb-3 mb-4 border-bottom font">
                             Cara Order
                           </h4>
                         </Link>
 
-                        <h4 className="mx-3 mt-1 pb-2 mb-3 border-bottom font">
+                        <h4 className="mx-3 mt-1 pb-3 mb-5 border-bottom font">
                           FAQ
                         </h4>
-                        <Link to="./home">
-                          <div
-                            className="mb-4 mx-3 text-center"
-                            style={{
-                              height: "40px",
-                              width: "70px",
-                              backgroundColor: "green",
-                              borderRadius: "5px"
-                            }}
-                          >
-                            <img
-                              className="mt-2"
-                              style={{ width: "25px" }}
-                              src="https://i.ibb.co/f8v4bQx/left-arrow-1.png"
-                              alt="left-arrow-1"
-                              border="0"
-                            />
-                          </div>
-                        </Link>
                       </div>
                     </div>
                   </div>
