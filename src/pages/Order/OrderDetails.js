@@ -7,7 +7,7 @@ import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/Store";
 import { Redirect } from "react-router-dom";
 
 class OrderDetails extends React.Component {

@@ -6,11 +6,14 @@ import swal from "sweetalert";
 import Header from "../../component/Header";
 import { storage } from "../../firebase/index";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/ActionOrderPage";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../component/Footer";
 import Swal from "sweetalert2";
+// import GoogleMaps from "./GoogleMaps"
+import GoogleMaps2 from "./GoogleMaps2";
+import "./order.css";
 
 class Order extends React.Component {
   constructor(props) {
@@ -20,13 +23,28 @@ class Order extends React.Component {
       photo: null,
       urlPhoto: "",
       progress: 0,
-      adress: null
+      adress: null,
+      additialNotes: null,
+      markers: {
+        position: {
+          lat: -7.9666204,
+          lng: 112.6326321
+        },
+        key: Date.now(),
+        defaultAnimation: 2
+      },
+      mapCenter: { lat: -7.9666204, lng: 112.6326321 },
+      // access_token: 'AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo',
+      // address: '',
+      mapRef: null,
+      lat: -7.9666204,
+      lng: 112.6326321
     };
   }
 
-  setAdress = e => {
+  setAdditionalNotes = e => {
     e.preventDefault();
-    this.setState({ adress: e.target.value });
+    this.setState({ additialNotes: e.target.value });
   };
 
   setTime = e => {
@@ -108,7 +126,12 @@ class Order extends React.Component {
         Authorization: "Bearer " + localStorage.getItem("token")
       },
       data: {
-        adress: self.state.adress,
+        adress: {
+          adress: self.state.adress,
+          lat: self.state.lat,
+          lng: self.state.lng,
+          additialNotes: self.state.additialNotes
+        },
         time:
           year +
           "-" +
@@ -157,8 +180,91 @@ class Order extends React.Component {
       });
   };
 
+  handleMapClick = event => {
+    let that = this;
+    let mapRef = this._mapComponent;
+    console.log(mapRef.getCenter().lat() + "; " + mapRef.getCenter().lng());
+    this.setState({
+      markers: {
+        position: event.latLng,
+        defaultAnimation: 2,
+        key: Date.now()
+      },
+      mapCenter: event.latLng,
+      lat: mapRef.getCenter().lat(),
+      lng: mapRef.getCenter().lng()
+    });
+    const self = this;
+    const config = {
+      method: "GET",
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        mapRef.getCenter().lat() +
+        "," +
+        mapRef.getCenter().lng() +
+        "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+    };
+    axios(config)
+      .then(function(response) {
+        self.setState({ adress: response.data.results[0].formatted_address });
+        console.log(response.data.results[0].formatted_address);
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log("error Order", error);
+        swal("Oooppss!", "Ada yang error!", "error");
+      });
+    console.log(this.state.lat);
+    console.log(this.state.lng);
+  };
+
+  handleMapDrag = () => {
+    let mapRef = this._mapComponent;
+    console.log(mapRef.getCenter().lat() + "; " + mapRef.getCenter().lng());
+    console.log(this.state.markers.position);
+  };
+
+  handleMapLoad = map => {
+    this._mapComponent = map;
+  };
+
+  componentDidMount = async props => {
+    await navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+
+      this.setState({
+        markers: {
+          position: { lat: latitude, lng: longitude },
+          defaultAnimation: 2,
+          key: Date.now()
+        },
+        mapCenter: { lat: latitude, lng: longitude }
+      });
+      console.log(this.state.mapCenter);
+    });
+    const self = this;
+    const config = {
+      method: "GET",
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        this.state.lat +
+        "," +
+        this.state.lng +
+        "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+    };
+    axios(config)
+      .then(function(response) {
+        self.setState({ adress: response.data.results[0].formatted_address });
+        console.log(response.data.results[0].formatted_address);
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log("error Order", error);
+        swal("Oooppss!", "Ada yang error!", "error");
+      });
+  };
+
   render() {
-    const { errors } = this.state;
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       return (
@@ -210,34 +316,44 @@ class Order extends React.Component {
                       }}
                     >
                       <div className="col-11">
-                        <div class="mapouter font">
-                          <div class="gmap_canvas">
-                            <iframe
-                              width="100%"
-                              padding="10px"
-                              height="300"
-                              id="gmap_canvas"
-                              src="https://maps.google.com/maps?q=sepulsa%20lodge%20malang&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                              frameborder="0"
-                              scrolling="no"
-                              marginheight="0"
-                              marginwidth="0"
-                            ></iframe>
-                            Google Maps Generator by{" "}
-                          </div>
+
+                        <h6 className="text-left">
+                          Klik posisi di peta untuk menentukan alamat
+                          penjemputan
+                        </h6>
+                      </div>
+                      <div className="col-11">
+                        <div className="maps">
+                          <GoogleMaps2
+                            markers={this.state.markers}
+                            center={this.state.mapCenter}
+                            handleMapLoad={this.handleMapLoad}
+                            handleMapDrag={this.handleMapDrag}
+                            handleMapClick={this.handleMapClick}
+                          />
                         </div>
-                        <br />
-                        <h6 className="text-left font">
-                          Dimana tempat penjemputan sampahmu?
+                      </div>
+                      <br />
+                      <br />
+                      <br />
+                      <div className="col-11">
+                        <h6 className="text-left">Alamat</h6>
+                        <p className="text-left">{this.state.adress}</p>
+                        <h6 className="text-left">
+                          Beri keterangan tambahan agar kami lebih mudah
+                          menemukan Anda
+
                         </h6>
                         <input
-                          onChange={this.setAdress}
+                          onChange={this.setAdditionalNotes}
                           type="text"
                           id="defaultFormLoginEmailEx"
                           className="form-control"
                         />
                         <br />
+
                         <div className="text-left font">
+
                           <p style={{ fontSize: "15px", margin: "0" }}>
                             Tentukan tanggal
                           </p>
@@ -275,6 +391,7 @@ class Order extends React.Component {
                           <br />
                           <br />
                         </div>
+
                         <MDBBtn
                           id="buttonHover"
                           onClick={e => {
@@ -309,6 +426,6 @@ class Order extends React.Component {
 }
 
 export default connect(
-  "is_login, base_url, token",
+  "is_login, base_url, token, provinces",
   actions
 )(withRouter(Order));

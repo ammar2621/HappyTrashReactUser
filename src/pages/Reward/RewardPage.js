@@ -6,7 +6,7 @@ import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../store";
+import { actions } from "../../Store/Store";
 import { withRouter, Link, Redirect } from "react-router-dom";
 
 class RewardPage extends React.Component {

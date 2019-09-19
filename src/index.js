@@ -6,7 +6,7 @@ import "mdbreact/dist/css/mdb.css";
 import "./index.css";
 import MainRoute from "./MainRoute";
 import { Provider } from "unistore/react";
-import { store } from "./store";
+import { store } from "./Store/Store";
 
 import registerServiceWorker from "./registerServiceWorker";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "unistore/react";
-import { actions } from "./store";
+import { actions } from "./Store/Store";
 import Welcome from "./pages/Welcome/WelcomePage";
 import Home from "./pages/Home/Home";
 import Order from "./pages/Order/OrderPage";
