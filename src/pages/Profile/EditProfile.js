@@ -328,7 +328,7 @@ class EditProfile extends Component {
                   this.doEdit(e);
                 }}
                 isOpen={this.state.modal14}
-                color="dark-green"
+                color="#377c4e"
               >
                 Edit
               </MDBBtn>

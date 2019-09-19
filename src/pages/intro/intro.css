@@ -1,0 +1,117 @@
+/* body {
+    background-color: #239DFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(http://media.idownloadblog.com/wp-content/uploads/2016/06/macOS-Sierra-Wallpaper-Macbook-Wallpaper.jpg);
+    background-position: center center;
+    background-size: cover;
+  } */
+
+.screen {
+  border: 2px solid #333;
+  max-width: 600px;
+  max-height: 568px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  border-radius: 4 px;
+  background-color: #333;
+  display: flex;
+  background-image: url(https://www.thestorybookfactory.com/assets/icons/doodle-bg-1.svg);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.flickity-viewport {
+  height: 100% !important;
+}
+
+.flickity-page-dots {
+  display: flex;
+  bottom: 70px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.flickity-page-dots .dot {
+  background-color: #000 !important;
+  opacity: 0.2;
+  flex: 1;
+  margin: 0px 20px !important;
+  border-radius: 5px !important;
+}
+.flickity-page-dots .dot.is-selected {
+  opacity: 1;
+  background-color: #fff !important;
+}
+
+.flickity-prev-next-button {
+  bottom: 15px;
+  top: auto;
+  background-color: #fff !important;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+  width: calc(50% - 15px) !important;
+}
+.flickity-prev-next-button:disabled {
+  opacity: 0 !important;
+  -webkit-transform: translateY(50px);
+  transform: translateY(50px);
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  -webkit-perspective: 300px;
+  perspective: 300px;
+}
+.carousel .page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0.15);
+}
+
+.red {
+  background-color: #d75a4a;
+}
+
+.green {
+  background-color: #8ee177;
+}
+
+.yellow {
+  background-color: #ffd045;
+}
+
+.blue {
+  background-color: #5599f0;
+}
+
+button.button {
+  background-color: #fff;
+  border-radius: 3px;
+  border: none;
+  padding: 10px;
+  margin: 10px 0px;
+  flex: 1;
+  width: 280px;
+  height: 40px;
+  position: absolute;
+  bottom: 0px;
+}

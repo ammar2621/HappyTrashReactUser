@@ -1,169 +1,247 @@
 import React from "react";
-import SwipeableViews from "react-swipeable-views";
-import {
-  MDBCarousel,
-  MDBCarouselInner,
-  MDBCarouselItem,
-  MDBView,
-  MDBContainer,
-  MDBRow,
-  MDBCol
-} from "mdbreact";
+import Axios from "axios";
+import { connect } from "unistore/react";
+import { actions } from "../../store";
+import Joyride from "react-joyride";
+import { async } from "q";
+import Home from "../Home/Home";
+import OrderPage from "../Order/OrderPage";
+import styled, { keyframes } from "styled-components";
 
-const styles = {
-  slide: {
-    padding: 15,
-    minHeight: 100,
-    height: "100vh",
-    color: "#fff"
-  },
-  slide1: {
-    backgroundColor: "#FEA900"
-  },
-  slide2: {
-    backgroundColor: "#B3DC4A"
-  },
-  slide3: {
-    backgroundColor: "#6AC0FF"
+import { BeaconRenderProps } from "react-joyride";
+
+const pulse = keyframes`
+  0% {
+    transform: scale(1);
   }
-};
 
-function OnBoarding() {
-  return (
-    <MDBContainer>
-      <MDBRow className="justify-content-center" style={{ padding: "0" }}>
-        <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
-          <div
-            style={{
-              height: "100vh",
+  55% {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.6);
+  }
+`;
+
+const Beacon = styled.span`
+  animation: ${pulse} 3s ease-in-out infinite;
+  background-color: rgba(255, 27, 14, 0.6);
+  border-radius: 0%;
+  display: inline-block;
+  height: 10rem;
+  width: 20rem;
+`;
+
+class Basic extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      run: false,
+      steps: [
+        {
+          content: (
+            <h3 className="text-center font  p-4">
+              Ini merupakan petunjuk menggunakan aplikasi ini.
+            </h3>
+          ),
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          placement: "center",
+          target: "body"
+        },
+        {
+          content: (
+            <p className="font">Pilih ini untuk kamu menukarkan sampahmu</p>
+          ),
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          placement: "top",
+          target: ".first",
+          title: "Fitur Tukar Sampahmu"
+        },
+        {
+          content: (
+            <p className="font">
+              Pilih ini untuk kamu menukarkan poinmu dengan hadiah
+            </p>
+          ),
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          placement: "top",
+          target: ".second",
+          title: "Fitur Tukan Poinmu"
+        },
+        {
+          content: (
+            <p className="font">
+              Pilih ini jika kamu ingin kembali ke halaman awal
+            </p>
+          ),
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          placement: "bottom",
+          target: ".home",
+          title: "Home"
+        },
+        {
+          content: (
+            <p className="font">
+              Pilih ini jika kamu ingin melihat tentang pesanan
+            </p>
+          ),
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          // floaterProps: {
+          //   disableAnimation: true
+          // },
+          // spotlightPadding: 20,
+          placement: "bottom",
+          target: ".pesanan",
+          title: "Pesanan"
+        },
+        {
+          placement: "top",
+          content: (
+            <p className="font">Click here to see all of your events!</p>
+          ),
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          // styles: {
+          //   options: {
+          //     width: 300
+          //   }
+          // },
+          target: ".bantuan",
+          title: "Events"
+        },
+        {
+          placement: "top",
+          locale: {
+            skip: (
+              <strong
+                className="font"
+                aria-label="skip"
+                style={{ color: "#377c4e" }}
+              >
+                Tidak Perlu
+              </strong>
+            )
+          },
+          content: <p className="font">accept and reject invitations</p>,
+          target: ".profile",
+          title: "Invitations"
+        }
+      ],
+      isLogin: localStorage.getItem("isLogin")
+    };
+  }
+  componentWillMount = async () => {
+    // this.setState({ display: true });
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      this.setState({ run: true });
+    }
+  };
+
+  componentDidMount = async () => {
+    let config = {
+      url: this.props.baseUrl + "users/after_first_login",
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    };
+
+    let response = await Axios(config).then(() => {
+      localStorage.setItem("status_first_login", false);
+    });
+  };
+
+  render() {
+    const { run, steps } = this.state;
+    return (
+      <div className="HomePage font mbForFooter">
+        <Joyride
+          className="font"
+          // beaconComponent={Beacon}
+          continuous={true}
+          run={run}
+          scrollToFirstStep={true}
+          showProgress={true}
+          showSkipButton={true}
+          steps={steps}
+          styles={{
+            options: {
+              arrowColor: "yellow",
               backgroundColor: "white",
-              textAlign: "center",
-              padding: "0"
-            }}
-          >
-            <div
-              id="carouselExampleIndicators"
-              class="carousel slide"
-              data-ride="carousel"
-              data-interval="false"
-            >
-              <ol class="carousel-indicators">
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="0"
-                  class="active"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="1"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="2"
-                ></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div style={Object.assign({}, styles.slide, styles.slide1)}>
-                    <img
-                      style={{
-                        width: "300px",
-                        height: "400px",
-                        paddingTop: "100px"
-                      }}
-                      src="https://image.flaticon.com/icons/svg/1559/1559859.svg"
-                    />
-                    <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
-                        <h3 className="font">Tukar Sampahmu</h3>
-                        <h5>Dengan Aplikasi Loakin</h5>
-                        <h6>
-                          Anda dapat menukar sampah kepada kami dan kami akan
-                          menjemput sampah tersebut ke lokasi Anda.
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div style={Object.assign({}, styles.slide, styles.slide2)}>
-                    <img
-                      style={{
-                        width: "300px",
-                        height: "300px",
-                        paddingTop: "100px",
-                        paddingBottom: "20px",
-                        marginTop: "100px"
-                      }}
-                      src="https://image.flaticon.com/icons/svg/138/138281.svg"
-                    />
-                    <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
-                        <h3 className="font">Dapat Uang dan Poin</h3>
-                        <h5>Dengan Aplikasi Loakin</h5>
-                        <h6>
-                          Anda akan mendapatkan uang dan poin dari setiap sampah
-                          yang anda tukarkan dengan ketentuan yang ada.
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div style={Object.assign({}, styles.slide, styles.slide3)}>
-                    <img
-                      style={{
-                        width: "300px",
-                        height: "300px",
-                        paddingTop: "100px",
-                        paddingBottom: "20px",
-                        marginTop: "100px"
-                      }}
-                      src="https://image.flaticon.com/icons/svg/1355/1355982.svg"
-                    />
-                    <div className="row font justify-content-center">
-                      <div className="col-10  text-center">
-                        <h3 className="font">Tukar Poin</h3>
-                        <h5>Dengan Aplikasi Loakin</h5>
-                        <h6>
-                          Anda dapat menukar poin yang anda dapatkan dari
-                          menukar sampah dengan hadiah yang telah kami sediakan.
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a
-                class="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a
-                class="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
-          </div>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-  );
+              overlayColor: "rgba(0, 0, 0, 0.8)",
+              primaryColor: "#377c4e ",
+              textColor: "black",
+              width: 500,
+              zIndex: 1000,
+              beaconSize: 76
+            }
+          }}
+        />
+        <Home />
+      </div>
+    );
+  }
 }
 
-export default OnBoarding;
+export default connect(
+  "baseUrl, allBookedDates",
+  actions
+)(Basic);

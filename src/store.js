@@ -13,7 +13,7 @@ export const store = createStore({
   name: "",
   token: "",
 
-  base_url: "http://api.loakin.online/v1",
+  base_url: "https://api.loakin.online/v1",
   // base_url: 'http://localhost:5000/v1',
 
   // data (made by Fikri)
@@ -21,7 +21,7 @@ export const store = createStore({
   trashes: [],
 
   // url
-  urlBase: "http://api.loakin.online/v1",
+  urlBase: "https://api.loakin.online/v1",
   urlTrashCategories: "/trash_category",
   urlTrashes: "/trash"
 });

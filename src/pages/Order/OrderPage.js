@@ -97,7 +97,7 @@ class Order extends React.Component {
     e.preventDefault();
     const self = this;
     const year = self.state.startDate.getFullYear();
-    const month = self.state.startDate.getMonth();
+    const month = self.state.startDate.getMonth() + 1;
     const date = self.state.startDate.getDate();
     const hour = self.state.startDate.getHours();
     const minute = self.state.startDate.getMinutes();

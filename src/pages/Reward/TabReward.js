@@ -21,7 +21,9 @@ class TabReward extends Component {
       photo: "",
       stock: null,
       data: [],
-      history: []
+      history: [],
+      notFoundReward: "",
+      notFoundHistoryReward: ""
     };
   }
 
@@ -160,7 +162,17 @@ class TabReward extends Component {
         });
         self.setState({ data });
         console.log("data", response.data);
+        if (self.state.data.length === 0) {
+          self.setState({
+            notFoundReward: "Mohon maaf, tidak ada hadiah saat ini"
+          });
+        } else {
+          self.setState({
+            notFoundReward: " "
+          });
+        }
       })
+
       .catch(error => {
         console.log("error rewards", error);
       });
@@ -169,6 +181,15 @@ class TabReward extends Component {
       .then(response => {
         self.setState({ history: response.data });
         console.log("history", response.data);
+        if (self.state.history.length === 0) {
+          self.setState({
+            notFoundHistoryReward: "Anda belum memiliki riwayat hadiah"
+          });
+        } else {
+          self.setState({
+            notFoundHistoryReward: " "
+          });
+        }
       })
       .catch(error => {
         console.log("error rewards history", error);
@@ -216,12 +237,16 @@ class TabReward extends Component {
         <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
           {/* Tab 1 */}
           <div style={Object.assign({}, styles.slide)}>
+            <p className="text-center" style={{ fontSize: "20px" }}>
+              {this.state.notFoundReward}
+            </p>
             {this.state.data.map((elm, key) => {
               if (elm.stock > 0)
                 return (
                   <MDBMedia className="mt-3" style={{ width: "100%" }}>
                     <MDBMedia left className="mr-3 ml-3">
                       <img
+                        className="p-2"
                         style={{
                           height: 75,
                           width: 75
@@ -252,17 +277,22 @@ class TabReward extends Component {
 
           {/* Tab 2 */}
           <div style={Object.assign({}, styles.slide)}>
+            <p className="text-center font" style={{ fontSize: "20px" }}>
+              {this.state.notFoundHistoryReward}
+            </p>
             {this.state.history.map((elm, key) => {
               return (
                 <MDBMedia className="mt-3" style={{ width: "100%" }}>
                   <MDBMedia left className="mr-3 ml-3">
                     <img
+                      className="p-2"
                       style={{
                         height: 75,
                         width: 75
                       }}
-                      src={elm.photo}
-                      alt={elm.photo}
+                      src="https://i.ibb.co/X2sFzjV/reward.png"
+                      alt="reward"
+                      border="0"
                     />
                   </MDBMedia>
                   <MDBMedia body className="text-left font">
@@ -270,7 +300,7 @@ class TabReward extends Component {
                     <p style={{ margin: "0", color: "blue" }}>
                       ID hadiah : {elm.id}
                     </p>
-                    <p style={{ margin: "0" }}>{elm.created_at}</p>
+                    <p style={{ margin: "0" }}>{elm.created_at.slice(0, 22)}</p>
                   </MDBMedia>
                 </MDBMedia>
               );

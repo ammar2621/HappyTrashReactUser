@@ -94,7 +94,7 @@ class TrashCategory extends Component {
                             borderTopRightRadius: "15px"
                           }}
                         >
-                          <h3
+                          <h2
                             className="font pt-2 pb-2"
                             style={{
                               marginTop: "5px",
@@ -104,7 +104,7 @@ class TrashCategory extends Component {
                             }}
                           >
                             Kategori Sampah
-                          </h3>
+                          </h2>
                         </div>
                       </div>
                       <div
@@ -125,33 +125,36 @@ class TrashCategory extends Component {
                           {this.props.trashCategories.map((item, index) => {
                             return (
                               <div>
-                                <div class="accordion" id={"accordion" + index}>
-                                  <div class="card font">
+                                <div
+                                  className="accordion"
+                                  id={"accordion" + index}
+                                >
+                                  <div className="card font">
                                     <div
-                                      class="card-header"
+                                      className="card-header"
                                       data-toggle="collapse"
                                       data-target={"#collapse" + index}
                                       aria-expanded="true"
                                       aria-controls="collapseOne"
                                       id="headingOne"
                                     >
-                                      <h2 class="mb-0">
+                                      <h4 className="mb-0 font">
                                         <button
-                                          class="btn btn-link"
+                                          className="btn btn-link"
                                           type="button"
                                         >
                                           {item.category_name}
                                         </button>
-                                      </h2>
+                                      </h4>
                                     </div>
 
                                     <div
                                       id={"collapse" + index}
-                                      class="collapse"
+                                      className="collapse"
                                       aria-labelledby="headingOne"
                                       data-parent={"#accordion" + index}
                                     >
-                                      <div class="card-body">
+                                      <div className="card-body">
                                         <ul>
                                           {this.props.trashes
                                             .filter(element => {
@@ -190,7 +193,8 @@ class TrashCategory extends Component {
                               </div>
                             );
                           })}
-                          <Link to="./help">
+                          <br />
+                          {/* <Link to="./help">
                             <div
                               className="mb-3 mt-3 mx-3 text-center"
                               style={{
@@ -208,7 +212,7 @@ class TrashCategory extends Component {
                                 border="0"
                               />
                             </div>
-                          </Link>
+                          </Link> */}
                         </div>
                       </div>
                     </div>
