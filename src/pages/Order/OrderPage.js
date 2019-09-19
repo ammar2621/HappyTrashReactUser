@@ -19,6 +19,7 @@ class Order extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentDate: new Date(),
       startDate: new Date(),
       photo: null,
       urlPhoto: "",
@@ -53,10 +54,17 @@ class Order extends React.Component {
   };
 
   // funtion to store date by user choose
-  handleChange = date => {
-    this.setState({
+  handleChange = async date => {
+    await this.setState({
       startDate: date
     });
+    // if (this.state.currentDate > this.state.startDate) {
+    //   Swal.fire({
+    //     type: "error",
+    //     title: "Oops...",
+    //     text: "Tidak Boleh Mengisi Tanggal Sebelum Hari ini! "
+    //   });
+    // }
     // console.log(this.state.startDate);
   };
 
@@ -126,12 +134,12 @@ class Order extends React.Component {
         Authorization: "Bearer " + localStorage.getItem("token")
       },
       data: {
-        adress: {
+        adress: JSON.stringify({
           adress: self.state.adress,
           lat: self.state.lat,
           lng: self.state.lng,
           additialNotes: self.state.additialNotes
-        },
+        }),
         time:
           year +
           "-" +
@@ -162,6 +170,13 @@ class Order extends React.Component {
         type: "error",
         title: "Oops...",
         text: "Lengkapi data terlebih dahulu!"
+      });
+      return false;
+    } else if (this.state.currentDate > this.state.startDate) {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Tidak Boleh Mengisi Tanggal Sebelum Hari ini! "
       });
       return false;
     }
@@ -315,12 +330,11 @@ class Order extends React.Component {
                         margin: "0"
                       }}
                     >
-                      <div className="col-11">
-
-                        <h6 className="text-left">
+                      <div className="col-11 font">
+                        <h5 className="text-left">
                           Klik posisi di peta untuk menentukan alamat
                           penjemputan
-                        </h6>
+                        </h5>
                       </div>
                       <div className="col-11">
                         <div className="maps">
@@ -336,14 +350,13 @@ class Order extends React.Component {
                       <br />
                       <br />
                       <br />
-                      <div className="col-11">
+                      <div className="col-11 font">
                         <h6 className="text-left">Alamat</h6>
                         <p className="text-left">{this.state.adress}</p>
-                        <h6 className="text-left">
+                        <h5 className="text-left">
                           Beri keterangan tambahan agar kami lebih mudah
                           menemukan Anda
-
-                        </h6>
+                        </h5>
                         <input
                           onChange={this.setAdditionalNotes}
                           type="text"
@@ -353,10 +366,7 @@ class Order extends React.Component {
                         <br />
 
                         <div className="text-left font">
-
-                          <p style={{ fontSize: "15px", margin: "0" }}>
-                            Tentukan tanggal
-                          </p>
+                          <h5 className="mb-1">Tentukan tanggal</h5>
                           <DatePicker
                             showTimeSelect
                             timeFormat="HH:mm"
@@ -370,8 +380,8 @@ class Order extends React.Component {
                           <br />
 
                           <br />
-                          <label className="font" for="inputPhotoURL">
-                            Pilih Foto Lalu Klik Upload
+                          <label className="font m-0" for="inputPhotoURL">
+                            <h5 className="m-0">Pilih Foto Lalu Klik Upload</h5>
                           </label>
                           <br />
                           <progress

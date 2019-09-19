@@ -14,7 +14,7 @@ class OrderDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: { Order: { time: null, id: null }, User: null, Details: null }
+      order: { Order: { time: "", id: null }, User: null, Details: null }
     };
     this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
@@ -46,6 +46,7 @@ class OrderDetails extends React.Component {
           return elm.Order.id == id;
         });
         self.setState({ order: order[0] });
+        console.log(JSON.parse(response.data[0].Order.adress));
       })
       .catch(function(error) {
         console.log(error);
@@ -136,7 +137,7 @@ class OrderDetails extends React.Component {
                               fontSize: "13px"
                             }}
                           >
-                            {this.state.order.Order.time}
+                            {this.state.order.Order.time.slice(0, 22)}
                           </h6>
                           <h6
                             className="font"

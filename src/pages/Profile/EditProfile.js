@@ -38,7 +38,7 @@ class EditProfile extends Component {
     super(props);
     this.state = {
       modal: false,
-      username: null,
+      name: null,
       email: null,
       password: null,
       mobile_number: null,
@@ -46,7 +46,7 @@ class EditProfile extends Component {
       type: "password",
       score: "null",
       errors: {
-        username: "",
+        name: "",
         email: "",
         password: "",
         mobile_number: ""
@@ -132,9 +132,9 @@ class EditProfile extends Component {
     });
   };
 
-  setUsername = e => {
+  setName = e => {
     e.preventDefault();
-    this.setState({ username: e.target.value });
+    this.setState({ name: e.target.value });
   };
 
   setEmail = e => {
@@ -152,6 +152,30 @@ class EditProfile extends Component {
     this.setState({ status: e.target.value });
   };
 
+  componentDidMount = async () => {
+    const self = this;
+    const configProfile = {
+      method: "GET",
+      url: self.props.base_url + "/users/" + localStorage.getItem("id"),
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    };
+    await axios(configProfile)
+      .then(function(response) {
+        // console.log(response.data);
+        // console.log(response.data.name);
+        self.setState({
+          name: response.data.name,
+          email: response.data.email,
+          mobile_number: response.data.mobile_number
+        });
+      })
+      .then(function(error) {
+        console.log(error);
+      });
+  };
+
   doEdit = async e => {
     e.preventDefault();
     const self = this;
@@ -160,7 +184,7 @@ class EditProfile extends Component {
         Authorization: "Bearer " + this.props.token
       },
       data: {
-        name: self.state.username,
+        name: self.state.name,
         email: self.state.email,
         password: self.state.password,
         mobile_number: self.state.mobile_number,
@@ -173,10 +197,11 @@ class EditProfile extends Component {
     const regex_password = /^[a-zA-Z1-9]{8,15}$/;
     // check the data validation
     if (
-      this.state.username == null ||
+      this.state.name == null ||
       this.state.email == null ||
       this.state.mobile_number == null ||
-      this.state.password == null
+      this.state.password == null ||
+      this.state.name == ""
     ) {
       Swal.fire({
         type: "error",
@@ -184,7 +209,7 @@ class EditProfile extends Component {
         text: "Lengkapi data terlebih dahulu!"
       });
       return false;
-    } else if (!regex_name.test(this.state.username)) {
+    } else if (!regex_name.test(this.state.name)) {
       Swal.fire({
         type: "error",
         title: "Oops...",
@@ -245,6 +270,7 @@ class EditProfile extends Component {
                       <MDBInput
                         style={{ marginBottom: "5px" }}
                         label="Masukkan Namamu"
+                        value={this.state.name}
                         group
                         type="text"
                         validate
@@ -252,13 +278,14 @@ class EditProfile extends Component {
                         success="right"
                         onChange={this.handleChange}
                         noValidate
-                        name="username"
+                        name="name"
                       />
-                      <span className="error">{errors.username}</span>
+                      <span className="error">{errors.name}</span>
 
                       <MDBInput
                         style={{ marginBottom: "5px", marginTop: "13px" }}
-                        label="Masukkan Emailmu"
+                        label="Masukkan Emailmuy"
+                        value={this.state.email}
                         group
                         type="email"
                         validate
@@ -272,6 +299,7 @@ class EditProfile extends Component {
                       <MDBInput
                         style={{ marginBottom: "5px", marginTop: "10px" }}
                         label="Masukkan Nomor Handphonemu"
+                        value={this.state.mobile_number}
                         group
                         type="text"
                         validate

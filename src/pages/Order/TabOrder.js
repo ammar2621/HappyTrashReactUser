@@ -163,7 +163,8 @@ class TabOrder extends React.Component {
                       <img
                         className="p-2"
                         style={{
-                          height: "100px"
+                          height: "100px",
+                          width: "100px"
                         }}
                         src={elm.Order.photo}
                       />
@@ -180,18 +181,20 @@ class TabOrder extends React.Component {
                 </div>
               );
             })}
-            {/* <img
-              style={{
-                marginLeft: "250px",
-                width: "50px",
-                marginBottom: "300px"
-                // position: "fixed",
-                // bottom: "0"
-              }}
-              src="https://i.ibb.co/YyQRkmm/add-button-inside-black-circle.png"
-              alt="add-button-inside-black-circle"
-              border="0"
-            ></img> */}
+            <Link to="./order">
+              <img
+                style={{
+                  marginLeft: "300px",
+                  width: "50px",
+                  marginBottom: "300px"
+                  // position: "fixed",
+                  // bottom: "0"
+                }}
+                src="https://i.ibb.co/YyQRkmm/add-button-inside-black-circle.png"
+                alt="add-button-inside-black-circle"
+                border="0"
+              ></img>
+            </Link>
           </div>
 
           {/* Switch Tabs */}
@@ -237,7 +240,8 @@ class TabOrder extends React.Component {
                     <img
                       className="p-2"
                       style={{
-                        height: "100px"
+                        height: "100px",
+                        width: "100px"
                       }}
                       src={elm.Order.photo}
                     />
