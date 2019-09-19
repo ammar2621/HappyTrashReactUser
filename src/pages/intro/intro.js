@@ -1,8 +1,6 @@
 import React from "react";
 import SwipeableViews from "react-swipeable-views";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import Welcome from "../Welcome/WelcomePage";
-import Register from "../../validcoba";
 import SignIn from "../../component/SignIn/SignIn";
 
 const styles = {
