@@ -180,6 +180,7 @@ class Basic extends React.Component {
     };
   }
   componentWillMount = async () => {
+    // onboarding_status: localStorage.getItem("onboarding_status");
     if (
       localStorage.getItem("onboarding_status") === 0 ||
       localStorage.getItem("onboarding_status") === false ||

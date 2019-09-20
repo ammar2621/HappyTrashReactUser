@@ -54,8 +54,8 @@ const Profile = () => {
                           border: "0.5px solid green",
                           borderLeft: "0.5px solid green",
                           borderRight: "0.5px solid green",
-                          borderTopLeftRadius: "15px",
-                          borderTopRightRadius: "15px"
+                          borderTopLeftRadius: "20px",
+                          borderTopRightRadius: "20px"
                         }}
                       >
                         <h2
@@ -85,7 +85,9 @@ const Profile = () => {
                           margin: "0",
                           border: "0.5px solid green",
                           borderLeft: "0.5px solid green",
-                          borderRight: "0.5px solid green"
+                          borderRight: "0.5px solid green",
+                          borderBottomLeftRadius: "20px",
+                          borderBottomRightRadius: "20px"
                         }}
                       >
                         <img

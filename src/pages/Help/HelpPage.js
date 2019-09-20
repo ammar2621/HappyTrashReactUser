@@ -9,20 +9,21 @@ import axios from "axios";
 class Help extends React.Component {
   doOnboarding = async () => {
     const self = this;
-    const configPUT = {
-      method: "PUT",
-      url: self.props.base_url + "/user_attributes",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
-    await axios(configPUT)
-      .then(function(response) {
-        console.log(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    localStorage.setItem("onboarding_status", false);
+    // const configPUT = {
+    //   method: "PUT",
+    //   url: self.props.base_url + "/user_attributes",
+    //   headers: {
+    //     Authorization: "Bearer " + localStorage.getItem("token")
+    //   }
+    // };
+    // await axios(configPUT)
+    //   .then(function(response) {
+    //     console.log(response.data);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   };
   render() {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
@@ -71,8 +72,8 @@ class Help extends React.Component {
                             border: "0.5px solid green",
                             borderLeft: "0.5px solid green",
                             borderRight: "0.5px solid green",
-                            borderTopLeftRadius: "15px",
-                            borderTopRightRadius: "15px"
+                            borderTopLeftRadius: "20px",
+                            borderTopRightRadius: "20px"
                           }}
                         >
                           <h2
@@ -99,8 +100,8 @@ class Help extends React.Component {
                           className="col-11 text-left px-0 py-0 "
                           style={{
                             border: "0.5px solid green",
-                            borderBottomLeftRadius: "15px",
-                            borderBottomRightRadius: "15px"
+                            borderBottomLeftRadius: "20px",
+                            borderBottomRightRadius: "20px"
                           }}
                         >
                           <Link to="./trashcategory">

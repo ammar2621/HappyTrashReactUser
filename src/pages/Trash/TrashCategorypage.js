@@ -15,6 +15,7 @@ import Header from "../../component/Header";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionTrashCategoryPage";
 import Swal from "sweetalert2";
+import "./trash.css";
 
 class TrashCategory extends Component {
   componentDidMount = async () => {
@@ -93,8 +94,8 @@ class TrashCategory extends Component {
                             border: "0.5px solid green",
                             borderLeft: "0.5px solid green",
                             borderRight: "0.5px solid green",
-                            borderTopLeftRadius: "15px",
-                            borderTopRightRadius: "15px"
+                            borderTopLeftRadius: "20px",
+                            borderTopRightRadius: "20px"
                           }}
                         >
                           <h2
@@ -121,8 +122,8 @@ class TrashCategory extends Component {
                           className="col-11 text-left px-0 py-0 mb-5 "
                           style={{
                             border: "0.5px solid green",
-                            borderBottomLeftRadius: "15px",
-                            borderBottomRightRadius: "15px"
+                            borderBottomLeftRadius: "20px",
+                            borderBottomRightRadius: "20px"
                           }}
                         >
                           {this.props.trashCategories.map((item, index) => {
@@ -145,7 +146,10 @@ class TrashCategory extends Component {
                                         className="btn btn-link"
                                         type="button"
                                       >
-                                        <h4 className="mb-0 font">
+                                        <h4
+                                          id="capitalize"
+                                          className="mb-0 accordion font"
+                                        >
                                           {item.category_name}
                                         </h4>
                                       </button>
@@ -197,7 +201,7 @@ class TrashCategory extends Component {
                             );
                           })}
                           <br />
-                          <Link to="./help">
+                          {/* <Link to="./help">
                             <div
                               className="mb-4 mx-3 text-center"
                               style={{
@@ -215,7 +219,7 @@ class TrashCategory extends Component {
                                 border="0"
                               />
                             </div>
-                          </Link>
+                          </Link> */}
                         </div>
                       </div>
                     </div>

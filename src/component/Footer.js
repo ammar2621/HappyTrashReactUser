@@ -23,8 +23,8 @@ const Footer = () => {
                     style={{
                       maxWidth: "480px",
                       backgroundColor: "#F0F0F0",
-                      borderTopLeftRadius: "10px",
-                      borderTopRightRadius: "10px"
+                      borderTopLeftRadius: "20px",
+                      borderTopRightRadius: "20px"
                     }}
                   >
                     <div className="row justify-content-center text-center py-0">

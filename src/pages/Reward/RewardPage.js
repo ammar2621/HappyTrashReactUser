@@ -109,8 +109,8 @@ class RewardPage extends React.Component {
                         borderTop: "0.5px solid green",
                         borderLeft: "0.5px solid green",
                         borderRight: "0.5px solid green",
-                        borderTopLeftRadius: "15px",
-                        borderTopRightRadius: "15px",
+                        borderTopLeftRadius: "20px",
+                        borderTopRightRadius: "20px",
                         padding: "5px 0 8px 0"
                       }}
                     >
@@ -149,8 +149,8 @@ class RewardPage extends React.Component {
                         borderLeft: "0.5px solid green",
                         borderRight: "0.5px solid green",
                         paddingTop: "5px",
-                        borderBottomLeftRadius: "15px",
-                        borderBottomRightRadius: "15px"
+                        borderBottomLeftRadius: "20px",
+                        borderBottomRightRadius: "20px"
                       }}
                     >
                       <h6 className="text-center">

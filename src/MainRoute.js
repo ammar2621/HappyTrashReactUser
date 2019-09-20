@@ -29,7 +29,7 @@ class MainRoute extends React.Component {
         <Switch>
           <Route exact path="/" component={Intro} />
           <Route exact path="/welcome" component={Welcome} />
-          <Route exact path="/home" component={Basic} />
+          <Route exact path="/home" component={Home} />
           <Route path="/order" component={Order} />
           <Route path="/orderhistory" component={OrderHistory} />
           <Route path="/orderdetails/:id" component={OrderDetails} />

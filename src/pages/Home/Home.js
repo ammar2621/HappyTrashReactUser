@@ -136,7 +136,9 @@ const Home = () => {
                     style={{
                       borderLeft: "0.5px solid #51C953",
                       borderRight: "0.5px solid #51C953",
-                      borderBottom: "0.5px solid #51C953"
+                      borderBottom: "0.5px solid #51C953",
+                      borderBottomLeftRadius: "20px",
+                      borderBottomRightRadius: "20px"
                     }}
                   >
                     <h4 className="font">Mari lestarikan lingkungan.</h4>
