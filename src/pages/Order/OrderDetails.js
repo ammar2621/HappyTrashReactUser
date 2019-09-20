@@ -9,6 +9,7 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/Store";
 import { Redirect } from "react-router-dom";
+import "./order.css";
 
 class OrderDetails extends React.Component {
   constructor(props) {
@@ -54,6 +55,11 @@ class OrderDetails extends React.Component {
   }
 
   render() {
+    const formatter = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR"
+      // minimumFractionDigits: 2
+    });
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       return (
@@ -63,50 +69,63 @@ class OrderDetails extends React.Component {
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>
               <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  style={{
-                    height: "100vh",
-                    backgroundColor: "white",
-                    textAlign: "center",
-                    padding: "0"
-                  }}
+                  className="pageBody"
+                  style={
+                    {
+                      // height: "100vh",
+                      // backgroundColor: "white",
+                      // textAlign: "center",
+                      // padding: "0"
+                    }
+                  }
                 >
                   <br />
                   <div
-                    className="row justify-content-center"
-                    style={{
-                      padding: "0",
-                      margin: "0"
-                    }}
+                    className="row justify-content-center p-0 m-0"
+                    style={
+                      {
+                        // padding: "0",
+                        // margin: "0"
+                      }
+                    }
                   >
                     <div
-                      className="col-11 text-left"
-                      style={{
-                        borderBottom: "1px solid grey",
-                        padding: "0"
-                      }}
+                      className="col-11 text-left p-0 bottomBorder"
+                      style={
+                        {
+                          // padding: "0"
+                        }
+                      }
                     >
                       <div
-                        className="row justify-content-center"
-                        style={{
-                          padding: "0",
-                          margin: "0"
-                        }}
+                        className="row justify-content-center p-0 m-0"
+                        style={
+                          {
+                            // padding: "0",
+                            // margin: "0"
+                          }
+                        }
                       >
                         <div
-                          className="col-6"
-                          style={{
-                            padding: "0",
-                            margin: "0"
-                          }}
+                          className="col-6 p-0 m-0"
+                          style={
+                            {
+                              // padding: "0",
+                              // margin: "0",
+                            }
+                          }
                         >
                           <h6
-                            className="font"
-                            style={{
-                              marginTop: "5px",
-                              marginBottom: "10px",
-                              fontWeight: "600",
-                              margin: "0"
-                            }}
+                            className="font orderDetailsText"
+                            style={
+                              {
+                                // borderBottom: "1px solid grey",
+                                // marginTop: "5px",
+                                // marginBottom: "10px",
+                                // fontWeight: "600",
+                                // margin: "0"
+                              }
+                            }
                           >
                             Tukar Sampahmu
                           </h6>
@@ -129,7 +148,7 @@ class OrderDetails extends React.Component {
                           }}
                         >
                           <h6
-                            className="font"
+                            className="font "
                             style={{
                               marginTop: "5px",
                               marginBottom: "6px",
@@ -202,8 +221,11 @@ class OrderDetails extends React.Component {
                       <div className="text-center">
                         <div className="mt-2 font">
                           <h4 className="font" style={{ fontWeight: "900" }}>
-                            Kamu mendapat Rp{" "}
-                            {this.state.order.Order.total_price} !
+                            {"Kamu mendapat " +
+                              formatter.format(
+                                this.state.order.Order.total_price
+                              ) +
+                              " !"}
                           </h4>
                           <h4 style={{ fontWeight: "200" }}>
                             Dan mendapat {this.state.order.Order.total_point}{" "}

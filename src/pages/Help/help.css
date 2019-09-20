@@ -1,26 +1,28 @@
-.accordion {
-  text-transform: capitalize !important;
+.pageBody {
+  height: 100vh;
+  backgroundcolor: white;
+  textalign: center;
+  padding: 0;
 }
 
-/* #capitalize {
-  color: aqua;
-  text-transform: capitalize !important;
-} */
-
-.trashBorderTop {
+.colBorderTop {
+  padding: 0;
+  margin: 0;
   border: 0.5px solid green;
+  borderleft: 0.5px solid green;
+  borderright: 0.5px solid green;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  padding: 5px 0 8px 0;
 }
 
-.trashH2 {
+.helpTextBantuan {
   margin-top: 5px;
   margin-bottom: 10px;
   font-weight: 700;
+  margin: 0;
 }
 
-.trashBorderBot {
+.helpColoBorderBot {
   border: 0.5px solid green;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;

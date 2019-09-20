@@ -11,19 +11,9 @@ import { Redirect } from "react-router-dom";
 class OrderHistory extends React.Component {
   constructor(props) {
     super(props);
-    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
     this.state = {
       orders: []
     };
-  }
-
-  sweetAlertFunction() {
-    console.log("button clicks");
-    swal(
-      "Terima Kasih, Ammar!",
-      "Harap tunggu tim kami akan menghubungi kamu!",
-      "success"
-    );
   }
 
   render() {
@@ -36,47 +26,56 @@ class OrderHistory extends React.Component {
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>
               <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  style={{
-                    height: "100vh",
-                    backgroundColor: "#FFFFFF",
-                    textAlign: "center",
-                    padding: "0"
-                  }}
+                  className="pageBody"
+                  style={
+                    {
+                      // height: "100vh",
+                      // backgroundColor: "#FFFFFF",
+                      // textAlign: "center",
+                      // padding: "0"
+                    }
+                  }
                 >
                   <br />
                   <div
-                    className="row justify-content-center"
-                    style={{
-                      padding: "0",
-                      margin: "0"
-                    }}
+                    className="row p-0 m-0 justify-content-center"
+                    style={
+                      {
+                        // padding: "0",
+                        // margin: "0"
+                      }
+                    }
                   >
                     <div
-                      className="col-11 text-left"
-                      style={{
-                        borderBottom: "1px solid grey",
-                        padding: "0"
-                      }}
+                      className="col-11 p-0 text-left border-bottom"
+                      style={
+                        {
+                          // borderBottom: "1px solid grey",
+                          // padding: "0"
+                        }
+                      }
                     >
                       <div
-                        className="row justify-content-center"
-                        style={{
-                          padding: "0",
-                          margin: "0"
-                        }}
+                        className="row p-0 m-0 justify-content-center"
+                        style={
+                          {
+                            // padding: "0",
+                            // margin: "0"
+                          }
+                        }
                       >
                         <div
-                          className="col-12"
-                          style={{
-                            padding: "0",
-                            margin: "0"
-                          }}
+                          className="col-12 p-0 m-0"
+                          style={
+                            {
+                              // padding: "0",
+                              // margin: "0"
+                            }
+                          }
                         >
                           <h5
-                            className="font"
+                            className="font mt-2 p-0 mb-2"
                             style={{
-                              marginTop: "5px",
-                              marginBottom: "10px",
                               fontWeight: "700"
                             }}
                           >

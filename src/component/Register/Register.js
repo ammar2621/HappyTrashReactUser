@@ -218,6 +218,8 @@ class Register extends Component {
           })
           .then(function(response) {
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("intro", true);
+
             console.log(response.data.token);
             // code Fikri
             axios

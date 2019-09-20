@@ -4,9 +4,9 @@
   font-family: "Muli", sans-serif;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 480px) {
   .welcome {
-    padding-top: 150px;
-    padding-bottom: 150px;
+    padding-top: 50px !important;
+    padding-bottom: 30px !important;
   }
 }
