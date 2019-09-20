@@ -4,9 +4,7 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import SignIn from "../../component/SignIn/SignIn";
 import Register from "../../component/Register/Register";
 import { Redirect, Link } from "react-router-dom";
-
 import "./intro.css";
-import Tos from "./tos";
 
 const styles = {
   slide: {
@@ -172,7 +170,7 @@ function Intro() {
                           style={{ color: "black" }}
                         >
                           <div
-                            className="welcome "
+                            className="intro"
                             style={{
                               paddingTop: "100px",
                               paddingBottom: "70px"

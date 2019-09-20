@@ -47,7 +47,7 @@ class Welcome extends Component {
                 >
                   <br />
                   <div
-                    className="welcome "
+                    className="welcome"
                     style={{ paddingTop: "100px", paddingBottom: "70px" }}
                   >
                     <h2 className="font pb-0" style={{ fontWeight: "900" }}>

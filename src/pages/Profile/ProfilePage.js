@@ -150,8 +150,6 @@ class Profile extends React.Component {
                               <EditProfile />
                             </div>
                             <div className="col-6" style={{ padding: "0" }}>
-                              <div>{this.state.total_trash}</div>
-
                               <MDBBtn
                                 id="buttonHover"
                                 className="font"

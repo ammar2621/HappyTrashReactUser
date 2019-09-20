@@ -14,6 +14,7 @@ class TableProfile extends Component {
       name: "",
       email: "",
       password: "",
+      total_trash: null,
       mobile_number: null,
       data: []
     };
@@ -55,7 +56,8 @@ class TableProfile extends Component {
         self.setState({
           name: response.data.name,
           email: response.data.email,
-          mobile_number: response.data.mobile_number
+          mobile_number: response.data.mobile_number,
+          total_trash: response.data.total_trash
         });
       })
       .then(function(error) {
@@ -79,6 +81,10 @@ class TableProfile extends Component {
         {
           key: "Nomor Handphone",
           value: this.state.mobile_number
+        },
+        {
+          key: "Total Sampahmu",
+          value: this.state.total_trash
         }
       ]
     };
