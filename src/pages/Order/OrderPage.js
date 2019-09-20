@@ -211,18 +211,22 @@ class Order extends React.Component {
     });
     const self = this;
     const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
       method: "GET",
       url:
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        self.props.base_url + 
+        "/google_maps" + 
+        "?lat=" + 
         mapRef.getCenter().lat() +
-        "," +
-        mapRef.getCenter().lng() +
-        "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+        "&lng=" +
+        mapRef.getCenter().lng()
     };
     axios(config)
       .then(function(response) {
-        self.setState({ adress: response.data.results[0].formatted_address });
-        console.log(response.data.results[0].formatted_address);
+        self.setState({ adress: response.data.adress });
+        console.log(response.data.adress);
         console.log(response);
       })
       .catch(function(error) {
@@ -259,18 +263,22 @@ class Order extends React.Component {
     });
     const self = this;
     const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
       method: "GET",
       url:
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        self.props.base_url + 
+        "/google_maps" + 
+        "?lat=" + 
         this.state.lat +
-        "," +
-        this.state.lng +
-        "&key=AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
+        "&lng=" +
+        this.state.lng
     };
     axios(config)
       .then(function(response) {
-        self.setState({ adress: response.data.results[0].formatted_address });
-        console.log(response.data.results[0].formatted_address);
+        self.setState({ adress: response.data.adress });
+        console.log(response.data.adress);
         console.log(response);
       })
       .catch(function(error) {
