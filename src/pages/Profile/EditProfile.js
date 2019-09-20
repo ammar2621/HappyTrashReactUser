@@ -18,6 +18,7 @@ import { withRouter } from "react-router-dom";
 import zxcvbn from "zxcvbn";
 import "../../component/Register/register.css";
 import Swal from "sweetalert2";
+import "./profile.css";
 
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -253,7 +254,7 @@ class EditProfile extends Component {
         <MDBBtn
           id="buttonHover"
           className="font"
-          style={{ width: "125px", borderRadius: "15px" }}
+          style={{ width: "125px", borderRadius: "20px" }}
           color="dark-green"
           onClick={this.toggle(14)}
         >
@@ -351,12 +352,18 @@ class EditProfile extends Component {
           <MDBModalFooter>
             <div className="text-center">
               <MDBBtn
-                className="font rounded-pill"
+                color="dark-green"
+                className="font buttonHover"
+                style={{
+                  borderRadius: "20px",
+                  backgroundColor: "green",
+                  color: "white"
+                }}
                 onClick={e => {
                   this.doEdit(e);
                 }}
                 isOpen={this.state.modal14}
-                color="#377c4e"
+                color="dark-green"
               >
                 Edit
               </MDBBtn>

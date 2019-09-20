@@ -50,7 +50,7 @@ class TableProfile extends Component {
     };
     await axios(configProfile)
       .then(function(response) {
-        // console.log(response.data);
+        console.log("halo", response);
         // console.log(response.data.name);
         self.setState({
           name: response.data.name,

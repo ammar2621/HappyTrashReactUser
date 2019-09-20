@@ -289,29 +289,31 @@ class Order extends React.Component {
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>
               <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  style={{
-                    height: "100vh",
-                    backgroundColor: "white",
-                    textAlign: "center",
-                    padding: "0"
-                  }}
+                  className="pageBody"
+                  style={
+                    {
+                      // height: "100vh",
+                      // backgroundColor: "white",
+                      // textAlign: "center",
+                      // padding: "0"
+                    }
+                  }
                 >
                   <div
+                    className="p-0 m-0"
                     style={{
                       height: "100vh",
-                      backgroundColor: "white",
-                      textAlign: "center",
-                      padding: "0",
-                      borderTopLeftRadius: "20px",
-                      borderTopRightRadius: "20px"
+                      textAlign: "center"
                     }}
                   >
                     <div
-                      className="row justify-content-center"
-                      style={{
-                        padding: "0",
-                        margin: "0"
-                      }}
+                      className="row justify-content-center p-0 m-0"
+                      style={
+                        {
+                          // padding: "0",
+                          // margin: "0"
+                        }
+                      }
                     ></div>
                     <br />
                     <div className="col-10 text-left">
@@ -324,11 +326,13 @@ class Order extends React.Component {
 
                     <br />
                     <div
-                      className="row text-center justify-content-center"
-                      style={{
-                        padding: "0",
-                        margin: "0"
-                      }}
+                      className="row text-center p-0 m-0 justify-content-center"
+                      style={
+                        {
+                          // padding: "0",
+                          // margin: "0"
+                        }
+                      }
                     >
                       <div className="col-11 font">
                         <h5 className="text-left">
@@ -403,15 +407,18 @@ class Order extends React.Component {
                         </div>
 
                         <MDBBtn
+                          className="orderButton"
                           id="buttonHover"
                           onClick={e => {
                             this.doOrder(e);
                           }}
-                          style={{
-                            width: "100%",
-                            borderRadius: "15px",
-                            marginBottom: "100px"
-                          }}
+                          style={
+                            {
+                              // width: "100%",
+                              // borderRadius: "15px",
+                              // marginBottom: "100px"
+                            }
+                          }
                           target="_blank"
                           color="dark-green"
                         >

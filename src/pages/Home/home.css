@@ -26,3 +26,29 @@ body.shepherd-active::after {
   z-index: 10000000;
   position: relative;
 }
+
+.pageBody {
+  height: 100vh;
+  backgroundcolor: white;
+  text-align: center;
+  padding: 0;
+}
+
+.homeColBorderTop {
+  backgroundcolor: black;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-image: url("https://images.unsplash.com/photo-1503334849647-1d48ae0ba696?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.homeColBorderBot {
+  border-left: 0.5px solid #51c953;
+  border-right: 0.5px solid #51c953;
+  border-bottom: 0.5px solid #51c953;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}

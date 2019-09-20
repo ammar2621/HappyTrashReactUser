@@ -80,6 +80,7 @@ class SignIn extends React.Component {
           .then(response => {
             console.log(response);
             if (response.data.claims.role === false) {
+              localStorage.setItem("intro", true);
               localStorage.setItem("isLogin", true);
               localStorage.setItem("onboarding_status", true);
               localStorage.setItem("id", response.data.claims.id);

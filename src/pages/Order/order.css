@@ -49,3 +49,16 @@
   right: 0;
   bottom: 0;
 }
+
+.orderDetailsText {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.orderButton {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 100px;
+}

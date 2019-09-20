@@ -8,6 +8,7 @@ import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/Store";
 import { withRouter, Link, Redirect } from "react-router-dom";
+import "./reward.css";
 
 class RewardPage extends React.Component {
   constructor(props) {
@@ -68,6 +69,24 @@ class RewardPage extends React.Component {
   // });
 
   // }
+  componentDidMount() {
+    const self = this;
+    axios
+      .get(self.props.base_url + "/users/" + localStorage.getItem("id"), {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(function(response) {
+        localStorage.setItem("point", response.data.point);
+        self.setState({ point: response.data.point });
+        console.log(localStorage.getItem("point"));
+      })
+      .catch(function(error) {
+        console.log(error);
+        swal("Oops ada yang salah!", "Coba lagi!", "error");
+      });
+  }
 
   sweetAlertFunction() {
     console.log("button clicks");
@@ -88,54 +107,67 @@ class RewardPage extends React.Component {
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>
               <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  style={{
-                    height: "100vh",
-                    backgroundColor: "white",
-                    textAlign: "center",
-                    padding: "0"
-                  }}
+                  className="pageBody"
+                  style={
+                    {
+                      // height: "100vh",
+                      // backgroundColor: "white",
+                      // textAlign: "center",
+                      // padding: "0"
+                    }
+                  }
                 >
                   <br />
                   <div
-                    className="row justify-content-center"
-                    style={{
-                      padding: "0",
-                      margin: "0"
-                    }}
+                    className="row p-0 m-0 justify-content-center"
+                    style={
+                      {
+                        // padding: "0",
+                        // margin: "0"
+                      }
+                    }
                   >
                     <div
-                      className="col-11 text-left"
-                      style={{
-                        borderTop: "0.5px solid green",
-                        borderLeft: "0.5px solid green",
-                        borderRight: "0.5px solid green",
-                        borderTopLeftRadius: "20px",
-                        borderTopRightRadius: "20px",
-                        padding: "5px 0 8px 0"
-                      }}
+                      className="col-11 text-left rewardBorderTop"
+                      style={
+                        {
+                          // borderTop: "0.5px solid green",
+                          // borderLeft: "0.5px solid green",
+                          // borderRight: "0.5px solid green",
+                          // borderTopLeftRadius: "20px",
+                          // borderTopRightRadius: "20px",
+                          // padding: "5px 0 8px 0"
+                        }
+                      }
                     >
                       <div
-                        className="row justify-content-center"
-                        style={{
-                          padding: "0",
-                          margin: "0"
-                        }}
+                        className="row p-0 m-0 justify-content-center"
+                        style={
+                          {
+                            // padding: "0",
+                            // margin: "0"
+                          }
+                        }
                       >
                         <div
-                          className="col-11 text-center"
-                          style={{
-                            padding: "0",
-                            margin: "0"
-                          }}
+                          className="col-11 p-0 m-0 text-center"
+                          style={
+                            {
+                              // padding: "0",
+                              // margin: "0"
+                            }
+                          }
                         >
                           <h3
-                            className="font"
-                            style={{
-                              marginTop: "5px",
-                              marginBottom: "10px",
-                              fontWeight: "600",
-                              margin: "0"
-                            }}
+                            className="font textH3"
+                            style={
+                              {
+                                // marginTop: "5px",
+                                // marginBottom: "10px",
+                                // fontWeight: "600",
+                                // margin: "0"
+                              }
+                            }
                           >
                             Jumlah Poinmu
                           </h3>
@@ -143,15 +175,17 @@ class RewardPage extends React.Component {
                       </div>
                     </div>
                     <div
-                      className="col-11 text-left"
-                      style={{
-                        borderBottom: "0.5px solid green",
-                        borderLeft: "0.5px solid green",
-                        borderRight: "0.5px solid green",
-                        paddingTop: "5px",
-                        borderBottomLeftRadius: "20px",
-                        borderBottomRightRadius: "20px"
-                      }}
+                      className="col-11 text-left rewardBorderBot"
+                      style={
+                        {
+                          // borderBottom: "0.5px solid green",
+                          // borderLeft: "0.5px solid green",
+                          // borderRight: "0.5px solid green",
+                          // paddingTop: "5px",
+                          // borderBottomLeftRadius: "20px",
+                          // borderBottomRightRadius: "20px"
+                        }
+                      }
                     >
                       <h6 className="text-center">
                         Total kamu sudah mengumpulkan Poin sebanyak
@@ -160,7 +194,7 @@ class RewardPage extends React.Component {
                         className="text-center font"
                         style={{ fontWeight: "600" }}
                       >
-                        {localStorage.getItem("point")} Poin
+                        {this.state.point}
                       </h3>
                     </div>
                   </div>
@@ -170,8 +204,6 @@ class RewardPage extends React.Component {
                       <TabReward />
                     </div>
                   </div>
-                  <br />
-                  <br />
                   <br />
                 </div>
               </MDBCol>

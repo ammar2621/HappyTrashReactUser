@@ -56,21 +56,26 @@ class TrashCategory extends Component {
             <MDBRow className="justify-content-center" style={{ padding: "0" }}>
               <MDBCol style={{ maxWidth: "480px", padding: "0" }}>
                 <div
-                  style={{
-                    height: "100vh",
-                    backgroundColor: "white",
-                    textAlign: "center",
-                    padding: "0"
-                  }}
+                  className="pageBody"
+                  style={
+                    {
+                      // height: "100vh",
+                      // backgroundColor: "white",
+                      // textAlign: "center",
+                      // padding: "0"
+                    }
+                  }
                 >
                   <br />
                   <br />
                   <div
-                    className="row justify-content-center"
-                    style={{
-                      padding: "0",
-                      margin: "0"
-                    }}
+                    className="row justify-content-center p-0 m-0"
+                    style={
+                      {
+                        // padding: "0",
+                        // margin: "0"
+                      }
+                    }
                   >
                     <div
                       className="col-11 text-left"
@@ -80,51 +85,58 @@ class TrashCategory extends Component {
                       }}
                     >
                       <div
-                        className="row justify-content-center"
-                        style={{
-                          padding: "0",
-                          margin: "0"
-                        }}
+                        className="row justify-content-center m-0 p-0"
+                        style={
+                          {
+                            // padding: "0",
+                            // margin: "0"
+                          }
+                        }
                       >
                         <div
-                          className="col-11 text-center"
-                          style={{
-                            padding: "0",
-                            margin: "0",
-                            border: "0.5px solid green",
-                            borderLeft: "0.5px solid green",
-                            borderRight: "0.5px solid green",
-                            borderTopLeftRadius: "20px",
-                            borderTopRightRadius: "20px"
-                          }}
+                          className="col-11 p-0 m-0 text-center trashBorderTop"
+                          style={
+                            {
+                              // border: "0.5px solid green",
+                              // borderLeft: "0.5px solid green",
+                              // borderRight: "0.5px solid green",
+                              // borderTopLeftRadius: "20px",
+                              // borderTopRightRadius: "20px"
+                            }
+                          }
                         >
                           <h2
-                            className="font pt-2 pb-2"
-                            style={{
-                              marginTop: "5px",
-                              marginBottom: "10px",
-                              fontWeight: "700",
-                              margin: "0"
-                            }}
+                            className="font pt-2 pb-2 trashH2"
+                            style={
+                              {
+                                // marginTop: "5px",
+                                // marginBottom: "10px",
+                                // fontWeight: "700"
+                              }
+                            }
                           >
                             Kategori Sampah
                           </h2>
                         </div>
                       </div>
                       <div
-                        className="row justify-content-center list"
-                        style={{
-                          padding: "0",
-                          margin: "0"
-                        }}
+                        className="row p-0 m-0 justify-content-center list"
+                        style={
+                          {
+                            // padding: "0",
+                            // margin: "0"
+                          }
+                        }
                       >
                         <div
-                          className="col-11 text-left px-0 py-0 mb-5 "
-                          style={{
-                            border: "0.5px solid green",
-                            borderBottomLeftRadius: "20px",
-                            borderBottomRightRadius: "20px"
-                          }}
+                          className="col-11 trashBorderBot text-left px-0 py-0 mb-5 "
+                          style={
+                            {
+                              // border: "0.5px solid green",
+                              // borderBottomLeftRadius: "20px",
+                              // borderBottomRightRadius: "20px"
+                            }
+                          }
                         >
                           {this.props.trashCategories.map((item, index) => {
                             return (
