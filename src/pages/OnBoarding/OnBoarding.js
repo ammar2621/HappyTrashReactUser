@@ -11,26 +11,6 @@ import axios from "axios";
 
 import { BeaconRenderProps } from "react-joyride";
 
-const pulse = keyframes`
-  0% {
-    transform: scale(1);
-  }
-
-  55% {
-    background-color: rgba(255, 255, 255, 0.9);
-    transform: scale(1.6);
-  }
-`;
-
-const Beacon = styled.span`
-  animation: ${pulse} 3s ease-in-out infinite;
-  background-color: rgba(255, 27, 14, 0.6);
-  border-radius: 0%;
-  display: inline-block;
-  height: 10rem;
-  width: 20rem;
-`;
-
 class Basic extends React.Component {
   constructor(props) {
     super(props);

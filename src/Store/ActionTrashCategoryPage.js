@@ -1,9 +1,9 @@
 // import createStore from "unistore";
 import axios from "axios";
-import store from "./Store"
+import store from "./Store";
 
 export const actions = store => ({
-
+  // Function to get a trash category
   async setTrashCategories(state) {
     const req = {
       method: "get",
@@ -20,7 +20,7 @@ export const actions = store => ({
         alert(error);
       });
   },
-
+  // Function to get a trash's name
   async setTrashes(state) {
     const req = {
       method: "get",

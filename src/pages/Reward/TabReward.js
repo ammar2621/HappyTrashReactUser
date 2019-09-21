@@ -7,7 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../Store/Store";
+import { actions } from "../../Store/ActionTabReward";
 import { withRouter } from "react-router-dom";
 import "../Order/order.css";
 
@@ -27,174 +27,136 @@ class TabReward extends Component {
     };
   }
 
-  // setName = e => {
-  // e.preventDefault();
-  // this.setState({ name: e.target.value });
-  // };
-  //
-  // setPoint = e => {
-  // e.preventDefault();
-  // this.setState({ point: e.target.value });
-  // };
-  //
-  // setPhoto = e => {
-  // e.preventDefault();
-  // this.setState({ photo: e.target.value });
-  // };
-  //
-  // setStock = e => {
-  // e.preventDefault();
-  // this.setState({ stock: e.target.value });
-  // };
-  //
+  // Function to claim a reward
+  claimReward = (e, id) => {
+    e.preventDefault();
+    this.props.claimReward(id);
+  };
+
+  // to call a function from store
+  componentDidMount = async () => {
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      await this.props.setAllRewards();
+      await this.props.setRewardHistory();
+    }
+  };
 
   // claimReward = (e, id) => {
   //   e.preventDefault();
   //   const self = this;
-  //   const config = {
-  //     method: "PUT",
-  //     headers: {
-  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //   const swalConfirmations = Swal.mixin({
+  //     customClass: {
+  //       confirmButton: "btn btn-success",
+  //       cancelButton: "btn btn-danger"
   //     },
-  //     data: {
-  //       stock: 1
-  //     },
-  //     url: self.props.base_url + "/rewards/" + id
-  //   };
-  //   axios(config)
-  //     .then(async function(response) {
-  //       console.log(response.data);
-  //       localStorage.setItem("point", response.data.user_point);
-  //       await swal(
-  //         "Terbeli ! Hadiahmu akan dikirim pada transaksi berikutnya",
-  //         {
-  //           icon: "success"
-  //         }
-  //       );
-  //       window.location.reload();
+  //     buttonsStyling: false
+  //   });
+  //   // making the confirmaton first before it deleted
+  //   swalConfirmations
+  //     .fire({
+  //       title: "Apakah kamu yakin?",
+  //       text: "Untuk membeli hadiah ini dengan pointmu?",
+  //       type: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonText: "Ya, aku yakin!",
+  //       cancelButtonText: "Tidak jadi deh!",
+  //       reverseButtons: true
   //     })
-  //     .catch(function(error) {
-  //       console.log(error);
+  //     .then(result => {
+  //       if (result.value) {
+  //         const config = {
+  //           method: "PUT",
+  //           headers: {
+  //             Authorization: "Bearer " + localStorage.getItem("token")
+  //           },
+  //           data: {
+  //             stock: 1
+  //           },
+  //           url: self.props.base_url + "/rewards/" + id
+  //         };
+  //         /* delete with axios */
+  //         axios(config)
+  //           .then(async function(response) {
+  //             localStorage.setItem("point", response.data.user_point);
+  //             await Swal.fire({
+  //               type: "success",
+  //               title: "Success",
+  //               text:
+  //                 "Poof! Hadiah berhasil dibeli dan akan dikirimkan saat order kamu selanjutnya."
+  //             });
+  //             window.location.reload();
+  //             self.componentDidMount();
+  //           })
+  //           .catch(function(error) {
+  //             Swal.fire({
+  //               type: "error",
+  //               title: "Oops....",
+  //               text: "Poinmu kurang untuk membeli hadiah ini!"
+  //             });
+  //           });
+  //       } else if (
+  //         /* Read more about handling dismissals below */
+  //         result.dismiss === Swal.DismissReason.cancel
+  //       ) {
+  //         swalConfirmations.fire(
+  //           "Ayo kumpulkan poinmu!",
+  //           "Dan cari hadiah yang lain",
+  //           "error"
+  //         );
+  //       }
   //     });
-
-  //   // self.componentDidMount();
   // };
 
-  claimReward = (e, id) => {
-    e.preventDefault();
-    const self = this;
-    const swalConfirmations = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger"
-      },
-      buttonsStyling: false
-    });
-    // making the confirmaton first before it deleted
-    swalConfirmations
-      .fire({
-        title: "Apakah kamu yakin?",
-        text: "Untuk membeli hadiah ini dengan pointmu?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Ya, aku yakin!",
-        cancelButtonText: "Tidak jadi deh!",
-        reverseButtons: true
-      })
-      .then(result => {
-        if (result.value) {
-          const config = {
-            method: "PUT",
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            },
-            data: {
-              stock: 1
-            },
-            url: self.props.base_url + "/rewards/" + id
-          };
-          /* delete with axios */
-          axios(config)
-            .then(async function(response) {
-              localStorage.setItem("point", response.data.user_point);
-              await Swal.fire({
-                type: "success",
-                title: "Success",
-                text:
-                  "Poof! Hadiah berhasil dibeli dan akan dikirimkan saat order kamu selanjutnya."
-              });
-              window.location.reload();
-              self.componentDidMount();
-            })
-            .catch(function(error) {
-              Swal.fire({
-                type: "error",
-                title: "Oops....",
-                text: "Poinmu kurang untuk membeli hadiah ini!"
-              });
-            });
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalConfirmations.fire(
-            "Ayo kumpulkan poinmu!",
-            "Dan cari hadiah yang lain",
-            "error"
-          );
-        }
-      });
-  };
+  // componentDidMount() {
+  //   const self = this;
+  //   var config = {
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     }
+  //   };
+  //   console.log("token", localStorage.getItem("token"));
+  //   axios
+  //     .get(self.props.base_url + "/rewards", config)
+  //     .then(response => {
+  //       let data = response.data.filter(elm => {
+  //         return elm.status === true;
+  //       });
+  //       self.setState({ data });
+  //       console.log("data", response.data);
+  //       if (self.state.data.length === 0) {
+  //         self.setState({
+  //           notFoundReward: "Mohon maaf, tidak ada hadiah saat ini"
+  //         });
+  //       } else {
+  //         self.setState({
+  //           notFoundReward: " "
+  //         });
+  //       }
+  //     })
 
-  componentDidMount() {
-    const self = this;
-    var config = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
-    console.log("token", localStorage.getItem("token"));
-    axios
-      .get(self.props.base_url + "/rewards", config)
-      .then(response => {
-        let data = response.data.filter(elm => {
-          return elm.status === true;
-        });
-        self.setState({ data });
-        console.log("data", response.data);
-        if (self.state.data.length === 0) {
-          self.setState({
-            notFoundReward: "Mohon maaf, tidak ada hadiah saat ini"
-          });
-        } else {
-          self.setState({
-            notFoundReward: " "
-          });
-        }
-      })
-
-      .catch(error => {
-        console.log("error rewards", error);
-      });
-    axios
-      .get(self.props.base_url + "/reward_history/user", config)
-      .then(response => {
-        self.setState({ history: response.data });
-        console.log("history", response.data);
-        if (self.state.history.length === 0) {
-          self.setState({
-            notFoundHistoryReward: <p>Anda belum memiliki riwayat hadiah</p>
-          });
-        } else {
-          self.setState({
-            notFoundHistoryReward: " "
-          });
-        }
-      })
-      .catch(error => {
-        console.log("error rewards history", error);
-      });
-  }
+  //     .catch(error => {
+  //       console.log("error rewards", error);
+  //     });
+  //   axios
+  //     .get(self.props.base_url + "/reward_history/user", config)
+  //     .then(response => {
+  //       self.setState({ history: response.data });
+  //       console.log("history", response.data);
+  //       if (self.state.history.length === 0) {
+  //         self.setState({
+  //           notFoundHistoryReward: <p>Anda belum memiliki riwayat hadiah</p>
+  //         });
+  //       } else {
+  //         self.setState({
+  //           notFoundHistoryReward: " "
+  //         });
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log("error rewards history", error);
+  //     });
+  // }
 
   handleChange = (event, value) => {
     this.setState({
@@ -238,9 +200,9 @@ class TabReward extends Component {
           {/* Tab 1 */}
           <div style={Object.assign({}, styles.slide)}>
             <p className="text-center" style={{ fontSize: "20px" }}>
-              {this.state.notFoundReward}
+              {this.props.notFoundReward}
             </p>
-            {this.state.data.map((elm, key) => {
+            {this.props.reward.map((elm, key) => {
               if (elm.stock > 0)
                 return (
                   <MDBMedia className="mt-3" style={{ width: "100%" }}>
@@ -278,9 +240,9 @@ class TabReward extends Component {
           {/* Tab 2 */}
           <div style={Object.assign({}, styles.slide)}>
             <p className="text-center font" style={{ fontSize: "20px" }}>
-              {this.state.notFoundHistoryReward}
+              {this.props.notFoundHistoryReward}
             </p>
-            {this.state.history.map((elm, key) => {
+            {this.props.rewardHistory.map((elm, key) => {
               return (
                 <MDBMedia className="mt-3" style={{ width: "100%" }}>
                   <MDBMedia left className="mr-3 ml-3">
@@ -323,6 +285,6 @@ const styles = {
 };
 
 export default connect(
-  "base_url, token",
+  "token, reward, rewardHistory, notFoundReward, notFoundHistoryReward",
   actions
 )(withRouter(TabReward));

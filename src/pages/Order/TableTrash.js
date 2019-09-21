@@ -2,7 +2,10 @@ import React from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
 
 const TableTrash = props => {
-  const details = props.details ? props.details : [{ trash_detail: { trash_name: null } }];
+  // To make a table trash details
+  const details = props.details
+    ? props.details
+    : [{ trash_detail: { trash_name: null } }];
   const data = {
     columns: [
       {
@@ -22,16 +25,16 @@ const TableTrash = props => {
       }
     ],
     rows: details.map((elm, key) => {
-      const name = elm.trash_detail.trash_name ? elm.trash_detail.trash_name : 0;
+      const name = elm.trash_detail.trash_name
+        ? elm.trash_detail.trash_name
+        : 0;
       const point = elm.point ? elm.point : 0;
       const qty = elm.qty ? elm.qty : 0;
-      return (
-        {
-          id: name,
-          qty,
-          point
-        }
-      )
+      return {
+        id: name,
+        qty,
+        point
+      };
     })
   };
 

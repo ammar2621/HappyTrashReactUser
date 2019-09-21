@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import "./trash.css";
 
 class TrashCategory extends Component {
+  // to call a function from store
   componentDidMount = async () => {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {

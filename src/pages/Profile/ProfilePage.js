@@ -20,27 +20,27 @@ class Profile extends React.Component {
     };
   }
 
-  componentDidMount = async () => {
-    const self = this;
-    const configProfile = {
-      method: "GET",
-      url: self.props.base_url + "/users/" + localStorage.getItem("id"),
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
-    await axios(configProfile)
-      .then(function(response) {
-        console.log("ini total", response);
-        // console.log(response.data.name);
-        self.setState({
-          total_trash: response.data.total_trash
-        });
-      })
-      .then(function(error) {
-        console.log(error);
-      });
-  };
+  // componentDidMount = async () => {
+  //   const self = this;
+  //   const configProfile = {
+  //     method: "GET",
+  //     url: self.props.base_url + "/users/" + localStorage.getItem("id"),
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     }
+  //   };
+  //   await axios(configProfile)
+  //     .then(function(response) {
+  //       console.log("ini total", response);
+  //       // console.log(response.data.name);
+  //       self.setState({
+  //         total_trash: response.data.total_trash
+  //       });
+  //     })
+  //     .then(function(error) {
+  //       console.log(error);
+  //     });
+  // };
 
   render() {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));

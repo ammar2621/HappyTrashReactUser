@@ -107,6 +107,7 @@ class Order extends React.Component {
     }
   };
 
+  // Function to user make a order
   doOrder = async e => {
     e.preventDefault();
     const self = this;
@@ -182,7 +183,9 @@ class Order extends React.Component {
       });
   };
 
+
   // Function for changing latitude and longitude stored in state by user's click. The latitude and longitude then used for determine its address
+
   handleMapClick = event => {
     let mapRef = this._mapComponent;
     this.setState({
@@ -199,7 +202,9 @@ class Order extends React.Component {
     const config = {
       method: "GET",
       url:
+
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + 
+
         mapRef.getCenter().lat() +
         "," +
         mapRef.getCenter().lng() +
@@ -238,7 +243,9 @@ class Order extends React.Component {
     const config = {
       method: "GET",
       url:
+
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + 
+
         this.state.lat +
         "," +
         this.state.lng +

@@ -20,11 +20,15 @@ import "../../component/Register/register.css";
 import Swal from "sweetalert2";
 import "./profile.css";
 
+// Variabel regex valid Email
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
+
+// Variabel regex valid pgone
 const validPhoneRegex = RegExp(/^0[0-9]{9,}$/);
 
+// Variable validate form
 const validateForm = errors => {
   let valid = true;
   Object.values(errors).forEach(
