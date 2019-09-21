@@ -11,7 +11,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../component/Footer";
 import Swal from "sweetalert2";
-import GoogleMaps2 from "./GoogleMaps2";
+import GoogleMaps from "./GoogleMaps";
 import "./order.css";
 
 class Order extends React.Component {
@@ -34,8 +34,7 @@ class Order extends React.Component {
         defaultAnimation: 2
       },
       mapCenter: { lat: -7.9666204, lng: 112.6326321 },
-      // access_token: 'AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo',
-      // address: '',
+      access_token: "AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo",
       mapRef: null,
       lat: -7.9666204,
       lng: 112.6326321
@@ -57,13 +56,6 @@ class Order extends React.Component {
     await this.setState({
       startDate: date
     });
-    // if (this.state.currentDate > this.state.startDate) {
-    //   Swal.fire({
-    //     type: "error",
-    //     title: "Oops...",
-    //     text: "Tidak Boleh Mengisi Tanggal Sebelum Hari ini! "
-    //   });
-    // }
   };
 
   // funtion to store photo uploaded by user
@@ -191,7 +183,8 @@ class Order extends React.Component {
       });
   };
 
-  // function to use map
+  // Function for changing latitude and longitude stored in state by user's click. The latitude and longitude then used for determine its address
+
   handleMapClick = event => {
     let mapRef = this._mapComponent;
     this.setState({
@@ -206,33 +199,30 @@ class Order extends React.Component {
     });
     const self = this;
     const config = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      },
       method: "GET",
       url:
-        self.props.base_url +
-        "/google_maps" +
-        "?lat=" +
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
         mapRef.getCenter().lat() +
-        "&lng=" +
-        mapRef.getCenter().lng()
+        "," +
+        mapRef.getCenter().lng() +
+        "&key=" +
+        this.state.access_token
     };
     axios(config)
       .then(function(response) {
-        self.setState({ adress: response.data.adress });
+        self.setState({ adress: response.data.results[0].formatted_address });
       })
       .catch(function(error) {
         swal("Oooppss!", "Ada yang error!", "error");
       });
   };
 
-  handleMapDrag = () => {};
-
+  // Function for loading map
   handleMapLoad = map => {
     this._mapComponent = map;
   };
 
+  // Function that will run after page rendered to determine user's location based on latitude and longitude retrieved from user's device
   componentDidMount = async props => {
     await navigator.geolocation.getCurrentPosition(position => {
       const { latitude, longitude } = position.coords;
@@ -248,21 +238,18 @@ class Order extends React.Component {
     });
     const self = this;
     const config = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      },
       method: "GET",
       url:
-        self.props.base_url +
-        "/google_maps" +
-        "?lat=" +
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
         this.state.lat +
-        "&lng=" +
-        this.state.lng
+        "," +
+        this.state.lng +
+        "&key=" +
+        this.state.access_token
     };
     axios(config)
       .then(function(response) {
-        self.setState({ adress: response.data.adress });
+        self.setState({ adress: response.data.results[0].formatted_address });
       })
       .catch(function(error) {
         swal("Oooppss!", "Ada yang error!", "error");
@@ -332,11 +319,10 @@ class Order extends React.Component {
                       </div>
                       <div className="col-11">
                         <div className="maps">
-                          <GoogleMaps2
+                          <GoogleMaps
                             markers={this.state.markers}
                             center={this.state.mapCenter}
                             handleMapLoad={this.handleMapLoad}
-                            handleMapDrag={this.handleMapDrag}
                             handleMapClick={this.handleMapClick}
                           />
                         </div>
@@ -351,11 +337,12 @@ class Order extends React.Component {
                           Beri keterangan tambahan agar kami lebih mudah
                           menemukan Anda
                         </h5>
-                        <input
+                        <textarea
                           onChange={this.setAdditionalNotes}
                           type="text"
                           id="defaultFormLoginEmailEx"
                           className="form-control"
+                          placeholder="Contoh: Di samping kanan warung hijau."
                         />
                         <br />
 
