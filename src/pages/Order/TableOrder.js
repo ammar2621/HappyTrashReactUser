@@ -2,6 +2,7 @@ import React from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
 
 const TableOrder = props => {
+  // To make a table order details
   const dumm = props.summary.adress
     ? JSON.parse(props.summary.adress).adress
     : "dummy";

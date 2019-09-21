@@ -119,6 +119,7 @@ class Order extends React.Component {
     }
   };
 
+  // Function to user make a order
   doOrder = async e => {
     e.preventDefault();
     const self = this;
@@ -195,6 +196,7 @@ class Order extends React.Component {
       });
   };
 
+  // function to use map
   handleMapClick = event => {
     let that = this;
     let mapRef = this._mapComponent;
@@ -216,9 +218,9 @@ class Order extends React.Component {
       },
       method: "GET",
       url:
-        self.props.base_url + 
-        "/google_maps" + 
-        "?lat=" + 
+        self.props.base_url +
+        "/google_maps" +
+        "?lat=" +
         mapRef.getCenter().lat() +
         "&lng=" +
         mapRef.getCenter().lng()
@@ -268,9 +270,9 @@ class Order extends React.Component {
       },
       method: "GET",
       url:
-        self.props.base_url + 
-        "/google_maps" + 
-        "?lat=" + 
+        self.props.base_url +
+        "/google_maps" +
+        "?lat=" +
         this.state.lat +
         "&lng=" +
         this.state.lng

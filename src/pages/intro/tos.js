@@ -20,6 +20,7 @@ class Tos extends Component {
     modal14: false
   };
 
+  // Function to use modal
   toggle = nr => () => {
     let modalNumber = "modal" + nr;
     this.setState({

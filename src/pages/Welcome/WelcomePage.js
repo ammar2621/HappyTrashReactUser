@@ -26,6 +26,7 @@ class Welcome extends Component {
     });
   };
 
+  // function to set intro at local storage
   componentDidMount() {
     localStorage.setItem("intro", true);
   }

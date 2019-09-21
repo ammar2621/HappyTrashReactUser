@@ -5,7 +5,7 @@ import SwipeableViews from "react-swipeable-views";
 import { MDBMedia, MDBBtn } from "mdbreact";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../Store/Store";
+import { actions } from "../../Store/ActionOrderPage";
 import { withRouter, Link, Redirect } from "react-router-dom";
 
 class TabOrder extends React.Component {
@@ -35,76 +35,90 @@ class TabOrder extends React.Component {
     });
   };
 
-  cancelOrder = (e, id) => {
+  // Function to cancel order
+  cancelOrder = async (e, id) => {
     e.preventDefault();
-    const self = this;
-    let config = {
-      method: "PUT",
-      url: self.props.base_url + "/orders/" + id,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      },
-      data: {
-        status: "cancelled"
-      }
-    };
-    axios(config)
-      .then(function(response) {
-        console.log(response);
-        self.setState({ orders: [], waiting: [] });
-        self.componentDidMount();
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    await this.props.cancelOrder(id);
+    this.componentDidMount();
   };
 
-  componentDidMount() {
-    const self = this;
-    let config = {
-      method: "GET",
-      url: self.props.base_url + "/orders/user",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
+  // To call function at store
+  componentDidMount = async () => {
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      await this.props.setUserOrder();
+    }
+  };
+  // cancelOrder = (e, id) => {
+  //   e.preventDefault();
+  //   const self = this;
+  //   let config = {
+  //     method: "PUT",
+  //     url: self.props.base_url + "/orders/" + id,
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     },
+  //     data: {
+  //       status: "cancelled"
+  //     }
+  //   };
+  //   axios(config)
+  //     .then(function(response) {
+  //       console.log(response);
+  //       self.setState({ orders: [], waiting: [] });
+  //       self.componentDidMount();
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // };
 
-    axios(config)
-      .then(function(response) {
-        self.setState({ waiting: [] });
-        self.setState({ orders: [] });
-        response.data.forEach(element => {
-          if (
-            element.Order.status === "waiting" ||
-            element.Order.status === "confirmed"
-          ) {
-            self.state.waiting.push(element);
-          } else {
-            self.state.orders.push(element);
-          }
-          if (self.state.orders.length === 0) {
-            self.setState({
-              notFoundOrder: "Anda tidak memiliki pesanan yang belum selesai"
-            });
-          } else {
-            self.setState({
-              notFoundOrder: " "
-            });
-          }
+  // componentDidMount() {
+  //   const self = this;
+  //   let config = {
+  //     method: "GET",
+  //     url: self.props.base_url + "/orders/user",
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     }
+  //   };
 
-          if (self.state.waiting.length === 0) {
-            self.setState({ notFoundWaiting: "-----Tidak ada pesanan------" });
-          } else {
-            self.setState({ notFoundWaiting: " " });
-          }
-          console.log(element.Order.status);
-        });
-        self.handleChangeIndex(0);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+  //   axios(config)
+  //     .then(function(response) {
+  //       self.setState({ waiting: [] });
+  //       self.setState({ orders: [] });
+  //       response.data.forEach(element => {
+  //         if (
+  //           element.Order.status === "waiting" ||
+  //           element.Order.status === "confirmed"
+  //         ) {
+  //           self.state.waiting.push(element);
+  //         } else {
+  //           self.state.orders.push(element);
+  //         }
+  //         if (self.state.orders.length === 0) {
+  //           self.setState({
+  //             notFoundOrder: "Anda tidak memiliki pesanan yang belum selesai"
+  //           });
+  //         } else {
+  //           self.setState({
+  //             notFoundOrder: " "
+  //           });
+  //         }
+
+  //         if (self.state.waiting.length === 0) {
+  //           self.setState({ notFoundWaiting: "-----Tidak ada pesanan------" });
+  //         } else {
+  //           self.setState({ notFoundWaiting: " " });
+  //         }
+  //         console.log(element.Order.status);
+  //       });
+  //       self.handleChangeIndex(0);
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // }
 
   render() {
     const { index } = this.state;
@@ -129,10 +143,11 @@ class TabOrder extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <div style={Object.assign({}, styles.slide)}>
+            <br />
             <p className="text-center" style={{ fontSize: "20px" }}>
-              {this.state.notFoundWaiting}
+              {this.props.notFoundWaiting}
             </p>
-            {this.state.waiting.map((elm, key) => {
+            {this.props.waiting.map((elm, key) => {
               let color = null;
               let status = null;
               let cancel = null;
@@ -201,9 +216,9 @@ class TabOrder extends React.Component {
 
           <div style={Object.assign({}, styles.slide)}>
             <p className="text-center" style={{ fontSize: "20px" }}>
-              {this.state.notFoundOrder}
+              {this.props.notFoundOrder}
             </p>
-            {this.state.orders.map((elm, key) => {
+            {this.props.orders.map((elm, key) => {
               let color = null;
               let status = null;
               let detail = null;
@@ -272,6 +287,6 @@ const styles = {
   }
 };
 export default connect(
-  "base_url",
+  "base_url, orders, waiting, notFoundOrder, notFoundWaiting,  ",
   actions
 )(TabOrder);

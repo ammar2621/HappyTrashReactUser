@@ -6,7 +6,7 @@ import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../Store/Store";
+import { actions } from "../../Store/ActionTabReward";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import "./reward.css";
 
@@ -21,81 +21,65 @@ class RewardPage extends React.Component {
       stock: null,
       data: []
     };
-    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
+    // this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
 
-  setName = e => {
-    e.preventDefault();
-    this.setState({ name: e.target.value });
+  // to call function from store
+  componentDidMount = async () => {
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      await this.props.setPointReward();
+      console.log(this.props.setPointReward);
+    }
   };
-
-  setPoint = e => {
-    e.preventDefault();
-    this.setState({ point: e.target.value });
-  };
-
-  setPhoto = e => {
-    e.preventDefault();
-    this.setState({ photo: e.target.value });
-  };
-
-  setStock = e => {
-    e.preventDefault();
-    this.setState({ stock: e.target.value });
-  };
-
-  // componentDidMount() {
-  // const self = this;
-  // const config = {
-  // headers: {
-  // Authorization: "Bearer " + localStorage.getItem('token')
-  // }
+  // setName = e => {
+  //   e.preventDefault();
+  //   this.setState({ name: e.target.value });
   // };
-  // console.log("token", this.props.token);
-  // axios
-  // .get(self.props.base_url + "/rewards", config)
-  // .then(response => {
-  // self.setState({ data: response.data });
-  // self.setState({
-  // name: response.data.name,
-  // point: response.data.point,
-  // photo: response.data.photo,
-  // stock: response.data.stock
-  // });
-  // console.log(self.state.data);
-  // })
-  // .catch(error => {
-  // console.log("error rewards", error);
-  // });
+
+  // setPoint = e => {
+  //   e.preventDefault();
+  //   this.setState({ point: e.target.value });
+  // };
+
+  // setPhoto = e => {
+  //   e.preventDefault();
+  //   this.setState({ photo: e.target.value });
+  // };
+
+  // setStock = e => {
+  //   e.preventDefault();
+  //   this.setState({ stock: e.target.value });
+  // };
 
   // }
-  componentDidMount() {
-    const self = this;
-    axios
-      .get(self.props.base_url + "/users/" + localStorage.getItem("id"), {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
-      })
-      .then(function(response) {
-        localStorage.setItem("point", response.data.point);
-        self.setState({ point: response.data.point });
-        console.log(localStorage.getItem("point"));
-      })
-      .catch(function(error) {
-        console.log(error);
-        swal("Oops ada yang salah!", "Coba lagi!", "error");
-      });
-  }
+  // componentDidMount() {
+  //   const self = this;
+  //   axios
+  //     .get(self.props.base_url + "/users/" + localStorage.getItem("id"), {
+  //       headers: {
+  //         Authorization: "Bearer " + localStorage.getItem("token")
+  //       }
+  //     })
+  //     .then(function(response) {
+  //       localStorage.setItem("point", response.data.point);
+  //       self.setState({ point: response.data.point });
+  //       console.log(localStorage.getItem("point"));
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //       swal("Oops ada yang salah!", "Coba lagi!", "error");
+  //     });
+  // }
 
-  sweetAlertFunction() {
-    console.log("button clicks");
-    swal(
-      "Terima Kasih, Ammar!",
-      "Harap tunggu tim kami akan menghubungi kamu!",
-      "success"
-    );
-  }
+  // sweetAlertFunction() {
+  //   console.log("button clicks");
+  //   swal(
+  //     "Terima Kasih, Ammar!",
+  //     "Harap tunggu tim kami akan menghubungi kamu!",
+  //     "success"
+  //   );
+  // }
 
   render() {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
@@ -194,7 +178,7 @@ class RewardPage extends React.Component {
                         className="text-center font"
                         style={{ fontWeight: "600" }}
                       >
-                        {this.state.point}
+                        {this.props.point}
                       </h3>
                     </div>
                   </div>
@@ -219,6 +203,6 @@ class RewardPage extends React.Component {
 }
 
 export default connect(
-  "is_login, base_url, token",
+  "is_login, base_url, token, point",
   actions
 )(withRouter(RewardPage));

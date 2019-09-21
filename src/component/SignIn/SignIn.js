@@ -29,11 +29,12 @@ class SignIn extends React.Component {
     this.showHide = this.showHide.bind(this);
   }
 
-  setEmail = e => {
-    e.preventDefault();
-    this.setState({ email: e.target.value });
-  };
+  // setEmail = e => {
+  //   e.preventDefault();
+  //   this.setState({ email: e.target.value });
+  // };
 
+  // Funciton to show/hide password
   showHide(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -42,23 +43,7 @@ class SignIn extends React.Component {
     });
   }
 
-  setPassword = e => {
-    e.preventDefault();
-    this.setState({ password: e.target.value });
-  };
-
-  setToken = e => {
-    e.preventDefault();
-    this.setState({ token: e.target.value });
-  };
-
-  toggle = nr => () => {
-    let modalNumber = "modal" + nr;
-    this.setState({
-      [modalNumber]: !this.state[modalNumber]
-    });
-  };
-
+  // Fucntion to user Login
   doLogin = async e => {
     e.preventDefault();
     const self = this;

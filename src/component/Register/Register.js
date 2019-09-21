@@ -19,6 +19,7 @@ import zxcvbn from "zxcvbn";
 import "./register.css";
 import Swal from "sweetalert2";
 
+// Variabel for validate input form
 const validateForm = errors => {
   let valid = true;
   Object.values(errors).forEach(
@@ -28,6 +29,7 @@ const validateForm = errors => {
   return valid;
 };
 
+// Variabel Ragex for validate the input
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
@@ -57,6 +59,7 @@ class Register extends Component {
     this.passwordStrength = this.passwordStrength.bind(this);
   }
 
+  // Function for show or hide input password
   showHide(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -65,6 +68,7 @@ class Register extends Component {
     });
   }
 
+  // Function for show the password strength
   passwordStrength(e) {
     if (e.target.value === "") {
       this.setState({
@@ -78,6 +82,7 @@ class Register extends Component {
     }
   }
 
+  // Functon for handle change in input and show the invalid input
   handleChange = event => {
     event.preventDefault();
     // this.setState({ password: event.target.value });
@@ -117,6 +122,7 @@ class Register extends Component {
     });
   };
 
+  // Function for submit the input
   handleSubmit = event => {
     event.preventDefault();
     if (validateForm(this.state.errors)) {
@@ -126,6 +132,7 @@ class Register extends Component {
     }
   };
 
+  // Function for show the modal
   toggle = nr => () => {
     let modalNumber = "modal" + nr;
     this.setState({
@@ -133,32 +140,37 @@ class Register extends Component {
     });
   };
 
-  setUsername = e => {
-    e.preventDefault();
-    this.setState({ username: e.target.value });
-  };
+  // setUsername = e => {
+  //   e.preventDefault();
+  //   this.setState({ username: e.target.value });
+  // };
 
-  setEmail = e => {
-    e.preventDefault();
-    this.setState({ email: e.target.value });
-  };
+  // setEmail = e => {
+  //   e.preventDefault();
+  //   this.setState({ email: e.target.value });
+  // };
 
-  setPassword = e => {
-    e.preventDefault();
-    this.setState({ password: e.target.value });
-  };
+  // setPassword = e => {
+  //   e.preventDefault();
+  //   this.setState({ password: e.target.value });
+  // };
 
-  setNumber = e => {
-    e.preventDefault();
-    this.setState({ mobile_number: e.target.value });
-  };
+  // setNumber = e => {
+  //   e.preventDefault();
+  //   this.setState({ mobile_number: e.target.value });
+  // };
 
-  setStatus = e => {
-    e.preventDefault();
-    this.setState({ status: e.target.value });
-  };
+  // setStatus = e => {
+  //   e.preventDefault();
+  //   this.setState({ status: e.target.value });
+  // };
 
-  // Function to user's regitser
+  /*Function to user's regitser
+  First axios to make a user account
+  Second axios to get a token user
+  Third axios to Login
+  Fourth axios to get user details*/
+
   doRegister = async e => {
     e.preventDefault();
     const regex_name = /^(?![\s.]+$)[a-zA-Z\s.']*$/;
@@ -240,13 +252,6 @@ class Register extends Component {
                     response.data.claims.mobile_number
                   );
                   self.props.history.replace("/home");
-                  // swal(
-                  //   "Terima Kasih, Sudah Mendaftar!",
-                  //   "Sampah Online siap membantumu!",
-                  //   "success"
-                  // );
-                  // self.props.history.push("/home");
-                  // resita- get the user's point
                   axios
                     .get(
                       self.props.base_url +

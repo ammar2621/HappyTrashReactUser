@@ -8,6 +8,7 @@ import axios from "axios";
 import "./help.css";
 
 class Help extends React.Component {
+  // Function to show unboarding again
   doOnboarding = async () => {
     const self = this;
     localStorage.setItem("onboarding_status", false);

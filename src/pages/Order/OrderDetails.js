@@ -7,7 +7,7 @@ import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../Store/Store";
+import { actions } from "../../Store/ActionOrderPage";
 import { Redirect } from "react-router-dom";
 import "./order.css";
 
@@ -17,42 +17,40 @@ class OrderDetails extends React.Component {
     this.state = {
       order: { Order: { time: "", id: null }, User: null, Details: null }
     };
-    this.sweetAlertFunction = this.sweetAlertFunction.bind(this);
   }
 
-  sweetAlertFunction() {
-    console.log("button clicks");
-    swal(
-      "Terima Kasih, Ammar!",
-      "Harap tunggu tim kami akan menghubungi kamu!",
-      "success"
-    );
-  }
+  // to call funciton at store
+  componentDidMount = async () => {
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      await this.props.getSingleOrder(this.props.match.params.id);
+    }
+  };
 
-  componentDidMount() {
-    const self = this;
-    let config = {
-      method: "GET",
-      url: self.props.base_url + "/orders/user",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
+  // componentDidMount() {
+  //   const self = this;
+  //   let config = {
+  //     method: "GET",
+  //     url: self.props.base_url + "/orders/user",
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     }
+  //   };
 
-    axios(config)
-      .then(function(response) {
-        console.log(response.data);
-        let id = self.props.match.params.id;
-        let order = response.data.filter(elm => {
-          return elm.Order.id == id;
-        });
-        self.setState({ order: order[0] });
-        console.log(JSON.parse(response.data[0].Order.adress));
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+  //   axios(config)
+  //     .then(function(response) {
+  //       console.log(response.data);
+  //       let id = self.props.match.params.id;
+  //       let order = response.data.filter(elm => {
+  //         return elm.Order.id == id;
+  //       });
+  //       self.setState({ order: order[0] });
+  //       console.log(JSON.parse(response.data[0].Order.adress));
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // }
 
   render() {
     const formatter = new Intl.NumberFormat("id-ID", {
@@ -156,7 +154,7 @@ class OrderDetails extends React.Component {
                               fontSize: "13px"
                             }}
                           >
-                            {this.state.order.Order.time.slice(0, 22)}
+                            {this.props.singleOrder.Order.time.slice(0, 22)}
                           </h6>
                           <h6
                             className="font"
@@ -167,7 +165,7 @@ class OrderDetails extends React.Component {
                               fontSize: "13px"
                             }}
                           >
-                            {this.state.order.Order.id}
+                            {this.props.singleOrder.Order.id}
                           </h6>
                         </div>
                       </div>
@@ -185,7 +183,7 @@ class OrderDetails extends React.Component {
                       <div className="text-left" style={{ fontWeight: "800" }}>
                         Detail Service
                       </div>
-                      <TablePage summary={this.state.order.Order} />
+                      <TablePage summary={this.props.singleOrder.Order} />
                     </div>
                   </div>
                   <br />
@@ -200,7 +198,7 @@ class OrderDetails extends React.Component {
                       <div className="text-left" style={{ fontWeight: "800" }}>
                         Detail Sampah
                       </div>
-                      <TableTrash details={this.state.order.Details} />
+                      <TableTrash details={this.props.singleOrder.Details} />
                     </div>
                   </div>
                   <br />
@@ -223,13 +221,13 @@ class OrderDetails extends React.Component {
                           <h4 className="font" style={{ fontWeight: "900" }}>
                             {"Kamu mendapat " +
                               formatter.format(
-                                this.state.order.Order.total_price
+                                this.props.singleOrder.Order.total_price
                               ) +
                               " !"}
                           </h4>
                           <h4 style={{ fontWeight: "200" }}>
-                            Dan mendapat {this.state.order.Order.total_point}{" "}
-                            Points
+                            Dan mendapat{" "}
+                            {this.props.singleOrder.Order.total_point} Points
                           </h4>
                           <h4 style={{ fontWeight: "200" }}>Dari Order ini.</h4>
                         </div>
@@ -253,6 +251,6 @@ class OrderDetails extends React.Component {
 }
 
 export default connect(
-  "base_url",
+  "singleOrder",
   actions
 )(OrderDetails);

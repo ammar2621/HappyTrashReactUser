@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import axios from "axios";
 import { connect } from "unistore/react";
-import { actions } from "../../Store/Store";
+import { actions } from "../../Store/ActionProfile";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import { async } from "q";
 
@@ -20,50 +20,39 @@ class TableProfile extends Component {
     };
   }
 
-  setName = e => {
-    e.preventDefault();
-    this.setState({ name: e.target.value });
-  };
-
-  setEmail = e => {
-    e.preventDefault();
-    this.setState({ email: e.target.value });
-  };
-
-  setMobile_number = e => {
-    e.preventDefault();
-    this.setState({ mobile_number: e.target.value });
-  };
-
-  setPassword = e => {
-    e.preventDefault();
-    this.setState({ password: e.target.value });
-  };
-
+  // to call function at store
   componentDidMount = async () => {
-    const self = this;
-    const configProfile = {
-      method: "GET",
-      url: self.props.base_url + "/users/" + localStorage.getItem("id"),
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    };
-    await axios(configProfile)
-      .then(function(response) {
-        console.log("halo", response);
-        // console.log(response.data.name);
-        self.setState({
-          name: response.data.name,
-          email: response.data.email,
-          mobile_number: response.data.mobile_number,
-          total_trash: response.data.total_trash
-        });
-      })
-      .then(function(error) {
-        console.log(error);
-      });
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+    if (isLogin) {
+      await this.props.loadProfile();
+      // console.log("cek prof", this.props);
+    }
   };
+
+  // componentDidMount = async () => {
+  //   const self = this;
+  //   const configProfile = {
+  //     method: "GET",
+  //     url: self.props.base_url + "/users/" + localStorage.getItem("id"),
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     }
+  //   };
+  //   await axios(configProfile)
+  //     .then(function(response) {
+  //       console.log("halo", response);
+  //       // console.log(response.data.name);
+  //       self.setState({
+  //         name: response.data.name,
+  //         email: response.data.email,
+  //         mobile_number: response.data.mobile_number,
+  //         total_trash: response.data.total_trash
+  //       });
+  //     })
+  //     .then(function(error) {
+  //       console.log(error);
+  //     });
+  // };
 
   render() {
     console.log("woi", this.state.data);
@@ -72,19 +61,19 @@ class TableProfile extends Component {
       rows: [
         {
           key: "Nama",
-          value: this.state.name
+          value: localStorage.getItem("name")
         },
         {
           key: "Email",
-          value: this.state.email
+          value: localStorage.getItem("email")
         },
         {
           key: "Nomor Handphone",
-          value: this.state.mobile_number
+          value: localStorage.getItem("mobile_number")
         },
         {
           key: "Total Sampahmu",
-          value: this.state.total_trash
+          value: localStorage.getItem("total_trash")
         }
       ]
     };
