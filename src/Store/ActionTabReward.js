@@ -1,6 +1,5 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import store from "./Store";
 import swal from "sweetalert";
 
 export const actions = store => ({
@@ -84,7 +83,6 @@ export const actions = store => ({
         const data = response.data.filter(elm => elm.status === true);
 
         store.setState({ reward: data });
-        console.log("data", response.data);
 
         if (store.getState().reward.length === 0) {
           store.setState({
@@ -97,9 +95,7 @@ export const actions = store => ({
         }
       })
 
-      .catch(error => {
-        console.log("error rewards", error);
-      });
+      .catch(error => {});
   },
 
   async setRewardHistory() {
@@ -113,7 +109,6 @@ export const actions = store => ({
       .get(store.getState().urlBase + store.getState().urlRewardHistory, config)
       .then(response => {
         store.setState({ rewardHistory: response.data });
-        console.log("history", response.data);
 
         if (store.getState().rewardHistory.length === 0) {
           store.setState({
@@ -125,9 +120,7 @@ export const actions = store => ({
           });
         }
       })
-      .catch(error => {
-        console.log("error rewards history", error);
-      });
+      .catch(error => {});
   },
   async setPointReward(state) {
     axios
@@ -145,10 +138,8 @@ export const actions = store => ({
       .then(function(response) {
         localStorage.setItem("point", response.data.point);
         store.setState({ point: response.data.point });
-        console.log(localStorage.getItem("point"));
       })
       .catch(function(error) {
-        console.log(error);
         swal("Oops ada yang salah!", "Coba lagi!", "error");
       });
   }

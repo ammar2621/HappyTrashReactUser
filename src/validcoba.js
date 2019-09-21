@@ -40,9 +40,7 @@ class Register extends Component {
       default:
         break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
+    this.setState({ errors, [name]: value }, () => {});
   };
 
   handleSubmit = event => {
@@ -56,9 +54,7 @@ class Register extends Component {
     };
     event.preventDefault();
     if (validateForm(this.state.errors)) {
-      console.info("Valid Form");
     } else {
-      console.error("Invalid Form");
     }
   };
 

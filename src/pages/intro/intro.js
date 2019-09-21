@@ -71,6 +71,7 @@ function Intro() {
                     <div style={Object.assign({}, styles.slide, styles.slide1)}>
                       <img
                         className="introImg1"
+                        alt=""
                         style={
                           {
                             // width: "300px",
@@ -101,6 +102,7 @@ function Intro() {
                     <div style={Object.assign({}, styles.slide, styles.slide2)}>
                       <img
                         className="introImg2"
+                        alt=""
                         style={
                           {
                             // width: "300px",
@@ -133,6 +135,7 @@ function Intro() {
                     <div style={Object.assign({}, styles.slide, styles.slide3)}>
                       <img
                         className="introImg3"
+                        alt=""
                         style={
                           {
                             // width: "200px",

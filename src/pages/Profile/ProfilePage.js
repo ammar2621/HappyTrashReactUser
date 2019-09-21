@@ -1,13 +1,12 @@
 import React from "react";
 import { MDBRow, MDBCol, MDBBtn, MDBContainer } from "mdbreact";
 import Footer from "../../component/Footer";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import TableProfile from "./TableProfile";
 import EditProfile from "./EditProfile";
 import Header from "../../component/Header";
 import swal from "sweetalert";
 import "./profile.css";
-import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/Store";
 import { withRouter } from "react-router-dom";
@@ -31,14 +30,11 @@ class Profile extends React.Component {
   //   };
   //   await axios(configProfile)
   //     .then(function(response) {
-  //       console.log("ini total", response);
-  //       // console.log(response.data.name);
   //       self.setState({
   //         total_trash: response.data.total_trash
   //       });
   //     })
   //     .then(function(error) {
-  //       console.log(error);
   //     });
   // };
 

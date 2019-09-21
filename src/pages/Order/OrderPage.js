@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { MDBRow, MDBCol, MDBBtn, MDBContainer } from "mdbreact";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,11 +7,10 @@ import Header from "../../component/Header";
 import { storage } from "../../firebase/index";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionOrderPage";
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../component/Footer";
 import Swal from "sweetalert2";
-// import GoogleMaps from "./GoogleMaps"
 import GoogleMaps2 from "./GoogleMaps2";
 import "./order.css";
 
@@ -65,14 +64,12 @@ class Order extends React.Component {
     //     text: "Tidak Boleh Mengisi Tanggal Sebelum Hari ini! "
     //   });
     // }
-    // console.log(this.state.startDate);
   };
 
   // funtion to store photo uploaded by user
   handleChangePhoto = e => {
     e.preventDefault();
     const regexImage = /([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/;
-    console.log(e.target.files[0]);
     if (!regexImage.test(e.target.files[0].name)) {
       Swal.fire({
         type: "error",
@@ -81,7 +78,6 @@ class Order extends React.Component {
       });
       return false;
     } else if (e.target.files[0]) {
-      console.log(e.target.files[0]);
       if (e.target.files[0].size < 5000000) {
         this.setState({ photo: e.target.files[0] });
         try {
@@ -159,14 +155,14 @@ class Order extends React.Component {
       method: "POST",
       url: self.props.base_url + "/orders"
     };
-    if (this.state.urlPhoto == "") {
+    if (this.state.urlPhoto === "") {
       Swal.fire({
         type: "error",
         title: "Oops...",
         text: "Pilih foto terlebih dahulu!"
       });
       return false;
-    } else if (this.state.adress == "") {
+    } else if (this.state.adress === "") {
       Swal.fire({
         type: "error",
         title: "Oops...",
@@ -191,16 +187,13 @@ class Order extends React.Component {
         );
       })
       .catch(function(error) {
-        console.log("error Order", error);
         swal("Oooppss!", "Lengkapi data terlebih dahulu!", "error");
       });
   };
 
   // function to use map
   handleMapClick = event => {
-    let that = this;
     let mapRef = this._mapComponent;
-    console.log(mapRef.getCenter().lat() + "; " + mapRef.getCenter().lng());
     this.setState({
       markers: {
         position: event.latLng,
@@ -228,22 +221,13 @@ class Order extends React.Component {
     axios(config)
       .then(function(response) {
         self.setState({ adress: response.data.adress });
-        console.log(response.data.adress);
-        console.log(response);
       })
       .catch(function(error) {
-        console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
-    console.log(this.state.lat);
-    console.log(this.state.lng);
   };
 
-  handleMapDrag = () => {
-    let mapRef = this._mapComponent;
-    console.log(mapRef.getCenter().lat() + "; " + mapRef.getCenter().lng());
-    console.log(this.state.markers.position);
-  };
+  handleMapDrag = () => {};
 
   handleMapLoad = map => {
     this._mapComponent = map;
@@ -261,7 +245,6 @@ class Order extends React.Component {
         },
         mapCenter: { lat: latitude, lng: longitude }
       });
-      console.log(this.state.mapCenter);
     });
     const self = this;
     const config = {
@@ -280,11 +263,8 @@ class Order extends React.Component {
     axios(config)
       .then(function(response) {
         self.setState({ adress: response.data.adress });
-        console.log(response.data.adress);
-        console.log(response);
       })
       .catch(function(error) {
-        console.log("error Order", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
   };

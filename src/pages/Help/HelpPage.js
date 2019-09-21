@@ -3,14 +3,11 @@ import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
 import Footer from "../../component/Footer";
 import { Link, Redirect } from "react-router-dom";
 import Header from "../../component/Header";
-import { borderRadius } from "@material-ui/system";
-import axios from "axios";
 import "./help.css";
 
 class Help extends React.Component {
   // Function to show unboarding again
   doOnboarding = async () => {
-    const self = this;
     localStorage.setItem("onboarding_status", false);
   };
   render() {

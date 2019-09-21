@@ -1,15 +1,9 @@
 import React from "react";
-import Axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/Store";
 import Joyride from "react-joyride";
-import { async } from "q";
 import Home from "../Home/Home";
-import OrderPage from "../Order/OrderPage";
-import styled, { keyframes } from "styled-components";
 import axios from "axios";
-
-import { BeaconRenderProps } from "react-joyride";
 
 class Basic extends React.Component {
   constructor(props) {
@@ -121,9 +115,7 @@ class Basic extends React.Component {
         },
         {
           placement: "top",
-          content: (
-            <p className="font">Click here to see all of your events!</p>
-          ),
+          content: <p className="font">Pilih ini jika kamu perlu bantuan</p>,
           locale: {
             skip: (
               <strong
@@ -151,7 +143,9 @@ class Basic extends React.Component {
               </strong>
             )
           },
-          content: <p className="font">accept and reject invitations</p>,
+          content: (
+            <p className="font">Pilih ini jika ingin melihat profilemu</p>
+          ),
           target: ".profile",
           title: "Invitations"
         }
@@ -167,8 +161,6 @@ class Basic extends React.Component {
       localStorage.getItem("onboarding_status") === "false"
     ) {
       this.setState({ run: true });
-      console.log("selesai");
-      const self = this;
     }
   };
 
@@ -194,20 +186,12 @@ class Basic extends React.Component {
           "onboarding_status",
           response.data.onboarding_status
         );
-        console.log(response.data);
-        console.log(response.data);
         // localStorage.setItem("status_first_login", false);
       })
-      .catch(function(error) {
-        console.log(error);
-      });
+      .catch(function(error) {});
     await axios(configPUT)
-      .then(function(response) {
-        console.log(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+      .then(function(response) {})
+      .catch(function(error) {});
   };
 
   render() {
@@ -219,7 +203,7 @@ class Basic extends React.Component {
           // beaconComponent={Beacon}
           continuous={true}
           run={run}
-          scrollToFirstStep={true}
+          scrollToFirstStep={false}
           showProgress={true}
           showSkipButton={true}
           steps={steps}
@@ -232,7 +216,7 @@ class Basic extends React.Component {
               textColor: "black",
               width: 500,
               zIndex: 1000,
-              beaconSize: 76
+              beaconSize: 100
             }
           }}
         />

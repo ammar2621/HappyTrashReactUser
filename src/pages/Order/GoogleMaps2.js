@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import axios from "axios";
-import { connect } from "unistore/react";
-import { actions } from "../../Store/ActionOrderPage";
-import { withRouter, Link, Redirect } from "react-router-dom";
 
 class MapPage extends Component {
   constructor(props) {

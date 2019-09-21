@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { MDBTable, MDBTableBody } from "mdbreact";
-import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionProfile";
-import { withRouter, Link, Redirect } from "react-router-dom";
-import { async } from "q";
+import { withRouter } from "react-router-dom";
 
 class TableProfile extends Component {
   constructor(props) {
@@ -25,7 +23,6 @@ class TableProfile extends Component {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       await this.props.loadProfile();
-      // console.log("cek prof", this.props);
     }
   };
 
@@ -40,8 +37,6 @@ class TableProfile extends Component {
   //   };
   //   await axios(configProfile)
   //     .then(function(response) {
-  //       console.log("halo", response);
-  //       // console.log(response.data.name);
   //       self.setState({
   //         name: response.data.name,
   //         email: response.data.email,
@@ -50,13 +45,10 @@ class TableProfile extends Component {
   //       });
   //     })
   //     .then(function(error) {
-  //       console.log(error);
   //     });
   // };
 
   render() {
-    console.log("woi", this.state.data);
-    const self = this;
     const data = {
       rows: [
         {

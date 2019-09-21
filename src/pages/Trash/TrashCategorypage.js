@@ -1,16 +1,7 @@
 import React, { Component } from "react";
-import {
-  MDBRow,
-  MDBCol,
-  MDBContainer,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBModalFooter,
-  MDBBtn
-} from "mdbreact";
+import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
 import Footer from "../../component/Footer";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Header from "../../component/Header";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionTrashCategoryPage";
@@ -24,7 +15,6 @@ class TrashCategory extends Component {
     if (isLogin) {
       await this.props.setTrashCategories();
       await this.props.setTrashes();
-      console.log(this.props.trashCategories);
     }
   };
 
@@ -37,14 +27,12 @@ class TrashCategory extends Component {
 
   toggle = (e, photo, price, point) => {
     e.preventDefault();
-    let modalNumber = "modal";
     Swal.fire({
       imageUrl: photo,
       imageWidth: "100%",
       width: "80vw",
       html: `<p>Rp ${price} <br> Poin: ${point}</p>`
     });
-    console.log("bisa woi");
   };
 
   render() {

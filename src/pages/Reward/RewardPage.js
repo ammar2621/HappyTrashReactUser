@@ -1,13 +1,11 @@
-import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer, MDBMedia } from "mdbreact";
-import swal from "sweetalert";
+import React from "react";
+import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
 import TabReward from "./TabReward";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
-import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionTabReward";
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import "./reward.css";
 
 class RewardPage extends React.Component {
@@ -29,7 +27,6 @@ class RewardPage extends React.Component {
     const isLogin = JSON.parse(localStorage.getItem("isLogin"));
     if (isLogin) {
       await this.props.setPointReward();
-      console.log(this.props.setPointReward);
     }
   };
   // setName = e => {
@@ -64,16 +61,13 @@ class RewardPage extends React.Component {
   //     .then(function(response) {
   //       localStorage.setItem("point", response.data.point);
   //       self.setState({ point: response.data.point });
-  //       console.log(localStorage.getItem("point"));
   //     })
   //     .catch(function(error) {
-  //       console.log(error);
   //       swal("Oops ada yang salah!", "Coba lagi!", "error");
   //     });
   // }
 
   // sweetAlertFunction() {
-  //   console.log("button clicks");
   //   swal(
   //     "Terima Kasih, Ammar!",
   //     "Harap tunggu tim kami akan menghubungi kamu!",

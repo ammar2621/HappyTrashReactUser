@@ -85,11 +85,9 @@ class EditProfile extends Component {
 
   handleChange = event => {
     event.preventDefault();
-    console.log("dsadsa");
 
     const { name, value } = event.target;
     let errors = this.state.errors;
-    // console.log(name, value);
     switch (name) {
       case "email":
         errors.email = validEmailRegex.test(value) ? "" : "Email tidak valid!";
@@ -116,17 +114,13 @@ class EditProfile extends Component {
       default:
       // break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      // console.log(errors);
-    });
+    this.setState({ errors, [name]: value }, () => {});
   };
 
   handleSubmit = event => {
     event.preventDefault();
     if (validateForm(this.state.errors)) {
-      console.info("Valid Form");
     } else {
-      console.error("Invalid Form");
     }
   };
 
@@ -168,17 +162,13 @@ class EditProfile extends Component {
     };
     await axios(configProfile)
       .then(function(response) {
-        // console.log(response.data);
-        // console.log(response.data.name);
         self.setState({
           name: response.data.name,
           email: response.data.email,
           mobile_number: response.data.mobile_number
         });
       })
-      .then(function(error) {
-        console.log(error);
-      });
+      .then(function(error) {});
   };
 
   doEdit = async e => {
@@ -206,7 +196,7 @@ class EditProfile extends Component {
       this.state.email == null ||
       this.state.mobile_number == null ||
       this.state.password == null ||
-      this.state.name == ""
+      this.state.name === ""
     ) {
       Swal.fire({
         type: "error",
@@ -239,14 +229,12 @@ class EditProfile extends Component {
       });
       return false;
     }
-    // console.log("token", self.props.token);
     await axios(config)
       .then(function(response) {
         self.props.history.replace("/home");
         swal("Profile anda sudah diperbarui!", "success");
       })
       .catch(function(error) {
-        console.log("errrrrrr", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
   };

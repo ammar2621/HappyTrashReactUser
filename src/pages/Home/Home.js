@@ -10,7 +10,6 @@ import {
 import Footer from "../../component/Footer";
 import { Link, Redirect } from "react-router-dom";
 import Header from "../../component/Header";
-import Shepherd from "shepherd.js";
 import "./home.css";
 
 const Home = () => {

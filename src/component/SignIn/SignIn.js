@@ -29,10 +29,21 @@ class SignIn extends React.Component {
     this.showHide = this.showHide.bind(this);
   }
 
-  // setEmail = e => {
-  //   e.preventDefault();
-  //   this.setState({ email: e.target.value });
-  // };
+  setEmail = e => {
+    e.preventDefault();
+    this.setState({ email: e.target.value });
+  };
+  setPassword = e => {
+    e.preventDefault();
+    this.setState({ password: e.target.value });
+  };
+
+  toggle = nr => () => {
+    let modalNumber = "modal" + nr;
+    this.setState({
+      [modalNumber]: !this.state[modalNumber]
+    });
+  };
 
   // Funciton to show/hide password
   showHide(e) {
@@ -54,7 +65,6 @@ class SignIn extends React.Component {
       })
       .then(function(response) {
         localStorage.setItem("token", response.data.token);
-        console.log(response.data.token);
         // code Fikri
         axios
           .get(self.props.base_url + "/auth", {
@@ -63,7 +73,6 @@ class SignIn extends React.Component {
             }
           })
           .then(response => {
-            console.log(response);
             if (response.data.claims.role === false) {
               localStorage.setItem("intro", true);
               localStorage.setItem("isLogin", true);
@@ -96,7 +105,6 @@ class SignIn extends React.Component {
                   localStorage.setItem("point", response.data.point);
                 })
                 .catch(function(error) {
-                  console.log(error);
                   swal("Email atau passwordmu salah!", "Coba lagi!", "error");
                 });
             } else {
@@ -104,14 +112,11 @@ class SignIn extends React.Component {
             }
           })
           .catch(function(error) {
-            console.log("errrrrrr", error);
             swal("Email atau passwordmu salah!", "Coba lagi!", "error");
           });
 
         // self.props.setLogin(true);
         self.props.setToken(response.data.token);
-        // console.log(response.data.status);
-        // console.log(self.props);
         // self.props.history.replace("/profile");
         // swal(
         //   "Terima Kasih, Sudah Login!",
@@ -121,7 +126,6 @@ class SignIn extends React.Component {
         // self.props.history.push("/home");
       })
       .catch(function(error) {
-        console.log("errrrrrr", error);
         swal("Email atau passwordmu salah!", "Coba lagi!", "error");
       });
   };

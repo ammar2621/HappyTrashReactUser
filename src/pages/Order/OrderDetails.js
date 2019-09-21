@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
-import swal from "sweetalert";
 import TablePage from "./TableOrder";
 import TableTrash from "./TableTrash";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
-import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionOrderPage";
 import { Redirect } from "react-router-dom";
@@ -39,16 +37,13 @@ class OrderDetails extends React.Component {
 
   //   axios(config)
   //     .then(function(response) {
-  //       console.log(response.data);
   //       let id = self.props.match.params.id;
   //       let order = response.data.filter(elm => {
   //         return elm.Order.id == id;
   //       });
   //       self.setState({ order: order[0] });
-  //       console.log(JSON.parse(response.data[0].Order.adress));
   //     })
   //     .catch(function(error) {
-  //       console.log(error);
   //     });
   // }
 

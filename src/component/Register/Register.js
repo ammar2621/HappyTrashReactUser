@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/Store";
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import swal from "sweetalert";
 import zxcvbn from "zxcvbn";
 import "./register.css";
@@ -86,11 +86,9 @@ class Register extends Component {
   handleChange = event => {
     event.preventDefault();
     // this.setState({ password: event.target.value });
-    console.log("dsadsa");
 
     const { name, value } = event.target;
     let errors = this.state.errors;
-    // console.log(name, value);
     switch (name) {
       case "email":
         errors.email = validEmailRegex.test(value) ? "" : "Email tidak valid!";
@@ -117,18 +115,14 @@ class Register extends Component {
       default:
       // break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      // console.log(errors);
-    });
+    this.setState({ errors, [name]: value }, () => {});
   };
 
   // Function for submit the input
   handleSubmit = event => {
     event.preventDefault();
     if (validateForm(this.state.errors)) {
-      console.info("Valid Form");
     } else {
-      console.error("Invalid Form");
     }
   };
 
@@ -232,7 +226,6 @@ class Register extends Component {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("intro", true);
 
-            console.log(response.data.token);
             // code Fikri
             axios
               .get(self.props.base_url + "/auth", {
@@ -241,7 +234,6 @@ class Register extends Component {
                 }
               })
               .then(response => {
-                console.log(response);
                 if (response.data.claims.role === false) {
                   localStorage.setItem("isLogin", true);
                   localStorage.setItem("id", response.data.claims.id);
@@ -268,7 +260,6 @@ class Register extends Component {
                       localStorage.setItem("point", response.data.point);
                     })
                     .catch(function(error) {
-                      console.log(error);
                       swal("Oops ada yang salah!", "Coba lagi!", "error");
                     });
                 } else {
@@ -276,14 +267,11 @@ class Register extends Component {
                 }
               })
               .catch(function(error) {
-                console.log("errrrrrr", error);
                 swal("Oops ada yang salah!", "Coba lagi!", "error");
               });
 
             // self.props.setLogin(true);
             self.props.setToken(response.data.token);
-            // console.log(response.data.status);
-            // console.log(self.props);
             // self.props.history.replace("/profile");
             // swal(
             //   "Terima Kasih, Sudah Login!",
@@ -293,7 +281,6 @@ class Register extends Component {
             // self.props.history.push("/home");
           })
           .catch(function(error) {
-            console.log("errrrrrr", error);
             swal("Email atau passwordmu salah!", "Coba lagi!", "error");
           });
         self.props.history.push("/home");
@@ -304,7 +291,6 @@ class Register extends Component {
         );
       })
       .catch(function(error) {
-        console.log("errrrrrr", error);
         swal("Oooppss!", "Ada yang error!", "error");
       });
   };

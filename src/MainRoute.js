@@ -13,7 +13,6 @@ import Profile from "./pages/Profile/ProfilePage";
 import Register from "./validcoba";
 import Help from "./pages/Help/HelpPage";
 import TrashCategory from "./pages/Trash/TrashCategorypage";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Basic from "./pages/OnBoarding/OnBoarding";
 import Intro from "./pages/intro/intro";
 import Tos from "./pages/intro/tos";
@@ -23,10 +22,6 @@ class MainRoute extends React.Component {
   render() {
     return (
       <Router>
-        {/* <Route
-          render={({ location }) => (
-            <TransitionGroup>
-              <CSSTransition key={location.key} timeout={450} classNames="fade"> */}
         <Switch>
           <Route exact path="/" component={Intro} />
           <Route exact path="/welcome" component={Welcome} />
@@ -43,10 +38,6 @@ class MainRoute extends React.Component {
           <Route path="/tos" component={Tos} />
           <Route component={NotFound} />
         </Switch>
-        {/* </CSSTransition>
-            </TransitionGroup>
-          )}
-        /> */}
       </Router>
     );
   }

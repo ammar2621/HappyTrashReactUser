@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import {
-  MDBRow,
-  MDBCol,
   MDBModalFooter,
   MDBBtn,
-  MDBModal,
   MDBModalHeader,
   MDBModalBody,
-  MDBContainer,
-  MDBInput
+  MDBContainer
 } from "mdbreact";
-import Signin from "../../component/SignIn/SignIn";
-import SignUp from "../../component/Register/Register";
-// import "./welcome.css";
+
 import { Redirect, Link } from "react-router-dom";
 
 class Tos extends Component {

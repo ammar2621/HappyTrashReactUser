@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { MDBMedia, MDBBadge } from "mdbreact";
-import swal from "sweetalert";
-import Swal from "sweetalert2";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
-import axios from "axios";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionTabReward";
 import { withRouter } from "react-router-dom";
@@ -115,7 +112,6 @@ class TabReward extends Component {
   //       Authorization: "Bearer " + localStorage.getItem("token")
   //     }
   //   };
-  //   console.log("token", localStorage.getItem("token"));
   //   axios
   //     .get(self.props.base_url + "/rewards", config)
   //     .then(response => {
@@ -123,7 +119,6 @@ class TabReward extends Component {
   //         return elm.status === true;
   //       });
   //       self.setState({ data });
-  //       console.log("data", response.data);
   //       if (self.state.data.length === 0) {
   //         self.setState({
   //           notFoundReward: "Mohon maaf, tidak ada hadiah saat ini"
@@ -136,13 +131,11 @@ class TabReward extends Component {
   //     })
 
   //     .catch(error => {
-  //       console.log("error rewards", error);
   //     });
   //   axios
   //     .get(self.props.base_url + "/reward_history/user", config)
   //     .then(response => {
   //       self.setState({ history: response.data });
-  //       console.log("history", response.data);
   //       if (self.state.history.length === 0) {
   //         self.setState({
   //           notFoundHistoryReward: <p>Anda belum memiliki riwayat hadiah</p>
@@ -154,7 +147,6 @@ class TabReward extends Component {
   //       }
   //     })
   //     .catch(error => {
-  //       console.log("error rewards history", error);
   //     });
   // }
 

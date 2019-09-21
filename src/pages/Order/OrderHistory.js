@@ -1,11 +1,9 @@
-import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBContainer, MDBMedia } from "mdbreact";
-import swal from "sweetalert";
+import React from "react";
+import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
 import TabOrder from "./TabOrder";
 import "./order.css";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
-import axios from "axios";
 import { Redirect } from "react-router-dom";
 
 class OrderHistory extends React.Component {

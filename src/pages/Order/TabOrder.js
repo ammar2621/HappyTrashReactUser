@@ -2,11 +2,10 @@ import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
-import { MDBMedia, MDBBtn } from "mdbreact";
-import axios from "axios";
+import { MDBMedia } from "mdbreact";
 import { connect } from "unistore/react";
 import { actions } from "../../Store/ActionOrderPage";
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class TabOrder extends React.Component {
   constructor(props) {
@@ -64,12 +63,10 @@ class TabOrder extends React.Component {
   //   };
   //   axios(config)
   //     .then(function(response) {
-  //       console.log(response);
   //       self.setState({ orders: [], waiting: [] });
   //       self.componentDidMount();
   //     })
   //     .catch(function(error) {
-  //       console.log(error);
   //     });
   // };
 
@@ -111,12 +108,10 @@ class TabOrder extends React.Component {
   //         } else {
   //           self.setState({ notFoundWaiting: " " });
   //         }
-  //         console.log(element.Order.status);
   //       });
   //       self.handleChangeIndex(0);
   //     })
   //     .catch(function(error) {
-  //       console.log(error);
   //     });
   // }
 
@@ -169,7 +164,6 @@ class TabOrder extends React.Component {
                 color = "blue";
                 status = "Diterima";
               } else {
-                console.log("error");
               }
               return (
                 <div>
@@ -177,6 +171,7 @@ class TabOrder extends React.Component {
                     <MDBMedia left className="mr-3">
                       <img
                         className="p-2"
+                        alt=""
                         style={{
                           height: "100px",
                           width: "100px"
@@ -244,7 +239,6 @@ class TabOrder extends React.Component {
                 color = "red";
                 status = "Dibatalkan";
               } else {
-                console.log("error");
               }
               return (
                 <MDBMedia
@@ -254,6 +248,7 @@ class TabOrder extends React.Component {
                   <MDBMedia left className="mr-3">
                     <img
                       className="p-2"
+                      alt=""
                       style={{
                         height: "100px",
                         width: "100px"

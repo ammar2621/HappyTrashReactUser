@@ -1,5 +1,4 @@
 import createStore from "unistore";
-import axios from "axios";
 
 export const store = createStore({
   email: "",
