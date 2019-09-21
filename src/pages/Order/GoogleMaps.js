@@ -1,73 +1,35 @@
 import React from "react";
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
-import './order.css'
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
-export class MapContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userLocation: { lat: -7.966486300000001, lng: 112.6103729 }, 
-      loading: true
-    }
-  }
-    // state = { userLocation: { lat: -7.966486300000001, lng: 112.6103729 }, loading: true };
+// Component that will render maps interactively with user click
+const MapPage = (props) => {
 
-    componentDidUpdate(prevProps, prevState) {
-      if (prevProps.google !== this.props.google) {
-        const curr = this.state.currentLocation
-        const google = this.props.google;
-        const maps = google.maps;
-        const center = new maps.LatLng(curr.lat, curr.lng);
-        this.setState({userLocation:center})
-        console.log(this.state.userLocation)
-      }
-    }
-  
-    componentDidMount = async (props) => {
-      await navigator.geolocation.getCurrentPosition(
-         position => {
-          const { latitude, longitude } = position.coords;
-  
-          this.setState({
-            userLocation: { lat: latitude, lng: longitude },
-            loading: false
-          });
-          console.log(this.state.userLocation)
-        },
-        () => {
-          this.setState({ loading: false });
-        }
-      ); 
-    }
-  
-    render() {
-      // const { loading, userLocation } = this.state;
-      // const { google } = this.props;
-  
-      if (this.state.loading) {
-        return null;
-      }
-  
-      return (
-        <div>
-          <Map 
-            google={window.google} 
-            initialCenter={this.state.userLocation} 
-            zoom={19} 
-            width="100px" 
-            height="100px" 
-            className="map">
-            <Marker
-              // title={'The marker`s title will appear as a tooltip.'}
-              // name={'SOMA'}
-              position={this.state.userLocation} />
-              <Marker />
-          </Map>
-        </div>
-        );
-    }
-  }
-  
-  export default GoogleApiWrapper({
-    apiKey: "AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo"
-  })(MapContainer);
+    const GoogleMapWrapper = withGoogleMap(props => (
+      <GoogleMap
+        ref={props.onMapLoad}
+        defaultZoom={15}
+        defaultCenter={props.center}
+        onClick={props.onMapClick}
+        className="map"
+      >
+        <Marker {...props.markers} />
+      </GoogleMap>
+    ));
+
+    return (
+      <div className="row-100">
+        <br />
+        <GoogleMapWrapper
+          containerElement={<div style={{ height: `260px` }} />}
+          mapElement={<div style={{ height: `260px` }} />}
+          onMapClick={props.handleMapClick}
+          onDragEnd={props.handleMapDrag}
+          onMapLoad={props.handleMapLoad}
+          markers={props.markers}
+          center={props.center}
+        />
+      </div>
+    );
+}
+
+export default MapPage;
