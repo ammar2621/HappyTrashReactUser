@@ -84,7 +84,7 @@ export const actions = store => ({
     axios(config)
       .then(response => {
         let order = response.data.filter(elm => {
-          return elm.Order.id === id;
+          return elm.Order.id === parseInt(id);
         });
         store.setState({ singleOrder: order[0] });
       })

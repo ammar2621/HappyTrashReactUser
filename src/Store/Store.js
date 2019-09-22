@@ -15,14 +15,15 @@ export const store = createStore({
   base_url: "https://api.loakin.online/v1",
   // base_url: 'http://localhost:5000/v1',
 
-  // data (made by Fikri)
   // Trash
   trashCategories: [],
   trashes: [],
+
   // Order
   orders: [],
   waiting: [],
   singleOrder: { Order: { time: "", id: null }, User: null, Details: null },
+
   // Reward
   reward: [],
   rewardHistory: [],
@@ -31,6 +32,7 @@ export const store = createStore({
   notFoundReward: "Mohon maaf, tidak ada hadiah saat ini",
   notFoundHistoryReward: "Anda belum memiliki riwayat hadiah",
   point: null,
+
   // Profile
   name_Profile: "",
   email_Profile: "",
