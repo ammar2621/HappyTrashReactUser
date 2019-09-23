@@ -26,15 +26,15 @@ const Home = () => {
                 <br />
                 <div className="row p-0 m-0">
                   <div className="col-10 text-left">
-                    <h2 className="font">Layanan Kami</h2>
+                    <h2 className="font mb-0">Layanan Kami</h2>
                   </div>
                 </div>
-                <div className="row justify-content-center link p-0 m-0">
+                <div className="row justify-content-center link p-0 mt-0">
                   <div className="col-6">
                     <Link to="/order">
                       <MDBCard
                         border="success"
-                        className="mt-3 first"
+                        className="mt-3 first m-0 p-0"
                         style={{ maxWidth: "18rem", width: "100%" }}
                       >
                         <MDBCardHeader className="font">
@@ -76,7 +76,7 @@ const Home = () => {
                 <br />
                 <div className="row p-0 m-0">
                   <div className="col-10 text-left">
-                    <h2 className="font">Campaign</h2>
+                    <h2 className="font mb-3">Campaign</h2>
                   </div>
                 </div>
                 <div
