@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from "./Store";
 import Swal from "sweetalert2";
 
 export const actions = store => ({
@@ -43,12 +42,9 @@ export const actions = store => ({
           } else {
             store.setState({ notFoundWaiting: " " });
           }
-          console.log(element.Order.status);
         });
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   },
 
   // Function to a cancel order
@@ -65,7 +61,6 @@ export const actions = store => ({
     };
     await axios(config)
       .then(response => {
-        console.log(response);
         store.setState({ orders: [], waiting: [] });
         Swal.fire({
           type: "success",
@@ -73,9 +68,7 @@ export const actions = store => ({
           text: "Order berhasil dibatalkan!"
         });
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   },
 
   // Function to get a order by user id
@@ -90,14 +83,11 @@ export const actions = store => ({
 
     axios(config)
       .then(response => {
-        console.log(response.data);
         let order = response.data.filter(elm => {
-          return elm.Order.id == id;
+          return elm.Order.id === parseInt(id);
         });
         store.setState({ singleOrder: order[0] });
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   }
 });

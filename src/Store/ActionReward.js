@@ -21,10 +21,8 @@
 //       .then(function(response) {
 //         localStorage.setItem("point", response.data.point);
 //         store.setState({ point: response.data.point });
-//         console.log(localStorage.getItem("point"));
 //       })
 //       .catch(function(error) {
-//         console.log(error);
 //         swal("Oops ada yang salah!", "Coba lagi!", "error");
 //       });
 //   }
