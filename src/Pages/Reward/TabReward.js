@@ -87,7 +87,14 @@ class TabReward extends Component {
               if (elm.stock > 0)
                 return (
                   <MDBMedia className="mt-3" style={{ width: "100%" }}>
-                    <MDBMedia left className="mr-3 ml-3">
+                    <MDBMedia
+                      left
+                      className="mr-3 ml-3 text-center"
+                      style={{
+                        height: 75,
+                        width: 75
+                      }}
+                    >
                       <img
                         className="p-2"
                         style={{
@@ -110,7 +117,7 @@ class TabReward extends Component {
                         style={{ width: "70px", height: "20px" }}
                         color="green"
                       >
-                        Beli
+                        Tukar
                       </MDBBadge>
                     </MDBMedia>
                   </MDBMedia>

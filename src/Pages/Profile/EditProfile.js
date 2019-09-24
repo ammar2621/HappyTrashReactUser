@@ -272,7 +272,7 @@ class EditProfile extends Component {
 
                       <MDBInput
                         style={{ marginBottom: "5px", marginTop: "13px" }}
-                        label="Masukkan Emailmuy"
+                        label="Masukkan Emailmu"
                         value={this.state.email}
                         group
                         type="email"
