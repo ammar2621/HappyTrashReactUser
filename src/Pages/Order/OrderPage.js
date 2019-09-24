@@ -241,9 +241,9 @@ class Order extends React.Component {
       method: "GET",
       url:
         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-        this.state.lat +
+        this.state.mapCenter.lat +
         "," +
-        this.state.lng +
+        this.state.mapCenter.lng +
         "&key=" +
         this.state.access_token
     };

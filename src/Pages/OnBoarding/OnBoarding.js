@@ -128,7 +128,7 @@ class Basic extends React.Component {
             )
           },
           target: ".bantuan",
-          title: "Events"
+          title: "Bantuan"
         },
         {
           placement: "top",
@@ -147,7 +147,7 @@ class Basic extends React.Component {
             <p className="font">Pilih ini jika ingin melihat profilemu</p>
           ),
           target: ".profile",
-          title: "Invitations"
+          title: "Profile"
         }
       ],
       onboarding_status: localStorage.getItem("onboarding_status")
