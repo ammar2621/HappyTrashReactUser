@@ -27,17 +27,17 @@ class Order extends React.Component {
       additialNotes: null,
       markers: {
         position: {
-          lat: -6.2093221,
-          lng: 106.8265639
+          lat: -6.2123751,
+          lng: 106.8205107
         },
         key: Date.now(),
         defaultAnimation: 2
       },
-      mapCenter: { lat: -6.2093221, lng: 106.8265639 },
+      mapCenter: { lat: -6.2123751, lng: 106.8205107 },
       access_token: "AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo",
       mapRef: null,
-      lat: -6.2093221,
-      lng: 106.8265639
+      lat: -6.2123751,
+      lng: 106.8205107
     };
   }
 
