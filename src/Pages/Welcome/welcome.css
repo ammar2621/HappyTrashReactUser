@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:300i,400,600,600i,700,800,800i,900&display=swap");
+
+.font {
+  font-family: "Muli", sans-serif;
+}
+
+@media screen and (min-width: 480px) {
+  .welcome {
+    padding-top: 50px !important;
+    padding-bottom: 30px !important;
+  }
+}

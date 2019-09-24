@@ -1,0 +1,24 @@
+.rewardBorderTop {
+  border-top: 0.5px solid green;
+  border-left: 0.5px solid green;
+  border-right: 0.5px solid green;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 5px 0 8px 0;
+}
+
+.textH3 {
+  margintop: 5px;
+  marginbottom: 10px;
+  fontweight: 600;
+  margin: 0;
+}
+
+.rewardBorderBot {
+  border-bottom: 0.5px solid green;
+  border-left: 0.5px solid green;
+  border-right: 0.5px solid green;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 5px 0 8px 0;
+}

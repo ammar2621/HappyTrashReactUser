@@ -1,0 +1,29 @@
+.pageBody {
+  height: 100vh;
+  backgroundcolor: white;
+  textalign: center;
+  padding: 0;
+}
+
+.colBorderTop {
+  padding: 0;
+  margin: 0;
+  border: 0.5px solid green;
+  borderleft: 0.5px solid green;
+  borderright: 0.5px solid green;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.helpTextBantuan {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.helpColoBorderBot {
+  border: 0.5px solid green;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}

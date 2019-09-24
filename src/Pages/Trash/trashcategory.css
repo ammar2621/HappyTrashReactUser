@@ -1,0 +1,27 @@
+.accordion {
+  text-transform: capitalize !important;
+}
+
+/* #capitalize {
+  color: aqua;
+  text-transform: capitalize !important;
+} */
+
+.trashBorderTop {
+  border: 0.5px solid green;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 5px 0 8px 0;
+}
+
+.trashH2 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.trashBorderBot {
+  border: 0.5px solid green;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
