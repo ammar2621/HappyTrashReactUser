@@ -383,7 +383,7 @@ class Register extends Component {
                 isOpen={this.state.modal14}
                 color="dark-green"
               >
-                Register
+                Daftar
               </MDBBtn>
             </div>
           </MDBModalFooter>

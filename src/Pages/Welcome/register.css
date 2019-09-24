@@ -73,3 +73,9 @@
   background-color: yellow !important;
   color: black !important;
 }
+
+.error {
+  color: #db2269;
+  font-size: 0.8em;
+  display: relative;
+}

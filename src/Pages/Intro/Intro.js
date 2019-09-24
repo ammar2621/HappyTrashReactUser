@@ -53,7 +53,10 @@ function Intro() {
                     data-target="#carouselExampleIndicators"
                     data-slide-to="2"
                   ></li>
-                  <li data-target="#welcome" data-slide-to="3"></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="3"
+                  ></li>
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
