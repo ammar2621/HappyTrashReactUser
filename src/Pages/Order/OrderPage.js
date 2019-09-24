@@ -27,17 +27,17 @@ class Order extends React.Component {
       additialNotes: null,
       markers: {
         position: {
-          lat: -7.9666204,
-          lng: 112.6326321
+          lat: -6.2093221,
+          lng: 106.8265639
         },
         key: Date.now(),
         defaultAnimation: 2
       },
-      mapCenter: { lat: -7.9666204, lng: 112.6326321 },
+      mapCenter: { lat: -6.2093221, lng: 106.8265639 },
       access_token: "AIzaSyAtJjcjFBzjxF908drCFRGAXBF-EvefsSo",
       mapRef: null,
-      lat: -7.9666204,
-      lng: 112.6326321
+      lat: -6.2093221,
+      lng: 106.8265639
     };
   }
 
@@ -187,16 +187,6 @@ class Order extends React.Component {
 
   handleMapClick = event => {
     let mapRef = this._mapComponent;
-    this.setState({
-      markers: {
-        position: event.latLng,
-        defaultAnimation: 2,
-        key: Date.now()
-      },
-      mapCenter: event.latLng,
-      lat: mapRef.getCenter().lat(),
-      lng: mapRef.getCenter().lng()
-    });
     const self = this;
     const config = {
       method: "GET",
@@ -210,6 +200,16 @@ class Order extends React.Component {
     };
     axios(config)
       .then(function(response) {
+        self.setState({
+          markers: {
+            position: event.latLng,
+            defaultAnimation: 2,
+            key: Date.now()
+          },
+          mapCenter: event.latLng,
+          lat: mapRef.getCenter().lat(),
+          lng: mapRef.getCenter().lng()
+        });
         self.setState({ adress: response.data.results[0].formatted_address });
       })
       .catch(function(error) {
@@ -224,7 +224,7 @@ class Order extends React.Component {
 
   // Function that will run after page rendered to determine user's location based on latitude and longitude retrieved from user's device
   componentDidMount = async props => {
-    await navigator.geolocation.getCurrentPosition(position => {
+    await navigator.geolocation.getCurrentPosition(async position => {
       const { latitude, longitude } = position.coords;
 
       this.setState({
@@ -233,27 +233,30 @@ class Order extends React.Component {
           defaultAnimation: 2,
           key: Date.now()
         },
-        mapCenter: { lat: latitude, lng: longitude }
+        mapCenter: { lat: latitude, lng: longitude },
+        lat: latitude,
+        lng: longitude
       });
+      const self = this;
+      const config = {
+        method: "GET",
+        url:
+          "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+          latitude +
+          "," +
+          longitude +
+          "&key=" +
+          this.state.access_token
+      };
+      await axios(config)
+        .then(function(response) {
+          console.log(response);
+          self.setState({ adress: response.data.results[0].formatted_address });
+        })
+        .catch(function(error) {
+          swal("Oooppss!", "Ada yang error!", "error");
+        });
     });
-    const self = this;
-    const config = {
-      method: "GET",
-      url:
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-        this.state.mapCenter.lat +
-        "," +
-        this.state.mapCenter.lng +
-        "&key=" +
-        this.state.access_token
-    };
-    axios(config)
-      .then(function(response) {
-        self.setState({ adress: response.data.results[0].formatted_address });
-      })
-      .catch(function(error) {
-        swal("Oooppss!", "Ada yang error!", "error");
-      });
   };
 
   render() {
