@@ -29,48 +29,58 @@ const Home = () => {
                     <h2 className="font mb-0">Layanan Kami</h2>
                   </div>
                 </div>
-                <div className="row justify-content-center link p-0 mt-0">
-                  <div className="col-6">
-                    <Link to="/order">
-                      <MDBCard
-                        border="success"
-                        className="mt-3 first m-0 p-0"
-                        style={{ maxWidth: "18rem", width: "100%" }}
+                <div
+                  className="row justify-content-center pb-5"
+                  style={{ margin: "0" }}
+                >
+                  <div className="col-11 ">
+                    <div className="row justify-content-center link p-0 mt-0">
+                      <div className="col-5 pr-2 pl-0">
+                        <Link to="/order">
+                          <MDBCard
+                            border="success"
+                            className="mt-3 first "
+                            style={{ maxWidth: "18rem", width: "150px" }}
+                          >
+                            <MDBCardHeader className="font">
+                              <h6 className="m-0">Tukar Sampahmu</h6>
+                            </MDBCardHeader>
+                            <MDBCardBody className="text-success h-100 pt-2 pb-3 px-0 w-100 text-center">
+                              <img
+                                style={{ width: "95px" }}
+                                src="https://i.ibb.co/z2MprCk/tracking-1.png"
+                                alt="tracking-1"
+                                border="0"
+                              ></img>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </Link>
+                      </div>
+                      <div
+                        className="col-5 pr-0"
+                        // style={{ paddingLeft: "80px" }}
                       >
-                        <MDBCardHeader className="font">
-                          <h6 className="m-0">Tukar Sampahmu</h6>
-                        </MDBCardHeader>
-                        <MDBCardBody className="text-success h-100 pt-2 pb-3 px-2 w-100 text-center">
-                          <img
-                            style={{ width: "95px" }}
-                            src="https://i.ibb.co/z2MprCk/tracking-1.png"
-                            alt="tracking-1"
-                            border="0"
-                          ></img>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </Link>
-                  </div>
-                  <div className="col-6">
-                    <Link to="/reward">
-                      <MDBCard
-                        border="success"
-                        className="mt-3 second"
-                        style={{ maxWidth: "18rem", width: "100%" }}
-                      >
-                        <MDBCardHeader className="font">
-                          <h6 className="mx-2 my-0">Tukar Poinmu</h6>
-                        </MDBCardHeader>
-                        <MDBCardBody className="text-success h-100 w-100 text-center">
-                          <img
-                            style={{ width: "80px" }}
-                            src="https://i.ibb.co/1vg0tQV/treasure-2.png"
-                            alt="treasure-2"
-                            border="0"
-                          ></img>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </Link>
+                        <Link to="/reward">
+                          <MDBCard
+                            border="success"
+                            className="mt-3 second "
+                            style={{ maxWidth: "18rem", width: "150px" }}
+                          >
+                            <MDBCardHeader className="font">
+                              <h6 className="mx-2 my-0">Tukar Poinmu</h6>
+                            </MDBCardHeader>
+                            <MDBCardBody className="text-success h-100 w-100 text-center">
+                              <img
+                                style={{ width: "80px" }}
+                                src="https://i.ibb.co/1vg0tQV/treasure-2.png"
+                                alt="treasure-2"
+                                border="0"
+                              ></img>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <br />
