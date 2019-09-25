@@ -179,7 +179,7 @@ class Order extends React.Component {
         );
       })
       .catch(function(error) {
-        swal("Oooppss!", "Lengkapi data terlebih dahulu!", "error");
+        swal("Oooppss!", "Ada yang error! Silahkan refresh halaman lalu coba lagi!", "error");
       });
   };
 
@@ -339,7 +339,7 @@ class Order extends React.Component {
 
                           <br />
                           <label className="font m-0" for="inputPhotoURL">
-                            <h5 className="m-0">Pilih Foto Lalu Klik Upload</h5>
+                            <h5 className="m-0">Pilih Foto</h5>
                           </label>
                           <br />
                           <progress
