@@ -118,7 +118,6 @@ class Order extends React.Component {
     const minute = self.state.startDate.getMinutes();
     const second = self.state.startDate.getSeconds();
     // var mili = self.state.startDate.getMiliseconds()
-    console.log(self.state.adress)
     let config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
@@ -180,7 +179,6 @@ class Order extends React.Component {
         );
       })
       .catch(function(error) {
-        console.log(error)
         swal("Oooppss!", "Ada yang error! Silahkan refresh halaman lalu coba lagi!", "error");
       });
   };
